@@ -1,0 +1,51 @@
+c*****************************************************************************
+c                                                                            *
+c              PISA INPUT INTERFACE TO HIJING 1.33  (F77 Syntax)             *
+c                                                                            *
+c   Sample case is for 600 events of Au + Au at root S = 200 GeV             *
+c   All default parameters except for impact parameter bmin = 0 to bmax = 2.0*
+c   The bmin and bmax parameters are newly added into HIJING for PHENIX use  *
+c                                                                            *
+c   Namelist input begins with line hijing_inp and ends with line end        *
+c   See postscript file EVENT_GEN/doc/hijing/hijing.ps for more details      *
+c                                                                            *
+c                                                                            *
+c   Original author Charles F. Maguire,  May 31, 1996                        *
+c   Revision History:                                                        *
+c   Feb. 12, 1997   C. F. Maguire   Added iseed parameter (GEANT: 1 to 215)  *
+c                                   Each GEANT seed has 1 billion non-       *
+c                                   repeating random numbers                 *
+c                                                                            *
+c   Dec. 30, 1997   C. F. Maguire   Deleted dollar signs from comments       *
+c                                   These cannot be read by the PPro         *
+c                                   (PPro no longer used by PHENIX, 1999)    *
+c                                                                            *
+c   Mar. 06, 1999   C. F. Maguire   Added jet trigger external option        *
+c                                   for hard scattering group.  See          *
+c                                   HIJING doc page 31. (Normally not used)  *
+c                                                                            *
+c   Dec. 01, 1999   C. F. Maguire   Added iseed_skip with 0 default value    *
+c                                   There will be  iseed_skip  million calls *
+c                                   to the GEANT random number generator     *
+c                                   before any event calculations start.     *
+c                                                                            *
+c   Apr. 21, 2001   C. F. Maguire   Change jet trigger to 0 cut              *
+c                                                                            *
+c*****************************************************************************
+ $hijing_inp
+  nruns = 1000,
+  elgev = 200.0,
+  ref = 'CMS',
+  chproj = 'A',
+  chtarg = 'A',
+  n1 = 197,
+  iz1 = 79,
+  n2 = 197,
+  iz2 = 79,
+  bmin = 0.0,
+  bmax = 18.0,
+  iseed = 1,
+  iseed_skip = 0,
+  jet_trigger = 0,
+  pthard = 0.0,
+ $end

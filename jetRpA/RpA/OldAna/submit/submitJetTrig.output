@@ -1,0 +1,13 @@
+/gpfs22/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/submit
+/usr/spool/PBS/aux//885775.vmpsched
+vmp578
+i = 7 and pthat = 280 
+Processing...
+root -l -b -q anaAsyJetTrig.C+
+Error in <TTree::SetBranchAddress>: unknown branch -> superFilterPath
+Error in <TTree::SetBranchAddress>: unknown branch -> phfCoincFilter
+Error in <TTree::SetBranchAddress>: unknown branch -> ppurityFractionFilter
+Error in <TTree::SetBranchAddress>: unknown branch -> pVertexFilterCutGplus
+Error in <TTree::SetBranchAddress>: unknown branch -> hltAna
+Done! 7
+Done all jobs!

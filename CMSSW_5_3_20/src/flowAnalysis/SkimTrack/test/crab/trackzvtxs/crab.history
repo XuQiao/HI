@@ -1,0 +1,10 @@
+150615_204440: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -create
+150615_204727: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -submit -c PbPb2011MB/
+150615_204807: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c PbPb2011MB/
+150615_205132: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c PbPb2011MB/
+150615_205207: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c PbPb2011MB/
+150615_205520: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c PbPb2011MB/
+150615_205550: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -submit -c PbPb2011MB/
+150615_205556: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c PbPb2011MB/
+150615_210518: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c PbPb2011MB/
+150615_220946: /cvmfs/cms.cern.ch/crab/CRAB_2_11_1_patch1/python/crab.py -status -c PbPb2011MB/

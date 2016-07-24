@@ -1,0 +1,2 @@
+01:/bin/rm -f lib/slc6_amd64_gcc472/pluginflowAnalysisLYZsecond.so lib/slc6_amd64_gcc472/flowAnalysisLYZsecond.edmplugin
+90:edmPluginRefresh lib/slc6_amd64_gcc472

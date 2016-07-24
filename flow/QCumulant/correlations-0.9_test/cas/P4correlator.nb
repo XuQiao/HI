@@ -1,0 +1,159 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      4289,        150]
+NotebookOptionsPosition[      4053,        137]
+NotebookOutlinePosition[      4389,        152]
+CellTagsIndexPosition[      4346,        149]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"P4correlator", "[", 
+   RowBox[{"n1_", ",", "n2_", ",", "n3_", ",", "n4_"}], "]"}], "=", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{"n1", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n2", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n3", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n4", ",", "1"}]]}], "-", 
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n2"}], ",", "2"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n3", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n4", ",", "1"}]]}], "-", 
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{"n2", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n3"}], ",", "2"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n4", ",", "1"}]]}], "-", 
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{"n1", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n2", "+", "n3"}], ",", "2"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n4", ",", "1"}]]}], "+", 
+   RowBox[{"2", " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n2", "+", "n3"}], ",", "3"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n4", ",", "1"}]]}], "-", 
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{"n2", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n3", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n4"}], ",", "2"}]]}], "+", 
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n2", "+", "n3"}], ",", "2"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n4"}], ",", "2"}]]}], "-", 
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{"n1", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n3", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n2", "+", "n4"}], ",", "2"}]]}], "+", 
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n3"}], ",", "2"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n2", "+", "n4"}], ",", "2"}]]}], "+", 
+   RowBox[{"2", " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n3", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n2", "+", "n4"}], ",", "3"}]]}], "-", 
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{"n1", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n2", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n3", "+", "n4"}], ",", "2"}]]}], "+", 
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n2"}], ",", "2"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n3", "+", "n4"}], ",", "2"}]]}], "+", 
+   RowBox[{"2", " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n2", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n3", "+", "n4"}], ",", "3"}]]}], "+", 
+   RowBox[{"2", " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n1", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n2", "+", "n3", "+", "n4"}], ",", "3"}]]}], "-", 
+   RowBox[{"6", " ", 
+    SubscriptBox["Q", 
+     RowBox[{
+      RowBox[{"n1", "+", "n2", "+", "n3", "+", "n4"}], ",", 
+      "4"}]]}]}]}]], "Input",
+ CellChangeTimes->{{3.592888155066347*^9, 3.592888212750963*^9}, 
+   3.592888269776088*^9, {3.592888457162729*^9, 3.592888466081434*^9}, {
+   3.592888625302711*^9, 3.592888676035426*^9}, {3.59349985302993*^9, 
+   3.593499870265133*^9}, {3.606017185744081*^9, 3.606017192294909*^9}}]
+},
+WindowSize->{740, 882},
+WindowMargins->{{16, Automatic}, {-9, Automatic}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 3492, 115, 143, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

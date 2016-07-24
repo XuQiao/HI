@@ -1,0 +1,18 @@
+tmp/slc6_amd64_gcc472/src/GeneratorInterface/HijingInterface/src/GeneratorInterfaceHijingInterface/HijingGeneratorFilter.o: \
+ src/GeneratorInterface/HijingInterface/src/HijingGeneratorFilter.cc \
+ src/GeneratorInterface/HijingInterface/interface/HijingHadronizer.h \
+
+tmp/slc6_amd64_gcc472/src/GeneratorInterface/HijingInterface/src/GeneratorInterfaceHijingInterface/HijingHadronizer.o: \
+ src/GeneratorInterface/HijingInterface/src/HijingHadronizer.cc \
+ src/GeneratorInterface/HijingInterface/interface/HijingHadronizer.h \
+ src/GeneratorInterface/HijingInterface/interface/HijingPythiaWrapper.h \
+ src/GeneratorInterface/HijingInterface/interface/HijingWrapper.h
+
+hijing1.383.o \
+ tmp/slc6_amd64_gcc472/src/GeneratorInterface/HijingInterface/src/GeneratorInterfaceHijingInterface/hijing1.383.o: \
+ src/GeneratorInterface/HijingInterface/src/hijing1.383.f
+
+hipyset1.35.o \
+ tmp/slc6_amd64_gcc472/src/GeneratorInterface/HijingInterface/src/GeneratorInterfaceHijingInterface/hipyset1.35.o: \
+ src/GeneratorInterface/HijingInterface/src/hipyset1.35.f
+
