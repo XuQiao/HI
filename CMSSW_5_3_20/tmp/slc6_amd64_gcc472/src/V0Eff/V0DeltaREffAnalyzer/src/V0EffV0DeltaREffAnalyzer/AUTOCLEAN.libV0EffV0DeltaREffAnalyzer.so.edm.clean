@@ -1,2 +1,0 @@
-01:/bin/rm -f lib/slc6_amd64_gcc472/pluginV0EffV0DeltaREffAnalyzer.so lib/slc6_amd64_gcc472/V0EffV0DeltaREffAnalyzer.edmplugin
-90:edmPluginRefresh lib/slc6_amd64_gcc472

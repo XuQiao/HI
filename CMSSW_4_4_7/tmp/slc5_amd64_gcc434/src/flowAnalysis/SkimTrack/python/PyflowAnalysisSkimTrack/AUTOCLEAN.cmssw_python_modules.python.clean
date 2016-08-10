@@ -1,1 +1,0 @@
-01:/usr/bin/find src/flowAnalysis/SkimTrack/python/ -name '*.pyc' -type f 2>/dev/null | /usr/bin/xargs /bin/rm -f 

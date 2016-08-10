@@ -1,6 +1,0 @@
-tmp/slc6_amd64_gcc472/src/RecoHI/HiCentralityAlgos/test/AnalyzerWithCentrality/AnalyzerWithCentrality.o: \
- src/RecoHI/HiCentralityAlgos/test/AnalyzerWithCentrality.cc \
- src/DataFormats/HeavyIonEvent/interface/CentralityProvider.h \
- src/DataFormats/HeavyIonEvent/interface/Centrality.h \
- src/DataFormats/HeavyIonEvent/interface/CentralityBins.h \
-

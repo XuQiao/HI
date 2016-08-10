@@ -1,2 +1,0 @@
-01:/bin/rm -f lib/slc6_amd64_gcc472/pluginflowAnalysisSkimTrack.so lib/slc6_amd64_gcc472/flowAnalysisSkimTrack.edmplugin
-90:edmPluginRefresh lib/slc6_amd64_gcc472

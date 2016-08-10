@@ -1,5 +1,0 @@
-tmp/slc6_amd64_gcc472/src/dNchdeta/PythiaMC/src/dNchdetaPythiaMC/PythiaMC.o: \
- src/dNchdeta/PythiaMC/src/PythiaMC.cc \
- src/DataFormats/HeavyIonEvent/interface/Centrality.h \
- src/DataFormats/HeavyIonEvent/interface/CentralityBins.h \
-

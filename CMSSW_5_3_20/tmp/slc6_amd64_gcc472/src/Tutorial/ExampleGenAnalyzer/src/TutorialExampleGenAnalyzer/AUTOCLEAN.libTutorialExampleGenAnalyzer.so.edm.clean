@@ -1,2 +1,0 @@
-01:/bin/rm -f lib/slc6_amd64_gcc472/pluginTutorialExampleGenAnalyzer.so lib/slc6_amd64_gcc472/TutorialExampleGenAnalyzer.edmplugin
-90:edmPluginRefresh lib/slc6_amd64_gcc472

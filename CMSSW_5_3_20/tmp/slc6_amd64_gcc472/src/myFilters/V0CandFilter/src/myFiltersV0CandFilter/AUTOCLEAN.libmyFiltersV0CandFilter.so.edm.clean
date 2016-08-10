@@ -1,2 +1,0 @@
-01:/bin/rm -f lib/slc6_amd64_gcc472/pluginmyFiltersV0CandFilter.so lib/slc6_amd64_gcc472/myFiltersV0CandFilter.edmplugin
-90:edmPluginRefresh lib/slc6_amd64_gcc472

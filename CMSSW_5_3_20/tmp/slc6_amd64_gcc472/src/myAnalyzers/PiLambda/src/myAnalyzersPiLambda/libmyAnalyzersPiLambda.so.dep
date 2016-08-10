@@ -1,4 +1,0 @@
-tmp/slc6_amd64_gcc472/src/myAnalyzers/PiLambda/src/myAnalyzersPiLambda/PiLambda.o: \
- src/myAnalyzers/PiLambda/src/PiLambda.cc \
- src/myAnalyzers/PiLambda/interface/PiLambda.h \
-

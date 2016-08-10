@@ -1,9 +1,0 @@
-/gpfs22/home/xuq7/CMSSW_6_2_3_patch1/src/jetRpA/RpA/TreeAna/JetID
-/usr/spool/PBS/aux//1043119.vmpsched
-vmp685
-
-Processing PPbanalyzeRpATree.C...
-start working
-Analyzing MC!
-Error: Symbol jet_etaweight is not defined in current scope  PPbanalyzeRpATree.C:493:
-*** Interpreter error recovered ***

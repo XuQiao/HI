@@ -1,2 +1,0 @@
-01:/bin/rm -f lib/slc6_amd64_gcc472/plugindNchdetaPythiaMC.so lib/slc6_amd64_gcc472/dNchdetaPythiaMC.edmplugin
-90:edmPluginRefresh lib/slc6_amd64_gcc472
