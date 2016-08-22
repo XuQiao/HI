@@ -1,0 +1,2 @@
+01:/bin/rm -f lib/slc6_amd64_gcc472/pluginmyAnalyzersPiLambda.so lib/slc6_amd64_gcc472/myAnalyzersPiLambda.edmplugin
+90:edmPluginRefresh lib/slc6_amd64_gcc472

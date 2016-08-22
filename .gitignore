@@ -1,0 +1,52 @@
+# file without extension
+*
+!/**/
+!*.*
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+*.d
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+*.mk
+*.pyc
+*.xml
+*.py.pkl
+
+# Executables
+*.exe
+*.out
+*.app
+
+# output files
+*.jpg
+*.pdf
+*.png
+*.gif
+*.gz
+*.tgz
+*.stdout
+*.stderr
+*.log
+*.err
+
+# Root files
+*.root
+
+# Others #
+# ####################
+*.txt
+*.txt
+core.*

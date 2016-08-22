@@ -1,0 +1,4 @@
+tmp/slc6_amd64_gcc472/src/myProducers/V0CandProducer/src/myProducersV0CandProducer/V0CandProducer.o: \
+ src/myProducers/V0CandProducer/src/V0CandProducer.cc \
+ src/myProducers/V0CandProducer/interface/V0Candidate.h \
+

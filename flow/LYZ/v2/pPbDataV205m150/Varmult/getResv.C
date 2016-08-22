@@ -1,0 +1,164 @@
+#include <iomanip>
+#include <fstream>
+#include "par.h"
+
+void getResv(int ispt){
+
+	double theta[ntheta];
+	TFile *f[nFileAll];
+		
+	for(int itheta=0;itheta<ntheta;itheta++)
+        	theta[itheta]=itheta*TMath::Pi()/ntheta/nn;
+
+        int nvv;
+        const double *binv;
+
+        if(ispt){             nvv = nptv;       binv = ptbinv;}
+            else{             nvv = netav;          binv = etabinv;}
+
+	ofstream fstrv;
+        if(ispt){
+	if(isSum)fstrv.open("v.txt");
+	else fstrv.open("v_2.txt");
+        }
+        else{
+	if(isSum)fstrv.open("v_eta.txt");
+	else fstrv.open("v_2_eta.txt");
+        }
+	TVectorD totmult[nbin], totpt[nbin], toteta[nbin];	TVectorD Nevent, totmultall;
+	TVectorD V_int;
+	TVectorD* V_mean;
+	TVectorD* V[nbin]; TVectorD* chi[nbin];
+	TVectorD* dDRe[nbin]; TVectorD* dDIm[nbin];
+	TVectorD* dNRe[nbin][ntheta]; TVectorD* dNIm[nbin][ntheta];
+	TComplex dD[nbin][ntheta], dN[nbin][ntheta][nvv];
+	TVectorD avgmult[nbin];	TVectorD avgmultall;
+	TVectorD avgpt[nbin],avgeta[nbin];
+	TVectorD v[nbin][ntheta],vmean[nbin],deltav[nbin][ntheta],deltavmean[nbin];
+	if(isSum)	TFile *infile = TFile::Open("mergedV_Sum.root");
+	else	TFile *infile = TFile::Open("mergedV_Prod.root");
+	Nevent.ResizeTo(nbin);	Nevent.Zero();
+	totmultall.ResizeTo(nbin);	totmultall.Zero();
+	avgmultall.ResizeTo(nbin);
+	V_int.ResizeTo(nbin);	V_int.Zero();
+	for(int ibin=0;ibin<nbin;ibin++){
+		totmult[ibin].ResizeTo(nvv);	totmult[ibin].Zero();
+		avgmult[ibin].ResizeTo(nvv);	avgpt[ibin].ResizeTo(nvv);  avgeta[ibin].ResizeTo(netav);
+		totpt[ibin].ResizeTo(nvv);	totpt[ibin].Zero(); 
+                toteta[ibin].ResizeTo(nvv);     toteta[ibin].Zero();
+		vmean[ibin].ResizeTo(nvv);	deltavmean[ibin].ResizeTo(nvv);
+		V[ibin] = (TVectorD*) infile->Get(Form("D_%d/V",ibin));
+		chi[ibin] = (TVectorD*) infile->Get(Form("chi"));
+		V_mean = (TVectorD*) infile->Get(Form("Vmean"));
+		for(int itheta=0;itheta<ntheta;itheta++){
+			v[ibin][itheta].ResizeTo(nvv);	deltav[ibin][itheta].ResizeTo(nvv);
+			dD[ibin][itheta]=0;
+			for(int ivbin=0;ivbin<nvv;ivbin++){
+				dN[ibin][itheta][ivbin]=0;
+			}
+		}
+	}
+
+        for(int ifile=0; ifile<nFileAll; ifile++){
+            if(ispt){
+	        if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Varmult/Anav_Prod_%d.root",ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Varmult/Anav_Prod2_%d.root",ifile));
+            }
+            else{
+	        if(isSum) f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Varmult/Anaveta_Prod_%d.root",ifile));
+	        else f[ifile] = TFile::Open(Form("/scratch/xuq7/flow/pbsjoboutput/pPbDataV205m150/Varmult/Anaveta_Prod2_%d.root",ifile));
+            }
+		TVectorD* Nevent_t = (TVectorD*)f[ifile]->Get("Nevent");	
+		TVectorD* totmultall_t = (TVectorD*)f[ifile]->Get("totmultall");
+		for(int ibin=0;ibin<nbin;ibin++){
+			TVectorD* totmult_t = (TVectorD*)f[ifile]->Get(Form("totmult_%d",ibin));
+			TVectorD* totpt_t = (TVectorD*)f[ifile]->Get(Form("totpt_%d",ibin));
+			TVectorD* toteta_t = (TVectorD*)f[ifile]->Get(Form("toteta_%d",ibin));
+			dDRe[ibin] = (TVectorD*)f[ifile]->Get(Form("dDRe_%d",ibin));
+			dDIm[ibin] = (TVectorD*)f[ifile]->Get(Form("dDIm_%d",ibin));
+			Nevent[ibin]+=(*Nevent_t)[ibin];
+			totmultall[ibin]+=(*totmultall_t)[ibin];
+			for(int ivbin=0;ivbin<nvv;ivbin++){
+				totmult[ibin][ivbin]+=(*totmult_t)[ivbin];
+				totpt[ibin][ivbin]+=(*totpt_t)[ivbin];
+				toteta[ibin][ivbin]+=(*toteta_t)[ivbin];
+			}
+			for(int itheta=0;itheta<ntheta;itheta++){
+				dNRe[ibin][itheta] = (TVectorD*)f[ifile]->Get(Form("dNRe_%d_%d",ibin,itheta));
+				dNIm[ibin][itheta] = (TVectorD*)f[ifile]->Get(Form("dNIm_%d_%d",ibin,itheta));
+				dD[ibin][itheta]+=TComplex((*dDRe[ibin])[itheta],(*dDIm[ibin])[itheta]);
+				for(int ivbin=0;ivbin<nvv;ivbin++)
+					dN[ibin][itheta][ivbin]+=TComplex((*dNRe[ibin][itheta])[ivbin],(*dNIm[ibin][itheta])[ivbin]);
+			}
+		}
+	f[ifile]->Close();
+	}
+
+	for(int ibin=0;ibin<nbin;ibin++)
+		for(int itheta=0;itheta<ntheta;itheta++)
+			dD[ibin][itheta]*=TComplex::Power(TComplex::I(),mm-1)/(Double_t)Nevent[ibin];
+	
+	for(int ibin=0;ibin<nbin;ibin++){
+			avgmultall[ibin]=1.0*totmultall[ibin]/Nevent[ibin];
+		for(int ivbin=0;ivbin<nvv; ivbin++){
+			vmean[ibin][ivbin]=0;
+			deltavmean[ibin][ivbin]=0;
+			avgmult[ibin][ivbin]=1.0*totmult[ibin][ivbin]/Nevent[ibin];
+			avgpt[ibin][ivbin]=1.0*totpt[ibin][ivbin]/totmult[ibin][ivbin];
+			avgeta[ibin][ivbin]=1.0*toteta[ibin][ivbin]/totmult[ibin][ivbin];
+			for(int itheta=0;itheta<ntheta;itheta++){
+				dN[ibin][itheta][ivbin]/=totmult[ibin][ivbin];
+				TComplex Res=dN[ibin][itheta][ivbin]/dD[ibin][itheta];
+				v[ibin][itheta][ivbin]=(*V[ibin])[itheta]*avgmultall[ibin]*TMath::BesselJ1(j01)/Besselj01(mm)*Res.Re();
+				vmean[ibin][ivbin]+=v[ibin][itheta][ivbin];
+				deltav[ibin][itheta][ivbin]=TMath::Cos(mm*nn*theta[itheta])/totmult[ibin][ivbin]*(TMath::Exp(j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Sin(nn*theta[itheta]/2.))+TMath::Power(-1,mm)*TMath::Exp(-j01*j01/2./(*chi[ibin])[0]/(*chi[ibin])[0]*TMath::Cos(nn*theta[itheta]))*TMath::BesselJ0(2*j01*TMath::Cos(nn*theta[itheta]/2.)));
+				deltavmean[ibin][ivbin]+=deltav[ibin][itheta][ivbin];
+			//	fstrv<<itheta<<"\t"<<v[ibin][itheta][ivbin]<<"\t"<<deltav[ibin][itheta][ivbin]<<endl;
+			}
+		deltavmean[ibin][ivbin]=TMath::Sqrt(deltavmean[ibin][ivbin])/2./Besselj01(mm);
+		//fstrv<<endl;
+		vmean[ibin][ivbin]/=ntheta;
+		deltavmean[ibin][ivbin]/=ntheta;
+		fstrv<<binv[ivbin]<<"-"<<binv[ivbin+1]<<"\t"<<vmean[ibin][ivbin]<<"\t"<<deltavmean[ibin][ivbin]<<endl;
+		V_int[ibin]+=vmean[ibin][ivbin]*totmult[ibin][ivbin];
+		}
+		V_int[ibin]/=totmultall[ibin];
+		fstrv<<endl<<"V ref="<<(*V_mean)[ibin]<<"\t"<<"V int="<<V_int[ibin]<<endl;
+	}
+	if(ispt){
+	if(isSum)TFile *fout = new TFile("mergedv_Prod.root","Recreate");
+	else TFile *fout = new TFile("mergedv_Prod2.root","Recreate");
+        }
+        else{
+	if(isSum)TFile *fout = new TFile("mergedv_Prod_eta.root","Recreate");
+	else TFile *fout = new TFile("mergedv_Prod2_eta.root","Recreate");
+        }
+	for(ibin=0;ibin<nbin;ibin++){
+	Nevent.Write("Nevent");
+	V_int.Write("V_int");
+	TDirectory *dir = fout->mkdir(Form("D_%d",ibin));
+	dir->cd();
+	avgpt[ibin].Write("avgpt");
+	avgeta[ibin].Write("avgeta");
+	totmult[ibin].Write("totmult");
+	vmean[ibin].Write("vmean");
+	deltavmean[ibin].Write("deltavmean");
+	}
+	
+	infile->Close();
+	fout->Close();
+	
+}
+
+double Besselj01(int m0){
+        if(m0==1)
+                return TMath::BesselJ1(j01);
+        else if(m0==2)
+                return 0.431755;
+        else if(m0==3)
+                return 0.199000;
+        else if(m0==4)
+                return 0.064747;
+        else return 0;
+}
+
