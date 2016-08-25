@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#PBS -m n
+#PBS -l nodes=1:ppn=1
+#PBS -l mem=2000mb
+#PBS -l pmem=2000mb
+#PBS -l walltime=24:00:00
+#PBS -o jobsub.output
+#PBS -j oe
+
+export SCRAM_ARCH=slc5_amd64_gcc462
+source /gpfs21/grid/grid-app/cmssoft/cms/cmsset_default.sh
+cd /home/xuq7/tmp/flow/CMSSW_5_3_8_HI_patch2/src/
+eval `scramv1 runtime -sh`
+
+cd /home/xuq7/tmp/flow/CMSSW_5_3_8_HI_patch2/src/Analysis/LYZsecond/test/pbs/jobs/Prod
+cmsRun lyzsecond_cfi.py

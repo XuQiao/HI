@@ -1,0 +1,19 @@
+#include "TF1.h"
+TF1 *V2vsPt = new TF1("V2vsPt","((x/3.31699)^2.35142/(1+(x/3.49188)^3.54429))*(.00005+(1/x)^1.50600)",0.3,6.0);
+const int nFileAll = 300;
+const TString dir = "/cms/store/user/qixu/flow/NewSTEG/pPbDataV205m100/";
+const TString outdir = "/scratch/xuq7/flow/QCumulant/pPbDataV205m100/Original";
+const double ptmin = 0.3;
+const double ptmax = 6.0; 
+const double etamax = 4.0; 
+const double ptbinv[]={0.3, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0};
+const double etabinv[]={-4,-3,-2.4,-2.0,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2.0,2.4,3,4};
+const int nptv= 9;
+const int netav= 14;
+const int trkbin[]={150,50};
+const int nbin = 1;
+const int nsamples=50;
+const double inV2=0.0502178;
+const TString method = "closed";
+const int maxN = 6;
+const bool useWeight = false;

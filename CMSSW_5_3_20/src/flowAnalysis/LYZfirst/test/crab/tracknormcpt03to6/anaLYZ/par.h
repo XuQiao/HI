@@ -1,0 +1,13 @@
+const double ptmin = 0.3;
+const double ptmax = 3.0; 
+//const double ptbin[]={0.2,0.5,1.0,1.5,2.0,2.5,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0};
+const double ptbin[]={0.3,0.5,0.7,1.0,1.3,1.6,2.0,2.5,3.0};
+const int npt= 8;
+const int trkbin[]={185,180,175,170,165,160,155,150};
+//const int trkbin[]={185,150};
+const int nbin = 7;
+const int nn=2;
+const int mm=1;
+const double j01=2.404826;
+const int ntheta = 5;
+const int nstepr=200;

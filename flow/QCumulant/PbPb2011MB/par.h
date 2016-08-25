@@ -1,0 +1,15 @@
+const int nFileAll = 427;
+const TString dir = "/lio/lfs/cms/store/user/qixu/flow/PACorrHM/skim/PbPb2011Data";
+const TString outdir = "/scratch/xuq7/flow/QCumulant/PbPb2011MB/effcorr";
+const double ptmin = 0.3;
+const double ptmax = 3.0; 
+const double ptbinv[]={0.3, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0};
+const double etabinv[]={-2.4,-2.0,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2.0,2.4};
+const int nptv= 9;
+const int netav= 12;
+const int trkbin[]={350,320,300,280,260,240,220,185,150,120,100,80,60,50};
+const int nbin = 13;
+const int nsamples=50;
+const TString method = "recurrence";
+const int maxN = 8;
+const bool useWeight = true;

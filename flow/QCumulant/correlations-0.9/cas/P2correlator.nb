@@ -1,0 +1,60 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      1395,         51]
+NotebookOptionsPosition[      1162,         38]
+NotebookOutlinePosition[      1498,         53]
+CellTagsIndexPosition[      1455,         50]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"P2correlator", "[", 
+   RowBox[{"n1_", ",", "n2_"}], "]"}], "=", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Q", 
+     RowBox[{"n1", ",", "1"}]], " ", 
+    SubscriptBox["Q", 
+     RowBox[{"n2", ",", "1"}]]}], "-", 
+   SubscriptBox["Q", 
+    RowBox[{
+     RowBox[{"n1", "+", "n2"}], ",", "2"}]]}]}]], "Input",
+ CellChangeTimes->{{3.592888155066347*^9, 3.592888212750963*^9}, 
+   3.592888269776088*^9, {3.592888457162729*^9, 3.592888466081434*^9}, 
+   3.593499587773187*^9, {3.593499636102146*^9, 3.593499648649558*^9}, {
+   3.606017138392169*^9, 3.606017150031865*^9}}]
+},
+WindowSize->{740, 867},
+WindowMargins->{{56, Automatic}, {58, Automatic}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 601, 16, 32, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

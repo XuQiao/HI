@@ -1,0 +1,5 @@
+tmp/slc6_amd64_gcc472/src/GeneratorInterface/HijingInterface/plugins/GeneratorInterfaceHijingInterfacePlugins/plugin.o: \
+ src/GeneratorInterface/HijingInterface/plugins/plugin.cc \
+ src/GeneratorInterface/HijingInterface/interface/HijingGeneratorFilter.h \
+ src/GeneratorInterface/HijingInterface/interface/HijingHadronizer.h \
+
