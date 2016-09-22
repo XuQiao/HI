@@ -1,0 +1,42 @@
+isub = 0 2 - particle correlation corrected:
+ <dcorr> = 0.0254682 <ccorr> = 0.0254655 <vcorr> = 0.159579
+isub = 0 4 - particle correlation corrected:
+ <dcorr> = 0.0190198 <ccorr> = 0.0177813 <vcorr> = -9999
+isub = 0 6 - particle correlation corrected:
+ <dcorr> = 0.0117341 <ccorr> = 0.00757274 <vcorr> = 2.89726e-05
+isub = 1 2 - particle correlation corrected:
+ <dcorr> = 0.013709 <ccorr> = 0.0137096 <vcorr> = 0.117088
+isub = 1 4 - particle correlation corrected:
+ <dcorr> = 0.00627243 <ccorr> = 0.00591339 <vcorr> = -9999
+isub = 1 6 - particle correlation corrected:
+ <dcorr> = 0.00207537 <ccorr> = 0.00133238 <vcorr> = 1.6006e-06
+isub = 2 2 - particle correlation corrected:
+ <dcorr> = 0.0138053 <ccorr> = 0.0138053 <vcorr> = 0.117496
+isub = 2 4 - particle correlation corrected:
+ <dcorr> = 0.00542454 <ccorr> = 0.00504503 <vcorr> = -9999
+isub = 2 6 - particle correlation corrected:
+ <dcorr> = 0.00208412 <ccorr> = 0.00144171 <vcorr> = 1.82542e-06
+isub = 3 2 - particle correlation corrected:
+ <dcorr> = 0.0118432 <ccorr> = 0.0118434 <vcorr> = 0.108827
+isub = 3 4 - particle correlation corrected:
+ <dcorr> = -0.00103738 <ccorr> = -0.0013419 <vcorr> = 0.191395
+isub = 3 6 - particle correlation corrected:
+ <dcorr> = 0.00186087 <ccorr> = 0.00199137 <vcorr> = 3.12719e-06
+isub = 4 2 - particle correlation corrected:
+ <dcorr> = -0.005925 <ccorr> = -0.00638357 <vcorr> = -9999
+isub = 4 4 - particle correlation corrected:
+ <dcorr> = -0.0188006 <ccorr> = -0.018874 <vcorr> = 0.370652
+isub = 4 6 - particle correlation corrected:
+ <dcorr> = 0.000183123 <ccorr> = -0.000821917 <vcorr> = -9999
+isub = 5 2 - particle correlation corrected:
+ <dcorr> = 0.0157318 <ccorr> = 0.0157319 <vcorr> = 0.125427
+isub = 5 4 - particle correlation corrected:
+ <dcorr> = 0.00525738 <ccorr> = 0.0047647 <vcorr> = -9999
+isub = 5 6 - particle correlation corrected:
+ <dcorr> = 0.00187491 <ccorr> = 0.00117726 <vcorr> = 1.30223e-06
+isub = 6 2 - particle correlation corrected:
+ <dcorr> = 0.0624103 <ccorr> = 0.0655895 <vcorr> = 0.256105
+isub = 6 4 - particle correlation corrected:
+ <dcorr> = -0.67403 <ccorr> = -0.678934 <vcorr> = 0.90773
+isub = 6 6 - particle correlation corrected:
+ <dcorr> = 0.661327 <ccorr> = 1.04284 <vcorr> = 0.106397

@@ -1,0 +1,42 @@
+isub = 0 2 - particle correlation
+ <d> = 0.0135645 <c> = 0.0135645 <v> = 0.116467
+isub = 0 4 - particle correlation
+ <d> = 0.000128956 <c> = -0.000239034 <v> = 0.124341
+isub = 0 6 - particle correlation
+ <d> = 1.59281e-05 <c> = 3.01346e-05 <v> = 0.140013
+isub = 1 2 - particle correlation
+ <d> = 0.00673213 <c> = 0.00673213 <v> = 0.0820496
+isub = 1 4 - particle correlation
+ <d> = 1.61502e-05 <c> = -7.44929e-05 <v> = 0.0929028
+isub = 1 6 - particle correlation
+ <d> = 5.481e-07 <c> = 3.2309e-06 <v> = 0.0965037
+isub = 2 2 - particle correlation
+ <d> = 0.00705429 <c> = 0.00705429 <v> = 0.0839898
+isub = 2 4 - particle correlation
+ <d> = 3.03106e-05 <c> = -6.92153e-05 <v> = 0.0912117
+isub = 2 6 - particle correlation
+ <d> = 1.7091e-06 <c> = 3.99723e-06 <v> = 0.0999885
+isub = 3 2 - particle correlation
+ <d> = 0.00719505 <c> = 0.00719505 <v> = 0.0848237
+isub = 3 4 - particle correlation
+ <d> = -0.000595169 <c> = -0.000698707 <v> = 0.162582
+isub = 3 6 - particle correlation
+ <d> = 6.67412e-06 <c> = 4.96843e-05 <v> = 0.152181
+isub = 4 2 - particle correlation
+ <d> = -0.016445 <c> = -0.016445 <v> = -9999
+isub = 4 4 - particle correlation
+ <d> = -0.00934025 <c> = -0.00988113 <v> = 0.315284
+isub = 4 6 - particle correlation
+ <d> = 1.30888e-05 <c> = -0.00142268 <v> = -9999
+isub = 5 2 - particle correlation
+ <d> = 0.00841402 <c> = 0.00841402 <v> = 0.091728
+isub = 5 4 - particle correlation
+ <d> = 2.45751e-05 <c> = -0.000117016 <v> = 0.104007
+isub = 5 6 - particle correlation
+ <d> = 7.11089e-07 <c> = 5.99823e-06 <v> = 0.106986
+isub = 6 2 - particle correlation
+ <d> = 0.0465281 <c> = 0.0465281 <v> = 0.215704
+isub = 6 4 - particle correlation
+ <d> = -0.467764 <c> = -0.472094 <v> = 0.828909
+isub = 6 6 - particle correlation
+ <d> = 0.362571 <c> = 0.559657 <v> = 0.720516
