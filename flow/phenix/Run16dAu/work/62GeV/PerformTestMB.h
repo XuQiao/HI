@@ -17,7 +17,7 @@ class PerformTestMB
 {
  public:
 
-  PerformTestMB(std::vector<TString> input, const char* output="rpanase.root");
+  PerformTestMB(std::vector<TString> input,std::vector<TString> input1, const char* output="rpanase.root");
   virtual ~PerformTestMB();
 
   int Init();
@@ -27,6 +27,7 @@ class PerformTestMB
   
  private:
   std::vector<TString> InputFileName;
+  std::vector<TString> InputFileName1;
   const std::string OutputFileName;
   TFile *d_infile;
   int ievent;
@@ -35,6 +36,7 @@ class PerformTestMB
 
   TFile *d_outfile;
   TChain *tree;
+  TChain *tree1;
   //tree variables
   float        d_bbcz;    // bbcz
   int        centrality; // integer but stored as float in PHGlobal etc
@@ -55,6 +57,7 @@ class PerformTestMB
   float        d_Qw[9];
   float        d_BBC_charge[128];
   float        d_BBC_time0[128];
+  float        d_BBC_valid[128];
 
   int          npc1;
   int          d_nFVTX_clus;
@@ -70,6 +73,16 @@ class PerformTestMB
   float        d_pc3dphi[1000];
   float        d_pc3dz[1000];
 
+  int          d_nfvtxtrk;
+  int          d_nfvtxtrk1; //for test
+  float        d_fvtxchi[1000];
+  int          d_farm[1000];
+  int          d_fnhits[1000];
+  float        d_feta[1000];
+  float        d_fphi[1000];
+  float        d_fvtxX[1000];
+  float        d_fvtxY[1000];
+  float        d_fvtxZ[1000];
 //---histograms---------------
 
   TH1F* htrig;

@@ -62,7 +62,7 @@ float isgood1(vector<float> bbct0, float bbct0mean, int nbbc_, float sigma);
 
 //_____________________________________________________________________________________________________________________________
 PerformTestMB::PerformTestMB(std::vector<TString> input, std::vector<TString> input1, const char* output) :
-  InputFileName(input), InputFileName(input1), OutputFileName(output), ievent(0), jevent(0), RunNumber(0)
+  InputFileName(input), InputFileName1(input1), OutputFileName(output), ievent(0), jevent(0), RunNumber(0)
 {
   d_outfile=NULL;
   htrig=NULL;

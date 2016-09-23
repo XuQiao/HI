@@ -17,7 +17,7 @@ class PerformTestMB
 {
  public:
 
-  PerformTestMB(std::vector<TString> input,std::vector<Tstring> input1, const char* output="rpanase.root");
+  PerformTestMB(std::vector<TString> input,std::vector<TString> input1, const char* output="rpanase.root");
   virtual ~PerformTestMB();
 
   int Init();
@@ -57,6 +57,7 @@ class PerformTestMB
   float        d_Qw[9];
   float        d_BBC_charge[128];
   float        d_BBC_time0[128];
+  float        d_BBC_valid[128];
 
   int          npc1;
   int          d_nFVTX_clus;

@@ -61,8 +61,8 @@ bool isgood(TH1F h, float sigma);
 float isgood1(vector<float> bbct0, float bbct0mean, int nbbc_, float sigma);
 
 //_____________________________________________________________________________________________________________________________
-PerformTestMB::PerformTestMB(std::vector<TString> input, const char* output) :
-  InputFileName(input), OutputFileName(output), ievent(0), jevent(0), RunNumber(0)
+PerformTestMB::PerformTestMB(std::vector<TString> input, std::vector<TString> input1, const char* output) :
+  InputFileName(input), InputFileName1(input1), OutputFileName(output), ievent(0), jevent(0), RunNumber(0)
 {
   d_outfile=NULL;
   htrig=NULL;
@@ -306,11 +306,19 @@ int PerformTestMB::Inittree(){
   //               Initializing Tree Variables                  //
   //------------------------------------------------------------//
   tree = NULL;
+  tree1 = NULL;
   tree = new TChain("tree");
+  tree1 = new TChain("tree");
   for(unsigned int itree=0;itree<InputFileName.size();itree++){
      cout<<InputFileName[itree]<<endl;
      try{
          tree->Add(InputFileName[itree]);}
+     catch(int e){ cout << "An exception occurred. Exception Nr. " << e << '\n';}
+  }
+  for(unsigned int itree=0;itree<InputFileName1.size();itree++){
+     cout<<InputFileName1[itree]<<endl;
+     try{
+         tree1->Add(InputFileName1[itree]);}
      catch(int e){ cout << "An exception occurred. Exception Nr. " << e << '\n';}
   }
   cout << "Now getting ready to read in the tree branch addresses and stuff...." << endl;
@@ -338,6 +346,7 @@ int PerformTestMB::Inittree(){
   TBranch* b_fvtx_z;   //!
   TBranch* b_d_BBC_charge;   //!
   TBranch* b_d_BBC_time0;   //!
+  TBranch* b_d_BBC_valid;   //!
   TBranch* b_d_nFVTX_clus;   //!
 //  TBranch* b_d_nFVTXN_clus;   //!
 //  TBranch* b_d_nFVTXS_clus;   //!
@@ -355,6 +364,16 @@ int PerformTestMB::Inittree(){
   // TBranch* b_d_cntpx;   //!
   // TBranch* b_d_cntpy;   //!
   // TBranch* b_d_cntpz;   //!
+  TBranch* b_d_nfvtxtrk;   //!
+  TBranch* b_d_nfvtxtrk1;  //!
+  TBranch* b_fvtxchi;
+  TBranch* b_farm;
+  TBranch* b_fnhits;
+  TBranch* b_feta;
+  TBranch* b_fphi;
+  TBranch* b_fvtxX;
+  TBranch* b_fvtxY;
+  TBranch* b_fvtxZ;
 
 
   tree->SetBranchAddress("run",&RunNumber,&b_run);
@@ -373,6 +392,7 @@ int PerformTestMB::Inittree(){
 
   tree->SetBranchAddress("bbccharge",d_BBC_charge,&b_d_BBC_charge);
   tree->SetBranchAddress("bbct0",d_BBC_time0,&b_d_BBC_time0);
+  tree1->SetBranchAddress("bbcvalid",d_BBC_valid,&b_d_BBC_valid);
 
   tree->SetBranchAddress("nclus",&d_nFVTX_clus,&b_d_nFVTX_clus);
   tree->SetBranchAddress("fclusX",d_FVTX_x,&b_d_FVTX_x);
@@ -387,6 +407,16 @@ int PerformTestMB::Inittree(){
   tree->SetBranchAddress("pc3dphi",d_pc3dphi,&b_pc3dphi);
   tree->SetBranchAddress("pc3dz",d_pc3dz,&b_pc3dz);
 
+  tree->SetBranchAddress("nfvtxtrack",&d_nfvtxtrk,&b_d_nfvtxtrk);
+  tree1->SetBranchAddress("nfvtxtrack",&d_nfvtxtrk1,&b_d_nfvtxtrk1);
+  tree1->SetBranchAddress("fvtxchi2",d_fvtxchi,&b_fvtxchi);
+  tree->SetBranchAddress("farm",d_farm,&b_farm);
+  tree->SetBranchAddress("fnhits",d_fnhits,&b_fnhits);
+  tree->SetBranchAddress("feta",d_feta,&b_feta);
+  tree->SetBranchAddress("fphi",d_fphi,&b_fphi);
+  tree->SetBranchAddress("fvtxX",d_fvtxX,&b_fvtxX);
+  tree->SetBranchAddress("fvtxY",d_fvtxY,&b_fvtxY);
+  tree->SetBranchAddress("fvtxZ",d_fvtxZ,&b_fvtxZ);
   return 0;
 }
 
@@ -400,6 +430,7 @@ int PerformTestMB::process_event()
   cout<<nEvent<<endl;
   for(ievent=0;ievent < nEvent; ievent++){
       tree->GetEntry(ievent);
+      tree1->GetEntry(ievent);
 
   if(ievent%10000==0) {
     cout<<"************* ievent= "<<ievent<<"    *************"<<endl;

@@ -1,16 +1,17 @@
 void Writehisto(){
     int i=atoi(getenv("I"));
-    string trig="dAu200all";
+    string trig="dAu62all";
     TString trigtype(trig);
     TString name;
     name = "tree.lst";
-        std::ifstream corrs("Run16dAu200GeV.lst");
+    name1 = "tree1.lst";
+        std::ifstream corrs("Run16dAu62GeV.lst");
         int index=0; int run=0;
         for(int irun=0;irun<i+1;irun++){
         corrs>>index>>run;
         }
 
-        PerformTestMB *pl = new PerformTestMB(readline(Form("%s",name.Data()),i),Form("/scratch/xuq7/phenix/Run16dAu/200GeV/Perform%s_%d.root",trigtype.Data(),i));
+        PerformTestMB *pl = new PerformTestMB(readline(Form("%s",name.Data()),i),readline(Form("%s",name1.Data()),i),Form("/scratch/xuq7/phenix/Run16dAu/62GeV/Perform%s_%d.root",trigtype.Data(),i));
         //PerformTestMB *pl = new PerformTestMB(readline(Form("%s",name.Data()),i),Form("testPerform%s_%d.root",trigtype.Data(),i));
         pl->Init();
         pl->Inittree();
@@ -23,7 +24,7 @@ std::vector<TString> readline(char* name, int i){
         std::ifstream backstory(name);
         std::vector<TString> vecline;
         std::string line;
-        std::ifstream corrs("Run16dAu200GeV.lst");
+        std::ifstream corrs("Run16dAu62GeV.lst");
         int index=0; int run=0;
         for(int irun=0;irun<i+1;irun++){
         corrs>>index>>run;
