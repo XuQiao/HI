@@ -16,14 +16,10 @@ export SCRAM_ARCH=slc6_amd64_gcc472
 cd /home/xuq7/HI/flow/phenix/Run16dAu/work/200GeV
 
 root -l <<EOF 
-.L PerformTestMB.C+
-.L RidgedAuRun16.C+
 .L EPAnaRun16alltree.C+
 .L Writehisto.C
 Writehisto()
 EOF
 echo "Done!"
-#.L WritehistoPerf.C
-#.L WritehistoRidge.C
 
 exit 0

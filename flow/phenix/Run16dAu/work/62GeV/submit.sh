@@ -1,8 +1,12 @@
 #!/bin/sh
 njobs=73
-jobs=(13 34 35 39 40 49 50 56 65 70 2 3 5)
-#for i in $( seq 0 $njobs );do
-for i in ${jobs[@]};do
+for i in $( seq 0 $njobs );do
     export I=$i
-    sbatch -o job$i.out -J 62GeVjob$i jobsub.slurm
+    if [[ ${1} == "EP" ]]; then
+        sbatch -o job$i.out -J 62${1}job$i jobsub.slurm
+    elif [[ ${1} == "Ridge" ]]; then
+        sbatch -o job$i.out -J 62${1}job$i jobsubRidge.slurm
+    else
+        echo "Wrong parameter!"
+    fi
 done

@@ -1,7 +1,7 @@
 #include "RpPar.h"
 void plotdphi(){
     gStyle->SetOptStat(kFALSE);
-    int ihar = 1;
+    int ihar = 2;
     int icent = 0;
     int isub = 5;
     int iharE = 0;

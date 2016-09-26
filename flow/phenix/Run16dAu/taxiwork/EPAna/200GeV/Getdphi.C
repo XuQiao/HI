@@ -54,7 +54,7 @@ TString choosesub1(int isub){
 }
 
 
-void Getdphi(int icent=0, int ihar=1, int iangle1=0, int iangle2=0, bool usingCNTEP=0){
+void Getdphi(int icent=0, int ihar=2, int iangle1=0, int iangle2=0, bool usingCNTEP=0){
     TString str;
     int nrun = GetTotalRun();
     std::cout<<"Totally we have "<<nrun<<" runs/segments!"<<std::endl;
@@ -69,7 +69,7 @@ void Getdphi(int icent=0, int ihar=1, int iangle1=0, int iangle2=0, bool usingCN
 
     int n = ihar+1.0+iharE;
     cout<<"iangle1 = "<<iangle1<<" iangle2 = "<<iangle2<<endl;
-    TFile *fout = new TFile(Form("dphicent%dv%d.root",icent,n),"recreate");
+    TFile *fout = new TFile(Form("dphiv%d.root",n),"recreate");
 
        for(int isub=0;isub<nsub;isub++){
         str = choosesub(isub);

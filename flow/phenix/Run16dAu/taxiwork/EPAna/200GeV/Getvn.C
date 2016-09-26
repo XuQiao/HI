@@ -32,7 +32,6 @@ TString choosesub(int isub){
         else if(isub==3)
          str = "FVTX4LS";
         else if(isub==5)
-        if(isub==5)
          str = "FVTX1S";
         else if(isub==4)
          str = "BBCS";
