@@ -897,8 +897,8 @@ if(calFlag>0){
       int dcarm=0;
       if(px>0) dcarm=1;
 
-      double sdphi = calcsdphi(pc3dphi,dcarm,charge,mom,RunNumber);
-      double sdz =  calcsdz(pc3dz,dcarm,charge,mom,RunNumber);
+      double sdphi = 0;//calcsdphi(pc3dphi,dcarm,charge,mom,RunNumber);
+      double sdz =  0;//calcsdz(pc3dz,dcarm,charge,mom,RunNumber);
       int iphi = 0;
       if(fabs(sdphi)<2.0 && fabs(sdz)<2.0){
           if(dcarm==0) iphi = 0;

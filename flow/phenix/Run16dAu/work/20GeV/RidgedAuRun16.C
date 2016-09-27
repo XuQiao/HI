@@ -13,13 +13,12 @@
 #include <iostream>
 
 #include "Run16dAupc3dphidzcalibsmoothpass1.h"
+#include "func.h"
 
 using namespace std;
 
 int get_fvtx_layer(float);
 void initialize_pmt_position();
-float d_pmt_x[64];
-float d_pmt_y[64];
 float d_pmt_z = -1443.5; // same for all tubes
 
 const int bbcz_cut = 10;
@@ -66,8 +65,8 @@ int buff_nbbcn[centbin][vzbin][nbuff];
 
 
 //_____________________________________________________________________________________________________________________________
-RidgedAuRun16::RidgedAuRun16(std::vector<TString> input, const char* output) :
-  OutputFileName(output), InputFileName(input), ievent(0), jevent(0), nevent(0), RunNumber(0)
+RidgedAuRun16::RidgedAuRun16(std::vector<TString> input, std::vector<TString> input1, const char* output) :
+  OutputFileName(output), InputFileName(input), InputFileName1(input1), ievent(0), jevent(0), nevent(0), RunNumber(0)
 {
 
   d_outfile=NULL;
@@ -398,11 +397,19 @@ int RidgedAuRun16::Inittree(){
   //               Initializing Tree Variables                  //
   //------------------------------------------------------------//
   tree = NULL;
+  tree1 = NULL;
   tree = new TChain("tree");
+  tree1 = new TChain("tree");
   for(unsigned int itree=0;itree<InputFileName.size();itree++){
      cout<<InputFileName[itree]<<endl;
      try{
          tree->Add(InputFileName[itree]);}
+     catch(int e){ cout << "An exception occurred. Exception Nr. " << e << '\n';}
+  }
+  for(unsigned int itree=0;itree<InputFileName1.size();itree++){
+     cout<<InputFileName1[itree]<<endl;
+     try{
+         tree1->Add(InputFileName1[itree]);}
      catch(int e){ cout << "An exception occurred. Exception Nr. " << e << '\n';}
   }
 
@@ -428,6 +435,7 @@ int RidgedAuRun16::Inittree(){
   TBranch* b_fvtx_z;   //!
   TBranch* b_d_BBC_charge;   //!
   TBranch* b_d_BBC_time0;   //!
+  TBranch* b_d_BBC_valid;   //!
   TBranch* b_d_nFVTX_clus;   //!
 //  TBranch* b_d_nFVTXN_clus;   //!
 //  TBranch* b_d_nFVTXS_clus;   //!
@@ -446,21 +454,23 @@ int RidgedAuRun16::Inittree(){
   // TBranch* b_d_cntpy;   //!
   // TBranch* b_d_cntpz;   //!
   
-  TBranch* b_d_nftrk;   //!
-  TBranch* b_farm;   //!
-  TBranch* b_feta;   //!
-  TBranch* b_fphi;   //!
-  TBranch* b_fnhits;   //!
-  TBranch* b_fvtxX;   //!
-  TBranch* b_fvtxY;   //!
-  TBranch* b_fvtxZ;   //!
+  TBranch* b_d_nfvtxtrk;   //!
+  TBranch* b_d_nfvtxtrk1;  //!
+  TBranch* b_fvtxchi;
+  TBranch* b_farm;
+  TBranch* b_fnhits;
+  TBranch* b_feta;
+  TBranch* b_fphi;
+  TBranch* b_fvtxX;
+  TBranch* b_fvtxY;
+  TBranch* b_fvtxZ;
 
-
+  
   tree->SetBranchAddress("run",&RunNumber,&b_bbc_z);
   tree->SetBranchAddress("bbcv",&d_bbcz,&b_bbc_z);
   tree->SetBranchAddress("cent",&centrality,&b_centrality);
-  tree->SetBranchAddress("bbc_s",&bbc_qn,&b_bbc_qn);
-  tree->SetBranchAddress("bbc_n",&bbc_qs,&b_bbc_qs);
+  tree->SetBranchAddress("bbc_n",&bbc_qn,&b_bbc_qn);
+  tree->SetBranchAddress("bbc_s",&bbc_qs,&b_bbc_qs);
   tree->SetBranchAddress("npc1hits",&npc1,&b_npc1);
   tree->SetBranchAddress("trig",&trigger_scaled,&b_trigger_scaled);
 
@@ -470,6 +480,7 @@ int RidgedAuRun16::Inittree(){
 
   tree->SetBranchAddress("bbccharge",d_BBC_charge,&b_d_BBC_charge);
   tree->SetBranchAddress("bbct0",d_BBC_time0,&b_d_BBC_time0);
+  tree1->SetBranchAddress("bbcvalid",d_BBC_valid,&b_d_BBC_valid);
 
   tree->SetBranchAddress("nclus",&d_nFVTX_clus,&b_d_nFVTX_clus);
   tree->SetBranchAddress("fclusX",d_FVTX_x,&b_d_FVTX_x);
@@ -484,11 +495,13 @@ int RidgedAuRun16::Inittree(){
   tree->SetBranchAddress("pc3dphi",d_pc3dphi,&b_pc3dphi);
   tree->SetBranchAddress("pc3dz",d_pc3dz,&b_pc3dz);
   
-  tree->SetBranchAddress("nfvtxtrack",&d_nftrk,&b_d_nftrk);
+  tree->SetBranchAddress("nfvtxtrack",&d_nfvtxtrk,&b_d_nfvtxtrk);
+  tree1->SetBranchAddress("nfvtxtrack",&d_nfvtxtrk1,&b_d_nfvtxtrk1);
+  tree1->SetBranchAddress("fvtxchi2",d_fvtxchi,&b_fvtxchi);
   tree->SetBranchAddress("farm",d_farm,&b_farm);
+  tree->SetBranchAddress("fnhits",d_fnhits,&b_fnhits);
   tree->SetBranchAddress("feta",d_feta,&b_feta);
   tree->SetBranchAddress("fphi",d_fphi,&b_fphi);
-  tree->SetBranchAddress("fnhits",d_fnhits,&b_fnhits);
   tree->SetBranchAddress("fvtxX",d_fvtxX,&b_fvtxX);
   tree->SetBranchAddress("fvtxY",d_fvtxY,&b_fvtxY);
   tree->SetBranchAddress("fvtxZ",d_fvtxZ,&b_fvtxZ);
@@ -498,13 +511,17 @@ int RidgedAuRun16::Inittree(){
 
 //_____________________________________________________________________________________________________________________________
 int RidgedAuRun16::process_event(){
-  int nEvent = 10000;//tree->GetEntries();
+  int nEvent = tree->GetEntries();
   cout<<nEvent<<endl;
   for(ievent=0;ievent < nEvent; ievent++){
       tree->GetEntry(ievent);
+      tree1->GetEntry(ievent);
   if(ievent%10000==0) {
     cout<<"************* ievent= "<<ievent<<"    *************"<<endl;
   }
+
+//event check
+   if(d_nfvtxtrk != d_nfvtxtrk1) {cout << d_nfvtxtrk << " EVENT NOT SYNC ! " << d_nfvtxtrk1 << endl; continue;}
 
 //global
     unsigned int trigger_FVTXNSBBCScentral = 0x00100000;
@@ -525,7 +542,7 @@ int RidgedAuRun16::process_event(){
   if ( passes_trigger == 0 )      continue;
   float bbcv = d_bbcz;
   int cent = centrality;
-//  float bbc_s = bbc_qs;
+  float bbc_s = bbc_qs;
   float vvertex = bbcv;
   
   float fvtxz = eventfvtx_z;
@@ -540,17 +557,17 @@ int RidgedAuRun16::process_event(){
 
  int ivz = -1;
  ivz = vzbin*(vvertex+10)/20;
- if(ivz<0||ivz>=vzbin) return 1;
+ if(ivz<0||ivz>=vzbin) continue;
 
  int icent = -9999;
- if(cent<0) return 1;
+ if(cent<0) continue;
  if(cent<=5) icent = 0;
  else if(cent<=10) icent = 1;
  else if(cent<=20) icent = 2;
  else if(cent<=40) icent = 3;
  else if(cent<=60) icent = 4;
  else icent = 5;
- if(icent>=centbin||icent<0) return 1;
+ if(icent>=centbin||icent<0) continue;
 
  // --- all numbers from Darren 2016-06-23
       const float x_off = 0.3;
@@ -558,6 +575,8 @@ int RidgedAuRun16::process_event(){
       float vtx_z = vvertex;
       float vtx_x = x_off + atan(beam_angle)*vtx_z;
       float vtx_y = 0.02;
+ if ( RunNumber >= 456652 && RunNumber <= 457298 && d_nFVTX_clus > 300) continue;
+ if ( RunNumber >= 457634 && RunNumber <= 458167 && d_nFVTX_clus > 500) continue;
 
   jevent++;
 
@@ -611,8 +630,10 @@ int RidgedAuRun16::process_event(){
  // float bbcn_et[nbbc];
  // float bbcn_phi[nbbc];
  // float bbcn_eta[nbbc];
+    int jbbc = 0;
  for(int ipmt = 0; ipmt < 128; ipmt++){
         float bbcx, bbcy, bbcz;
+        if(!d_BBC_valid[ipmt]) continue;
     if(ipmt < 64){
     bbcx      = d_pmt_x[ipmt];
     bbcy      = d_pmt_y[ipmt];
@@ -623,8 +644,9 @@ int RidgedAuRun16::process_event(){
     bbcy      = d_pmt_y[ipmt-64];
     bbcz      = -d_pmt_z;
     }
-    float charge = d_BBC_charge[ipmt];
-    float time0 = d_BBC_time0[ipmt];
+    float charge = d_BBC_charge[jbbc];
+    float time0 = d_BBC_time0[jbbc];
+    jbbc++;
     bbcx = bbcx - vtx_x*10.0;
     bbcy = bbcy - vtx_y*10.0;
     bbcz = bbcz - vtx_z*10.0;
@@ -667,20 +689,26 @@ int RidgedAuRun16::process_event(){
 //  float fvtxn_eta[nbbc];
 //  float fvtxn_et[nbbc];
   
-     for(int iftrk = 0; iftrk < d_nftrk ; iftrk ++){ 
- //     short fvtx_arm = d_farm[iftrk];
-      short nhits = d_fnhits[iftrk];
+    for(int iftrk = 0; iftrk < d_nfvtxtrk; iftrk++){
+      int fvtx_arm = d_farm[iftrk];
+      int nhits = d_fnhits[iftrk];
       float fvtx_eta = d_feta[iftrk];
-      float fvtx_phi = d_fphi[iftrk];
       float fvtx_the = 2.*atan(exp(-fvtx_eta));
+      float fvtx_phi = d_fphi[iftrk];
+
       float     fvtx_x = d_fvtxX[iftrk];
       float     fvtx_y = d_fvtxY[iftrk];
       float     fvtx_z = d_fvtxZ[iftrk];
+      float     chi2   = d_fvtxchi[iftrk];
+      if(fvtx_arm) continue;
+      if(fvtx_the==0) continue;
+      if(chi2>4) continue;
+ 
       float DCA_x = fvtx_x + tan(fvtx_the)*cos(fvtx_phi)*(fvtxz - fvtx_z);
       float DCA_y = fvtx_y + tan(fvtx_the)*sin(fvtx_phi)*(fvtxz - fvtx_z);
-     //bool dcacut = fabs(DCA_x-0.33)<2.0 && fabs(DCA_y-0.02)<2.0;
-     bool dcacut = fabs(DCA_x)<2.0 && fabs(DCA_y)<2.0;
-      if(fabs(fvtx_phi) < 999 && fabs(fvtx_eta)<3.5 && dcacut && nhits>=3){
+
+     bool dcacut = fabs(DCA_x)<2.0 && fabs(DCA_y)<2.0; //fabs(sigma_dcax)<2.0 && fabs(sigma_dcay)<2.0;
+      if(fvtx_phi<10 && fvtx_phi > -10 && fabs(fvtx_eta)<3.5 && dcacut && nhits>=3){
           if(fvtx_eta<-1.0 && fvtx_eta>-3.0){
             fvtxs_phi[nfvtxs] = fvtx_phi;
             fvtxs_eta[nfvtxs] = fvtx_eta;
@@ -698,10 +726,10 @@ int RidgedAuRun16::process_event(){
 
   hrunntrack[icent]->Fill(RunNumber,ntrack);
   hrunnfvtxs[icent]->Fill(RunNumber,nfvtxs);
-  hrunbbcs[icent]->Fill(RunNumber,nbbcs);
-  hbbcsnfvtxs[icent]->Fill(nbbcs,nfvtxs);
+  hrunbbcs[icent]->Fill(RunNumber,bbc_s);
+  hbbcsnfvtxs[icent]->Fill(bbc_s,nfvtxs);
   hcentnfvtxs->Fill(cent,nfvtxs);
-  hcentbbcs->Fill(cent,nbbcs);
+  hcentbbcs->Fill(cent,bbc_s);
 
   //correlation
   int sign =(int)(gRandom->Rndm()*2);//put the flip sign here since per track/evt
@@ -1228,156 +1256,4 @@ int RidgedAuRun16::End()
   }
 
   return 0;
-}
-
-
-int get_fvtx_layer(float z)
-{
-  // --- south side
-  if ( z < -18 && z > -24 ) return 0;
-  if ( z < -24 && z > -30 ) return 1;
-  if ( z < -30 && z > -35 ) return 2;
-  if ( z < -35 )            return 3;
-  // --- north side
-  if ( z > 18 && z < 24 ) return 0;
-  if ( z > 24 && z < 30 ) return 1;
-  if ( z > 30 && z < 35 ) return 2;
-  if ( z > 35 )           return 3;
-  // --- invalid numbers...
-  cout<<"get_fvtx_layer::invalid z =  "<<z<<endl;
-  return -1;
-}
-
-void initialize_pmt_position()
-{
-
-  d_pmt_x[0] = -123;
-  d_pmt_y[0] = 42.6;
-  d_pmt_x[1] = -123;
-  d_pmt_y[1] = 14.2;
-  d_pmt_x[2] = -98.4;
-  d_pmt_y[2] = 85.2;
-  d_pmt_x[3] = -98.4;
-  d_pmt_y[3] = 56.8;
-  d_pmt_x[4] = -98.4;
-  d_pmt_y[4] = 28.4;
-  d_pmt_x[5] = -73.8;
-  d_pmt_y[5] = 99.4;
-  d_pmt_x[6] = -73.8;
-  d_pmt_y[6] = 71;
-  d_pmt_x[7] = -73.8;
-  d_pmt_y[7] = 42.6;
-  d_pmt_x[8] = -73.8;
-  d_pmt_y[8] = 14.2;
-  d_pmt_x[9] = -49.2;
-  d_pmt_y[9] = 113.6;
-  d_pmt_x[10] = -49.2;
-  d_pmt_y[10] = 85.2;
-  d_pmt_x[11] = -49.2;
-  d_pmt_y[11] = 56.8;
-  d_pmt_x[12] = -24.6;
-  d_pmt_y[12] = 127.8;
-  d_pmt_x[13] = -24.6;
-  d_pmt_y[13] = 99.4;
-  d_pmt_x[14] = -24.6;
-  d_pmt_y[14] = 71;
-  d_pmt_x[15] = 0;
-  d_pmt_y[15] = 113.6;
-  d_pmt_x[16] = 0;
-  d_pmt_y[16] = 85.2;
-  d_pmt_x[17] = 24.6;
-  d_pmt_y[17] = 127.8;
-  d_pmt_x[18] = 24.6;
-  d_pmt_y[18] = 99.4;
-  d_pmt_x[19] = 24.6;
-  d_pmt_y[19] = 71;
-  d_pmt_x[20] = 49.2;
-  d_pmt_y[20] = 113.6;
-  d_pmt_x[21] = 49.2;
-  d_pmt_y[21] = 85.2;
-  d_pmt_x[22] = 49.2;
-  d_pmt_y[22] = 56.8;
-  d_pmt_x[23] = 73.8;
-  d_pmt_y[23] = 99.4;
-  d_pmt_x[24] = 73.8;
-  d_pmt_y[24] = 71;
-  d_pmt_x[25] = 73.8;
-  d_pmt_y[25] = 42.6;
-  d_pmt_x[26] = 73.8;
-  d_pmt_y[26] = 14.2;
-  d_pmt_x[27] = 98.4;
-  d_pmt_y[27] = 85.2;
-  d_pmt_x[28] = 98.4;
-  d_pmt_y[28] = 56.8;
-  d_pmt_x[29] = 98.4;
-  d_pmt_y[29] = 28.4;
-  d_pmt_x[30] = 123;
-  d_pmt_y[30] = 42.6;
-  d_pmt_x[31] = 123;
-  d_pmt_y[31] = 14.2;
-  d_pmt_x[32] = 123;
-  d_pmt_y[32] = -42.6;
-  d_pmt_x[33] = 123;
-  d_pmt_y[33] = -14.2;
-  d_pmt_x[34] = 98.4;
-  d_pmt_y[34] = -85.2;
-  d_pmt_x[35] = 98.4;
-  d_pmt_y[35] = -56.8;
-  d_pmt_x[36] = 98.4;
-  d_pmt_y[36] = -28.4;
-  d_pmt_x[37] = 73.8;
-  d_pmt_y[37] = -99.4;
-  d_pmt_x[38] = 73.8;
-  d_pmt_y[38] = -71;
-  d_pmt_x[39] = 73.8;
-  d_pmt_y[39] = -42.6;
-  d_pmt_x[40] = 73.8;
-  d_pmt_y[40] = -14.2;
-  d_pmt_x[41] = 49.2;
-  d_pmt_y[41] = -113.6;
-  d_pmt_x[42] = 49.2;
-  d_pmt_y[42] = -85.2;
-  d_pmt_x[43] = 49.2;
-  d_pmt_y[43] = -56.8;
-  d_pmt_x[44] = 24.6;
-  d_pmt_y[44] = -127.8;
-  d_pmt_x[45] = 24.6;
-  d_pmt_y[45] = -99.4;
-  d_pmt_x[46] = 24.6;
-  d_pmt_y[46] = -71;
-  d_pmt_x[47] = -0;
-  d_pmt_y[47] = -113.6;
-  d_pmt_x[48] = -0;
-  d_pmt_y[48] = -85.2;
-  d_pmt_x[49] = -24.6;
-  d_pmt_y[49] = -127.8;
-  d_pmt_x[50] = -24.6;
-  d_pmt_y[50] = -99.4;
-  d_pmt_x[51] = -24.6;
-  d_pmt_y[51] = -71;
-  d_pmt_x[52] = -49.2;
-  d_pmt_y[52] = -113.6;
-  d_pmt_x[53] = -49.2;
-  d_pmt_y[53] = -85.2;
-  d_pmt_x[54] = -49.2;
-  d_pmt_y[54] = -56.8;
-  d_pmt_x[55] = -73.8;
-  d_pmt_y[55] = -99.4;
-  d_pmt_x[56] = -73.8;
-  d_pmt_y[56] = -71;
-  d_pmt_x[57] = -73.8;
-  d_pmt_y[57] = -42.6;
-  d_pmt_x[58] = -73.8;
-  d_pmt_y[58] = -14.2;
-  d_pmt_x[59] = -98.4;
-  d_pmt_y[59] = -85.2;
-  d_pmt_x[60] = -98.4;
-  d_pmt_y[60] = -56.8;
-  d_pmt_x[61] = -98.4;
-  d_pmt_y[61] = -28.4;
-  d_pmt_x[62] = -123;
-  d_pmt_y[62] = -42.6;
-  d_pmt_x[63] = -123;
-  d_pmt_y[63] = -14.2;
-
 }

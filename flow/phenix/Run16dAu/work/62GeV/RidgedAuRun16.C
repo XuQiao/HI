@@ -557,17 +557,17 @@ int RidgedAuRun16::process_event(){
 
  int ivz = -1;
  ivz = vzbin*(vvertex+10)/20;
- if(ivz<0||ivz>=vzbin) return 1;
+ if(ivz<0||ivz>=vzbin) continue;
 
  int icent = -9999;
- if(cent<0) return 1;
+ if(cent<0) continue;
  if(cent<=5) icent = 0;
  else if(cent<=10) icent = 1;
  else if(cent<=20) icent = 2;
  else if(cent<=40) icent = 3;
  else if(cent<=60) icent = 4;
  else icent = 5;
- if(icent>=centbin||icent<0) return 1;
+ if(icent>=centbin||icent<0) continue;
 
  // --- all numbers from Darren 2016-06-23
       const float x_off = 0.3;
@@ -602,8 +602,8 @@ int RidgedAuRun16::process_event(){
       int dcarm=0;
       if(px>0) dcarm=1;
 
-      double sdphi = calcsdphi(pc3dphi,dcarm,charge,mom,RunNumber);
-      double sdz =  calcsdz(pc3dz,dcarm,charge,mom,RunNumber);
+      double sdphi = 0;//calcsdphi(pc3dphi,dcarm,charge,mom,RunNumber);
+      double sdz =  0;//calcsdz(pc3dz,dcarm,charge,mom,RunNumber);
       if(fabs(sdphi)<2.0 && fabs(sdz)<2.0){
 
      // if(m2tof>0.6 && m2tof<1.2)   //proton

@@ -557,17 +557,17 @@ int RidgedAuRun16::process_event(){
 
  int ivz = -1;
  ivz = vzbin*(vvertex+10)/20;
- if(ivz<0||ivz>=vzbin) return 1;
+ if(ivz<0||ivz>=vzbin) continue;
 
  int icent = -9999;
- if(cent<0) return 1;
+ if(cent<0) continue;
  if(cent<=5) icent = 0;
  else if(cent<=10) icent = 1;
  else if(cent<=20) icent = 2;
  else if(cent<=40) icent = 3;
  else if(cent<=60) icent = 4;
  else icent = 5;
- if(icent>=centbin||icent<0) return 1;
+ if(icent>=centbin||icent<0) continue;
 
  // --- all numbers from Darren 2016-06-23
       const float x_off = 0.3;
