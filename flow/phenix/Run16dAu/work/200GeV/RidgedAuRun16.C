@@ -36,20 +36,20 @@ const int nbufftrks = centbin*vzbin*nbuff*ntrks;
 
 const int nbuffbbcs = centbin*vzbin*nbuff*nbbc;
 
-typedef vector<float> track_buff;
-track_buff trackbuff_pt(nbufftrks);
-track_buff trackbuff_phi(nbufftrks);
-track_buff trackbuff_eta(nbufftrks);
+//typedef vector<float> track_buff;
+float trackbuff_pt[nbufftrks];
+float trackbuff_phi[nbufftrks];
+float trackbuff_eta[nbufftrks];
 
-typedef vector<float> bbcs_buff;
-bbcs_buff bbcsbuff_et(nbuffbbcs);
-bbcs_buff bbcsbuff_phi(nbuffbbcs);
-bbcs_buff bbcsbuff_eta(nbuffbbcs);
+//typedef vector<float> bbcs_buff;
+float bbcsbuff_et[nbuffbbcs];
+float bbcsbuff_phi[nbuffbbcs];
+float bbcsbuff_eta[nbuffbbcs];
 
-typedef vector<float> bbcn_buff;
-bbcn_buff bbcnbuff_et(nbuffbbcs);
-bbcn_buff bbcnbuff_phi(nbuffbbcs);
-bbcn_buff bbcnbuff_eta(nbuffbbcs);
+//typedef vector<float> bbcn_buff;
+float bbcnbuff_et[nbuffbbcs];
+float bbcnbuff_phi[nbuffbbcs];
+float bbcnbuff_eta[nbuffbbcs];
 
 int ntrack_buff[centbin][vzbin];
 int dtrack_buff[centbin][vzbin];
@@ -387,6 +387,18 @@ int RidgedAuRun16::Init()
   memset(nbbcn_buff, 0, sizeof(nbbcn_buff));
   memset(dbbcn_buff, 0, sizeof(dbbcn_buff));
   memset(buff_nbbcn, 0, sizeof(buff_nbbcn));
+
+  memset(trackbuff_pt, 0, sizeof(trackbuff_pt));
+  memset(trackbuff_phi, 0, sizeof(trackbuff_phi));
+  memset(trackbuff_eta, 0, sizeof(trackbuff_eta));
+  
+  memset(bbcnbuff_et, 0, sizeof(bbcnbuff_et));
+  memset(bbcnbuff_phi, 0, sizeof(bbcnbuff_phi));
+  memset(bbcnbuff_eta, 0, sizeof(bbcnbuff_eta));
+
+  memset(bbcsbuff_et, 0, sizeof(bbcsbuff_et));
+  memset(bbcsbuff_phi, 0, sizeof(bbcsbuff_phi));
+  memset(bbcsbuff_eta, 0, sizeof(bbcsbuff_eta));
 
   cout<<"finish of initialize"<<endl;
   return 0;
