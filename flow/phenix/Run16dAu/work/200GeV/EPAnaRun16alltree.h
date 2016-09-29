@@ -115,6 +115,14 @@ class EPAnaRun16alltree
    std::vector<std::vector<TH1F*> > phiweight[ncent][nbbcz][nhar][nsub];
    std::vector<std::vector<TProfile*> > phiweightbbc[ncent][nbbcz][nhar][nsub];
 
+  float meanx[ncent][nbbcz][nhar][nsub][nangle1][nagle2];
+  float meany[ncent][nbbcz][nhar][nsub][nangle1][nagle2];
+  float rmsx[ncent][nbbcz][nhar][nsub][nangle1][nagle2];
+  float rmsy[ncent][nbbcz][nhar][nsub][nangle1][nagle2];
+
+  float cosfltarr[ncent][nbbcz][nhar][nsub][nord][nangle1][nagle2];
+  float sinfltarr[ncent][nbbcz][nhar][nsub][nord][nangle1][nagle2];
+
   /*
   TH1F* EPRCNTBBCS[nangle1][nangle2][ncent][nhar];
   TH1F* EPRCNTFVTX1S[nangle1][nangle2][ncent][nhar];

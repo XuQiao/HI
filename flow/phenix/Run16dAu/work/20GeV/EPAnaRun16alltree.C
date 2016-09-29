@@ -471,8 +471,8 @@ int EPAnaRun16alltree::Inittree(){
   tree->SetBranchAddress("run",&RunNumber,&b_run);
   tree->SetBranchAddress("bbcv",&d_bbcz,&b_bbc_z);
   tree->SetBranchAddress("cent",&centrality,&b_centrality);
-  tree->SetBranchAddress("bbc_s",&bbc_qn,&b_bbc_qn);
-  tree->SetBranchAddress("bbc_n",&bbc_qs,&b_bbc_qs);
+  tree->SetBranchAddress("bbc_n",&bbc_qn,&b_bbc_qn);
+  tree->SetBranchAddress("bbc_s",&bbc_qs,&b_bbc_qs);
   tree->SetBranchAddress("npc1hits",&npc1,&b_npc1);
   tree->SetBranchAddress("trig",&trigger_scaled,&b_trigger_scaled);
 
@@ -893,6 +893,7 @@ if(calFlag>0){
       float px = pt * cos(phi0);
       float py = pt * sin(phi0);
       px = pz*sin(-beam_angle) + px*cos(-beam_angle);
+      pt = sqrt(px*px+py*py);
       float phi = atan2(py,px);
       int dcarm=0;
       if(px>0) dcarm=1;

@@ -516,7 +516,7 @@ int EPAnaRun16alltree::Inittree(){
 //_____________________________________________________________________________________________________________________________
 int EPAnaRun16alltree::process_event()
 {
-  int nEvent = tree->GetEntries();
+  int nEvent = 100000;//tree->GetEntries();
   cout<<nEvent<<endl;
   for(ievent=0;ievent < nEvent; ievent++){
       tree->GetEntry(ievent);
@@ -573,7 +573,6 @@ int EPAnaRun16alltree::process_event()
  if ( RunNumber >= 455792 && RunNumber <= 456283 && cent <= 10) icent = 0;
  if ( RunNumber >= 456652 && RunNumber <= 457298 && cent <= 20) icent = 0;
  if ( RunNumber >= 457634 && RunNumber <= 458167 && cent <= 20) icent = 0;
- else{};
  if(icent<0) continue;
 
  // --- all numbers from Darren 2016-06-23
@@ -586,7 +585,6 @@ int EPAnaRun16alltree::process_event()
  if ( RunNumber >= 456652 && RunNumber <= 457298 && d_nFVTX_clus > 300) continue;
  if ( RunNumber >= 457634 && RunNumber <= 458167 && d_nFVTX_clus > 500) continue;
 
-  jevent++;
 
  float Qx[nangle1][nangle2][nsub][nhar];
  float Qy[nangle1][nangle2][nsub][nhar];
@@ -667,9 +665,11 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
     else{
     if(iangle1==0 && iangle2==0){
     if(fabs(fvtx_eta)>1.0 && fabs(fvtx_eta)<3.0){
-        if(phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->GetBinContent(phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->FindBin(fvtx_phi))!=0){
-        if(phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->FindBin(fvtx_phi)>0 && phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->FindBin(fvtx_phi)<=50)
-         weight = phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->Integral()/phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->GetNbinsX()/phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->GetBinContent(phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->FindBin(fvtx_phi));
+        int ibin = phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->FindBin(fvtx_phi);
+        float binc = phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->GetBinContent(ibin);
+        if(binc!=0){
+        if(ibin > 0 && ibin<=50)
+         weight = phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->Integral()/phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->GetNbinsX()/binc;
         //if(fabs(weight-1.)>0.2) weight = 0.;
         else weight = 0.;
         }
@@ -678,9 +678,11 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
       Qy[iangle1][iangle2][istation][ihar] += weight * sin(n*fvtx_phi);
       Qw[iangle1][iangle2][istation][ihar] += weight;
 
-    if(phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->GetBinContent(phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->FindBin(fvtx_phi))!=0){
-    if(phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->FindBin(fvtx_phi)>0 && phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->FindBin(fvtx_phi)<=50)
-        weight = phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->Integral()/phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->GetNbinsX()/phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->GetBinContent(phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->FindBin(fvtx_phi));
+        ibin = phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->FindBin(fvtx_phi);
+        binc = phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->GetBinContent(ibin);
+        if(binc!=0){
+        if(ibin > 0 && ibin<=50)
+        weight = phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->Integral()/phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->GetNbinsX()/binc;
       //if(fabs(weight-1.)>0.2) weight = 0.;
         else weight = 0.;
         }
@@ -754,8 +756,10 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
            //        if(phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->GetBinContent(phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->FindBin(phi))!=0)
            //        weight = charge * phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->Integral()/phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->GetNbinsX()/phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->GetBinContent(phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->FindBin(phi));
           //        else weight = charge * 1.;
-        if(phiweightbbc[icent][ibbcz][ihar][4][iangle1][iangle2]->GetBinContent(phiweightbbc[icent][ibbcz][ihar][4][iangle1][iangle2]->FindBin(ipmt)) !=0)
-        weight = charge * PPbbcpmtweight[ibbcz][ipmt]/phiweightbbc[icent][ibbcz][ihar][4][iangle1][iangle2]->GetBinContent(phiweightbbc[icent][ibbcz][ihar][4][iangle1][iangle2]->FindBin(ipmt));
+        int ibin = phiweightbbc[icent][ibbcz][ihar][4][iangle1][iangle2]->FindBin(ipmt);
+        float binc = phiweightbbc[icent][ibbcz][ihar][4][iangle1][iangle2]->GetBinContent(ibin);
+        if(ibin!=0)
+        weight = charge * PPbbcpmtweight[ibbcz][ipmt]/binc;
         else weight = 0;
     if(iangle1==0 && iangle2==0) {
       Qx[iangle1][iangle2][4][ihar] += weight * cos(n*phi);
@@ -783,10 +787,13 @@ if(calFlag>0){
             q[icent][ibbcz][ihar][isub][1][iangle1][iangle2]->Fill(qy);
           }
           else{
-            float meanx = q[icent][ibbcz][ihar][isub][0][iangle1][iangle2]->GetMean();
-            float rmsx = q[icent][ibbcz][ihar][isub][0][iangle1][iangle2]->GetRMS();
-            float meany = q[icent][ibbcz][ihar][isub][1][iangle1][iangle2]->GetMean();
-            float rmsy = q[icent][ibbcz][ihar][isub][1][iangle1][iangle2]->GetRMS();
+              if(jevent==0){
+                meanx = q[icent][ibbcz][ihar][isub][0][iangle1][iangle2]->GetMean();
+                rmsx = q[icent][ibbcz][ihar][isub][0][iangle1][iangle2]->GetRMS();
+                meany = q[icent][ibbcz][ihar][isub][1][iangle1][iangle2]->GetMean();
+                rmsy = q[icent][ibbcz][ihar][isub][1][iangle1][iangle2]->GetRMS();
+              }
+              cout<< meanx << rmsx << meany << rmsy << endl;
             qx=(qx-meanx)/rmsx;
             qy=(qy-meany)/rmsy;
             float Psi = atan2(qy,qx)/n;
@@ -804,10 +811,14 @@ if(calFlag>0){
             else{
               float dPsi = 0;
               for (int iord=0; iord<nord; iord++) {
+                  if(jevent==0){
+                      cosfltarr[iord] = cosflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->GetMean();
+                      sinfltarr[iord] = sinflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->GetMean();
+                  }
                 float cosPsi=cos((iord+1.0)*n*Psi);
                 float sinPsi=sin((iord+1.0)*n*Psi);
                 //dPsi+=(fltcos[icent][ibbcz][ihar][isub][iord]*sinPsi-fltsin[icent][ibbcz][ihar][isub][iord]*cosPsi)*2.0/(iord+1)/n;
-                dPsi+=(cosflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->GetMean()*sinPsi-sinflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->GetMean()*cosPsi)*2.0/(iord+1)/n;
+                dPsi+=(cosfltarr[iord]*sinPsi-sinfltarr[iord]*cosPsi)*2.0/(iord+1)/n;
               }
             Psi+=dPsi;
             Psi=atan2(sin(n*Psi),cos(n*Psi))/n;
@@ -893,6 +904,7 @@ if(calFlag>0){
       float px = pt * cos(phi0);
       float py = pt * sin(phi0);
       px = pz*sin(-beam_angle) + px*cos(-beam_angle);
+      pt = sqrt(px*px+py*py);
       float phi = atan2(py,px);
       int dcarm=0;
       if(px>0) dcarm=1;
@@ -1048,6 +1060,7 @@ if(calFlag>0){
 
 } //iangle2 loop
 } //iangle1 loop
+  jevent++;
 
 } //event loop
 
