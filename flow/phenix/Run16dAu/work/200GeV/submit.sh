@@ -1,6 +1,6 @@
 #!/bin/sh
 njobs=106
-for i in $( seq 2 $njobs );do
+for i in $( seq 0 $njobs );do
     export I=$i
     if [[ ${1} == "EP" ]]; then
         sbatch -o job$i.out -J 200${1}job$i jobsub.slurm

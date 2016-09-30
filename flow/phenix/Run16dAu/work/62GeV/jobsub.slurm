@@ -16,7 +16,7 @@ export SCRAM_ARCH=slc6_amd64_gcc472
 cd /home/xuq7/HI/flow/phenix/Run16dAu/work/62GeV
 
 root -l <<EOF 
-.L EPAnaRun16alltree.C+
+.L ../EPAnaRun16alltree.C+
 .L Writehisto.C
 Writehisto()
 EOF

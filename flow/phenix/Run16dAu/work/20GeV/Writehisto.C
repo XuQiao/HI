@@ -11,7 +11,7 @@ void Writehisto(){
         corrs>>index>>run;
         }
 
-        //EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i),Form("/scratch/xuq7/phenix/Run16dAu/39GeV/EPAnaFull%s_%d.root",trigtype.Data(),i));
+        //EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("testEPAnaFull.root"));
         EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("output/EPAnaFull%s_%d.root",trigtype.Data(),i));
         pl->Init();
         pl->Inittree();
