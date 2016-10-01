@@ -36,6 +36,8 @@ TString choosesub(int isub){
         else if(isub==4)
          str = "BBCS";
         else if(isub==6)
+         str = "FVTX1p2p3LS";
+        else if(isub==7)
          str = "FVTXtrkS";
         else
          str = "ABORT";

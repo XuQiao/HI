@@ -2,7 +2,7 @@
 #SBATCH --nodes=1
 #SBATCH --mem=16G
 #SBATCH --mem-per-cpu=16G
-#SBATCH --time=1-00:00:00
+#SBATCH --time=2-00:00:00
 
 #source /gpfs21/grid/grid-app/cmssoft/cms/cmsset_default.sh
 #eval `scramv1 runtime -sh`

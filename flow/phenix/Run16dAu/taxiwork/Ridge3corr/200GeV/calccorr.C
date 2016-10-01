@@ -1,4 +1,4 @@
-void calccorr(int i=1,string t="per"){
+void calccorr(int i=1,string t="ptccentc"){
 float const PI = acos(-1.0);
 if(i==0){
 const int ncent = 6;
@@ -16,7 +16,7 @@ const int npt = 1;
 TString dire="sn";
 }
 
-TFile *f=TFile::Open("../../../work/200GeV/output_3corr.root");
+TFile *f=TFile::Open("../../../work/200GeV/output_Ridge.root");
 TH1F* kforebbcw[ncent][npt];
 TH1F* hforebbcw[ncent][npt];
 TH1F* kbackbbcw2[ncent][npt];
@@ -74,7 +74,7 @@ if(ptmin >= ptbin[ipt] && ptmin < ptbin[ipt+1]){int xptmin = ipt; continue;}
 if(ptmax >= ptbin[ipt] && ptmax < ptbin[ipt+1]){int xptmax = ipt; continue;}
 }*/
   ofstream fout(Form("c1_c2_central_%s_%s.dat",type.Data(),dire.Data()));
-for(int icent=0; icent<ncent; icent++){
+for(int icent=0; icent<1; icent++){
 for(int ipt=0; ipt<npt; ipt++){
 kforebbcw[icent][ipt] = (TH1F*)f->Get(Form("kfore%sbbcw_%d_%d",dire.Data(),icent,ipt));
 //htemp = (TH1F*)f->Get(Form("kforenorthbbcw_%d_%d",icent,ipt));
@@ -89,8 +89,8 @@ kbackbbcw2[icent][ipt] = (TH1F*)f->Get(Form("kback%sbbcw2_%d_%d",dire.Data(),ice
 }
 int ncent_a = sizeof(selcentbin)/sizeof(double)-1;
 int npt_a = sizeof(selptbin)/sizeof(double)-1;
-for(int icent_a=0;icent_a<ncent+1;icent_a++){
-for(int icent_b=0; icent_b<ncent+1; icent_b++)
+for(int icent_a=0;icent_a<1;icent_a++){
+for(int icent_b=0; icent_b<1; icent_b++)
 if(selcentbin[icent_a] == centbin[icent_b]) break;
 int xcentmin = icent_b;
 for(int icent_b=0; icent_b<ncent+1; icent_b++)

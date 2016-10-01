@@ -2,8 +2,10 @@ void getmult(){
     const int ncent = 6;
     int centmin[ncent] = {0,6,11,21,41,61};
     int centmax[ncent] = {5,10,20,40,60,80};
-    TFile *f=TFile::Open("../../../work/200GeV/output_3corr.root");
-    TFile *f1=TFile::Open("../../../work/200GeV/output_3corr_cntbbcsfvtxs.root");
+    //TFile *f=TFile::Open("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/taxi/Run15pAl200MBPro104/9780/merged.root");
+    //TFile *f1=TFile::Open("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/taxi/Run15pAl200MBPro104/9780/merged.root");
+    TFile *f=TFile::Open("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/taxi/Run15pp");
+    TFile *f1=TFile::Open("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/taxi/Run15pAl200MBPro104/9780/merged.root");
 //    for(int icent=0;icent<ncent;icent++){
         //TH2F* hbbcsnfvtxs = (TH2F*)f->Get(Form("hbbcsnfvtxs_%d",icent));
         TH2F* hcentnfvtxs = (TH2F*)f->Get(Form("hcentnfvtxs"));

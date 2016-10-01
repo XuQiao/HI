@@ -6,12 +6,12 @@ void plotcorr_4p_pt(){
   gStyle->SetErrorX(0);
 c1 = new TCanvas("c1"," ",1200,340);
 makeMultiPanelCanvas(c1,4,1,0,0,0.25,0.2,0.03);
-//TString dire = "north";
-TString dire = "south";
+TString dire = "north";
+//TString dire = "south";
   float const PI = acos(-1.0);
 const int ncent = 6;
 const int npt = 25;
-  TFile *f=TFile::Open("../../../work/200GeV/output_3corr.root");
+TFile *f=TFile::Open("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/taxi/Run15pAl200MBPro104/9780/merged.root");
 TH1F* kforebbcw[npt][ncent];
 TH1F* hforebbcw[npt][ncent];
 TH1F* kbackbbcw2[npt][ncent];
@@ -133,8 +133,8 @@ ptbin[ipt+1] = 4.0 ;
 
 //  float ymax = 1.032;//hpp[ipt]->GetMaximum()*1.1;
 //  float ymin = 0.968;//hpp[ipt]->GetMinimum()*0.9;
-  float ymax = 1.03;//hpp[ipt]->GetMaximum()*1.1;
-  float ymin = 0.97;//hpp[ipt]->GetMinimum()*0.9;
+  float ymax = 1.08;//hpp[ipt]->GetMaximum()*1.1;
+  float ymin = 0.92;//hpp[ipt]->GetMinimum()*0.9;
 
   hpp[ipt]->SetMinimum(ymin);
   hpp[ipt]->SetMaximum(ymax);
@@ -229,7 +229,7 @@ TLegend *leg1 = new TLegend(0.22,0.22,0.82,0.32);
 //  m0->Draw();
 
   if(ipt==0){
-  TLatex *t=new TLatex(-0.4,0.88*(ymax-ymin)+ymin, Form("Run16 d+Au 200GeV"));
+  TLatex *t=new TLatex(-0.4,0.88*(ymax-ymin)+ymin, Form("Run15 p+Al 200GeV"));
   t->SetTextSize(0.06);
   t->Draw();
   TLatex *t=new TLatex(1.2,0.78*(ymax-ymin)+ymin, Form("%.1f < p_{T}^{trig} < %.1f (GeV/c)",ptbin[ipt],ptbin[ipt+1]));
@@ -246,7 +246,7 @@ TLegend *leg1 = new TLegend(0.22,0.22,0.82,0.32);
   if(ipt==0)t->Draw();
 
 if(dire=="north")
-  TLatex *t=new TLatex(-1.2,0.14*(ymax-ymin)+ymin, "3.0<#eta_{asso}<3.9");
+  TLatex *t=new TLatex(-1.2,0.14*(ymax-ymin)+ymin, "-3.0<#eta_{asso}<-1.0");
 else
   TLatex *t=new TLatex(-1.2,0.14*(ymax-ymin)+ymin, "-3.9<#eta_{asso}<-3.0");
   t->SetTextSize(0.06);

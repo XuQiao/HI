@@ -16,6 +16,8 @@ TString choosesub(int isub){
         else if(isub==4)
          str = "BBCS";
         else if(isub==6)
+         str = "FVTX1p2p3LS";
+        else if(isub==7)
          str = "FVTXtrkS";
         else
          str = "ABORT";
@@ -25,7 +27,7 @@ TString choosesub(int isub){
 void plotvn(){
     gStyle->SetOptStat(kFALSE);
     int icent = 0;
-    int n = 2;
+    int n = 3;
     int color[6] = {1,2,4,7,8,5};
     int style[12] = {20,21,24,25,26,27,28,30,31,32,33,34};
     TGraphErrors *gr[nsub][3][2];
@@ -116,17 +118,17 @@ leg->SetBorderSize(0);
 leg->SetTextSize(0.04);
 SetStyle(*gr[4][idire][iCNTEP], 1.2, 2,style[2]);
 SetStyle(*gr[5][idire][iCNTEP], 1.2, 1,style[3]);
-SetStyle(*gr[6][idire][iCNTEP], 1.2, 4,style[6]);
+SetStyle(*gr[7][idire][iCNTEP], 1.2, 4,style[6]);
 if(n==2)
 grold_fvtx1s->Draw("Psame");
 gr[4][idire][iCNTEP]->Draw("Psame");
 gr[5][idire][iCNTEP]->Draw("Psame");
-gr[6][idire][iCNTEP]->Draw("Psame");
+gr[7][idire][iCNTEP]->Draw("Psame");
 if(n==2)
 leg->AddEntry(grold_fvtx1s,"Run8 200GeV 0-5\%");
 leg->AddEntry(gr[4][idire][iCNTEP],Form("Run16 200GeV BBCs"),"P");
 leg->AddEntry(gr[5][idire][iCNTEP],Form("Run16 200GeV FVTXs cluster -3.0<#eta<-1.0"),"P");
-leg->AddEntry(gr[6][idire][iCNTEP],Form("Run16 200GeV FVTXs track -3.0<#eta<-1.0"),"P");
+leg->AddEntry(gr[7][idire][iCNTEP],Form("Run16 200GeV FVTXs track -3.0<#eta<-1.0"),"P");
 leg->Draw("Psame");
 /*
 c2->cd(2);
@@ -304,22 +306,22 @@ leg->AddEntry(gr[3][0][iCNTEP],Form("FVTX 4LS"),"P");
 leg->Draw("same");
 
 c6->cd(2);
-if(n==2){
+if(n==3){
 h->SetMinimum(0);
 h->SetMaximum(2);
 }
-SetTitle(h,"","p_{T}","v_{2} ratio");
+SetTitle(h,"","p_{T}","v_{2} ratio over bbc");
 h->DrawCopy();
-TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[0][0][iCNTEP],gr[5][0][iCNTEP]);
+TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[0][0][iCNTEP],gr[4][0][iCNTEP]);
 //SetStyle(*grr,1.2,color[idire+3*iCNTEP],style[0]);
 grr->Draw("Psame");
-TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[1][0][iCNTEP],gr[5][0][iCNTEP]);
+TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[1][0][iCNTEP],gr[4][0][iCNTEP]);
 //SetStyle(*grr,1.2,color[idire+3*iCNTEP],style[1]);
 grr->Draw("Psame");
-TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[2][0][iCNTEP],gr[5][0][iCNTEP]);
+TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[2][0][iCNTEP],gr[4][0][iCNTEP]);
 //SetStyle(*grr,1.2,color[idire+3*iCNTEP],style[2]);
 grr->Draw("Psame");
-TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[3][0][iCNTEP],gr[5][0][iCNTEP]);
+TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[3][0][iCNTEP],gr[4][0][iCNTEP]);
 //SetStyle(*grr,1.2,color[idire+3*iCNTEP],style[3]);
 grr->Draw("Psame");
 c6->Print(Form("v%dLayers.png",n));

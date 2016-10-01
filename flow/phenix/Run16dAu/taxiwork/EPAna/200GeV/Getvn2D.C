@@ -16,8 +16,6 @@ int GetTotalRun();
 void FillGoodRun();
 float GetReso(int , int , int, bool);
 TString GetRun(int);
-TString pro = "Pro104";
-int taxi = 8661;
 float eps = 1e-4;
 float GoodRunFit[ncent][nhar][nsub][10000];
 
@@ -36,6 +34,8 @@ TString choosesub(int isub){
         else if(isub==4)
          str = "BBCS";
         else if(isub==6)
+         str = "FVTX1p2p3LS";
+        else if(isub==7)
          str = "FVTXtrkS";
         else
          str = "ABORT";
@@ -102,9 +102,7 @@ void Getvn2D(int icent, int ihar, bool usingCNTEP=0){
          if(iphi<nphi){
         for(int irun=0;irun<nrun;irun++){
          //std::cout<<"cent = "<<icent<<"; n = "<<n<<" ;isub = "<<str<<" ;run = "<<irun<<" "<<phistr<<std::endl;
-         //fin = TFile::Open(Form("/phenix/plhf/xuq/taxi/%s%s/%d/data/%s.root",dataset.Data(),pro.Data(),taxi,GetRun(irun).Data()));
-         //fin = TFile::Open(Form("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/phenix/flow/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
-         fin = TFile::Open(Form("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/phenix/flow/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
+         fin = TFile::Open(Form("/home/xuq7/HI/flow/phenix/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
          if(!(GoodRunFit[icent][ihar][isub][irun]>0.2 && GoodRunFit[icent][ihar][isub][irun]<3.0)){
          std::cout<<"cent = "<<icent<<"; n = "<<n<<" ;isub = "<<str<<" ;run = "<<GetRun(irun)<<" is bad run!"<<std::endl;
          fin->Close();
@@ -166,9 +164,7 @@ void FillGoodRun(){
             if(str=="ABORT") continue;
             for(int irun=0;irun<nrun;irun++){
         //std::cout<<icent<<" "<<ihar<<" "<<isub<<" "<<irun<<std::endl;
-        //fin = TFile::Open(Form("/phenix/plhf/xuq/taxi/%s%s/%d/data/%s.root",dataset.Data(),pro.Data(),taxi,GetRun(irun).Data()));
-        //fin = TFile::Open(Form("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/phenix/flow/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
-         fin = TFile::Open(Form("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/phenix/flow/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
+         fin = TFile::Open(Form("/home/xuq7/HI/flow/phenix/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
         TH1F* hpsi = new TH1F("psi","psi",100,-pi,pi);
         for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
           TH1F* hpsitemp = (TH1F*)fin->Get(Form("psiFla_0_0_%d_%d_%d_%d",icent,ibbcz,ihar,isub));
@@ -219,9 +215,7 @@ float GetReso(int icent, int ihar, int isub, bool usingCNTEP){
         std::cout<<"Calculating Resolution..."<<std::endl;
         for(int irun=0;irun<nrun;irun++){
          //std::cout<<"cent = "<<icent<<"; n = "<<n<<" ;run = "<<irun<<" of total "<<nrun<<" runs"<<std::endl;
-         //fin = TFile::Open(Form("/phenix/plhf/xuq/taxi/%s%s/%d/data/%s.root",dataset.Data(),pro.Data(),taxi,GetRun(irun).Data()));
-         //fin = TFile::Open(Form("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/phenix/flow/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
-         fin = TFile::Open(Form("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/phenix/flow/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
+         fin = TFile::Open(Form("/home/xuq7/HI/flow/phenix/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
          if(!(GoodRunFit[icent][ihar][isub][irun]>0.2 && GoodRunFit[icent][ihar][isub][irun]<3.0)){
          std::cout<<"cent = "<<icent<<"; n = "<<n<<" ;isub = "<<str1<<" ;run = "<<GetRun(irun)<<" is bad run!"<<std::endl;
          fin->Close();

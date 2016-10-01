@@ -3,7 +3,7 @@ void plotdphi(){
     gStyle->SetOptStat(kFALSE);
     int ihar = 2;
     int icent = 0;
-    int isub = 5;
+    int isub = 7;
     int iharE = 0;
     float ptmin  = 1.0;
     float ptmax  = 3.0;

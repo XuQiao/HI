@@ -14,7 +14,7 @@ const int npt = 1;
 //  TFile *f=TFile::Open("../../PP/Ridgecntbbc/merged.root");
  // TFile *f=TFile::Open("merged_AnapAumbcentral.root");
  // TFile *f=TFile::Open("merged_bbcfvtx.root");
-  TFile *f=TFile::Open("../../../work/200GeV/output_3corr.root");
+TFile *f=TFile::Open("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/taxi/Run15pAl200MBPro104/9780/merged.root");
  // TFile *f=TFile::Open("merged_123corr_EW.root");
 //  TFile *f=TFile::Open("merged_AnapAumb.root");
 TH1F* kforebbcw[npt][ncent];
@@ -237,7 +237,7 @@ TLegend *leg1 = new TLegend(0.62,0.40,0.82,0.45);
   m0->Draw();
 
   if(ipt==0){
-  TLatex *t=new TLatex(-0.8,0.88*(ymax-ymin)+ymin, Form("Run16 d+Au 200GeV"));
+  TLatex *t=new TLatex(-0.8,0.88*(ymax-ymin)+ymin, Form("Run15 p+Al 200GeV"));
   t->SetTextSize(0.04);
   t->Draw();
   TLatex *t=new TLatex(2.4,0.88*(ymax-ymin)+ymin, Form("%.1f < p_{T}^{trig} < %.1f (GeV/c)",ptbin[ipt],ptbin[ipt+1]));
@@ -253,7 +253,7 @@ TLegend *leg1 = new TLegend(0.62,0.40,0.82,0.45);
   //TLatex *t=new TLatex(-1.2,0.78*(ymax-ymin)+ymin, Form("Minimum Bias"));
   t->SetTextSize(0.04);
   if(ipt==0)t->Draw();
-  TLatex *t=new TLatex(2,0.78*(ymax-ymin)+ymin, Form("|#eta_{trig}| < 0.35"));
+  TLatex *t=new TLatex(2,0.78*(ymax-ymin)+ymin, Form("-3.0 <#eta_{trig} < -1.0"));
   t->SetTextSize(0.04);
   if(ipt==0)t->Draw();
 

@@ -1,6 +1,7 @@
 void calcv2(){
     const int ncent = 6;
     const int npt = 25;
+    int pporper = 0; // 0 is pp, 1 is per
     int centbin[ncent+1] = {0,5,10,20,40,60,100};
     gStyle->SetOptFit(kFALSE);
     gStyle->SetOptStat(kFALSE);
@@ -21,18 +22,20 @@ void calcv2(){
     float c1errcntfvtx[ncent][npt], c2errcntfvtx[ncent][npt], c3errcntfvtx[ncent][npt];
     float c1errcntfvtxIn[ncent][npt], c2errcntfvtxIn[ncent][npt], c3errcntfvtxIn[ncent][npt];
     float c1errbbcfvtx[ncent][npt], c2errbbcfvtx[ncent][npt], c3errbbcfvtx[ncent][npt];
-     
-    ifstream PPfcntbbc("c1_c2_cent_centIn_south.dat");
+    if(pporper ==0 ){
+    ifstream PPfcntbbc("c1_c2_PP_centIn_south.dat");
     ifstream PPfcntbbcIn("c1_c2_PP_ptIn_south.dat");
     ifstream PPfcntfvtx("c1_c2_PP_centIn_north.dat");
     ifstream PPfcntfvtxIn("c1_c2_PP_ptIn_north.dat");
     ifstream PPfbbcfvtx("c1_c2_bbcfvtx_PP_centIn.dat");
-//    ifstream PPfcntbbc("c1_c2_central_per_south.dat");
-//    ifstream PPfcntbbcIn("c1_c2_central_per_ptIn_south.dat");
-//    ifstream PPfcntfvtx("c1_c2_central_per_north.dat");
-//    ifstream PPfcntfvtxIn("c1_c2_central_per_ptIn_north.dat");
-//    ifstream PPfbbcfvtx("c1_c2_central_per_ptIn_sn.dat");
-    
+    }
+    else{
+    ifstream PPfcntbbc("c1_c2_central_per_south.dat");
+    ifstream PPfcntbbcIn("c1_c2_central_per_ptIn_south.dat");
+    ifstream PPfcntfvtx("c1_c2_central_per_north.dat");
+    ifstream PPfcntfvtxIn("c1_c2_central_per_ptIn_north.dat");
+    ifstream PPfbbcfvtx("c1_c2_central_per_ptIn_sn.dat");
+    }
     float c1PPcntbbc[ncent][npt], c2PPcntbbc[ncent][npt], c3PPcntbbc[ncent][npt];
     float c1PPcntbbcIn[ncent][npt], c2PPcntbbcIn[ncent][npt], c3PPcntbbcIn[ncent][npt];
     float c1PPcntfvtx[ncent][npt], c2PPcntfvtx[ncent][npt], c3PPcntfvtx[ncent][npt];
@@ -48,14 +51,27 @@ void calcv2(){
     int scale = 1; //0: use c1 as scale factor 1: use multiplicity as scale factor
 
 //--------------Multiplicity-----------------------
-float MPPbbc[ncent] = {7.43,7.43,7.43,7.43,7.43,7.43};
-float Mbbc[ncent]= {83.65,60.43,48.03,30.08,16.63,7.43};
+//float MPPbbc[ncent] = {7.43,7.43,7.43,7.43,7.43,7.43};
+    if(pporper ==0 ){
+float MPPbbc[ncent] = {3.8,3.8,3.8,3.8,3.8,3.8};
 float MPPfvtx[ncent] = {0.69,0.69,0.69,0.69,0.69,0.69};
-float Mfvtx[ncent]  = {3.40,3.36,2.36,0.74,0.64,0.69};
+    }
+    else{
+float MPPbbc[ncent] = {2.38,2.38,2.39,2.38,2.38,2.38};
+float MPPfvtx[ncent] = {1.27,1.27,1.27,1.27,1.27,1.27};
+    }
+float Mbbc[ncent] = {31.01,24.94,15.83,9.84,5.36,2.38};
+float Mfvtx[ncent]  = {4.75,3.62,2.93,2.25,1.67,1.27};
 //MPPNpart[0] = 2;
 //MNpart[0] = 11;
-float MPPNpart[ncent] = {7.43,7.43,7.43,7.43,7.43,7.43}; //use bbc
-float MNpart[ncent]= {83.65,60.43,48.03,30.08,16.63,7.43};  //use bbc
+    if(pporper ==0 ){
+float MPPNpart[ncent] = {3.8,3.8,3.8,3.8,3.8,3.8};
+float MNpart[ncent] = {31.01,24.94,15.83,9.84,5.36,2.38};
+    }
+    else{
+float MPPNpart[ncent] = {2.38,2.38,2.39,2.38,2.38,2.38};
+float MNpart[ncent] = {31.01,24.94,15.83,9.84,5.36,2.38};
+    }
 
 //--------------read in parameters--------------------------------------------
 for(int icent=0;icent<ncent;icent++){
@@ -84,6 +100,32 @@ for(int ipt=0;ipt<npt;ipt++){
         PPfcntbbc>>c1PPcntbbc[icent][ipt]>>c1PPerrcntbbc[icent][ipt]>>c2PPcntbbc[icent][ipt]>>c2PPerrcntbbc[icent][ipt]>>c3PPcntbbc[icent][ipt]>>c3PPerrcntbbc[icent][ipt];
         PPfcntfvtx>>c1PPcntfvtx[icent][ipt]>>c1PPerrcntfvtx[icent][ipt]>>c2PPcntfvtx[icent][ipt]>>c2PPerrcntfvtx[icent][ipt]>>c3PPcntfvtx[icent][ipt]>>c3PPerrcntfvtx[icent][ipt];
     }
+    if(pporper ==0 ){
+//Only PP c2 are fitted!
+    const int nptpp = 10;
+    float ptppmean[nptpp] = {0.25,0.75,1.25,1.75,2.25,2.75,3.25,3.75,4.25,4.75};
+    TGraphErrors *grPPcntbbc = new TGraphErrors(nptpp,ptppmean,c2PPcntbbc[icent],0,c2PPerrcntbbc[icent]);
+    TGraphErrors *grPPcntfvtx = new TGraphErrors(nptpp,ptppmean,c2PPcntfvtx[icent],0,c2PPerrcntfvtx[icent]);
+    TF1 *f1 = new TF1("f1","pol3",0,3.5);
+    TF1 *f2 = new TF1("f2","pol3",0,3.5);
+    TFitResultPtr r1 = grPPcntbbc->Fit("f1", "S");
+    TFitResultPtr r2 = grPPcntfvtx->Fit("f2", "S");
+    double x[npt];
+    for(int ipt=0;ipt<npt;ipt++){
+        x[ipt] = 0.1+0.2*ipt;
+    }
+    double ci1[npt],ci2[npt];
+    double cl = 0.683;  // for 1 sigma error
+    r1->GetConfidenceIntervals(npt,1,1,x,ci1,cl);
+    r2->GetConfidenceIntervals(npt,1,1,x,ci2,cl);
+    for(int ipt=0;ipt<npt;ipt++){
+        c2PPcntbbc[icent][ipt] = f1->Eval(x[ipt]);
+        c2PPerrcntbbc[icent][ipt] = ci1[ipt];
+        c2PPcntfvtx[icent][ipt] = f2->Eval(x[ipt]);
+        c2PPerrcntfvtx[icent][ipt] = ci2[ipt];
+        }
+    }
+
         cout<<"icent: "<<centbin[icent] << "\% to " << centbin[icent+1]<< "\%"<<endl;
         cout<<"cnt - bbc "<<c2cntbbcIn[icent][0]<<" "<<c2errcntbbcIn[icent][0]<<endl;
         cout<<"cnt - fvtx "<<c2cntfvtxIn[icent][0]<<" "<<c2errcntfvtxIn[icent][0]<<endl;
@@ -233,15 +275,22 @@ for(int ipt=0;ipt<npt;ipt++){
     ofsub1.close();
     ofsub2.close();
     ofsub.close();
-
-
+    
+if(pporper == 0 ){
+    ifstream PPfcntbbc("c1_c2_PP_centIn_south.dat");
+    ifstream PPfcntbbcIn("c1_c2_PP_ptIn_south.dat");
+    ifstream PPfcntfvtx("c1_c2_PP_centIn_north.dat");
+    ifstream PPfcntfvtxIn("c1_c2_PP_ptIn_north.dat");
+    ifstream PPfbbcfvtx("c1_c2_bbcfvtx_PP_centIn.dat");
+}
+else{
     ifstream PPfcntbbc("c1_c2_central_per_south.dat");
     ifstream PPfcntbbcIn("c1_c2_central_per_ptIn_south.dat");
     ifstream PPfcntfvtx("c1_c2_central_per_north.dat");
     ifstream PPfcntfvtxIn("c1_c2_central_per_ptIn_north.dat");
     ifstream PPfbbcfvtx("c1_c2_central_per_ptIn_sn.dat");
+    }
 }
-    
 }
 
 float get3sqerr(float a, float ea, float b, float eb, float c, float ec){
