@@ -33,34 +33,28 @@ EPAnaRun16alltree::EPAnaRun16alltree(std::vector<TString> input, std::vector<TSt
     for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
       for(int ihar=0;ihar<nhar;ihar++){
         for(int isub=0;isub<nsub;isub++){
-            psi[icent][ibbcz][ihar][isub].resize(nangle1, std::vector<TH1F*>(nangle2));
-   //         psitmp[icent][ibbcz][ihar][isub].resize(nangle1, std::vector<TH1F*>(nangle2));
-            psiFla[icent][ibbcz][ihar][isub].resize(nangle1, std::vector<TH1F*>(nangle2));
-            phiweight[icent][ibbcz][ihar][isub].resize(nangle1, std::vector<TH1F*>(nangle2));
-            phiweightbbc[icent][ibbcz][ihar][isub].resize(nangle1, std::vector<TProfile*>(nangle2));
+            psi[icent][ibbcz][ihar][isub]=NULL;
+            psiFla[icent][ibbcz][ihar][isub]=NULL;
+            phiweight[icent][ibbcz][ihar][isub]=NULL;
+            phiweightbbc[icent][ibbcz][ihar][isub]=NULL;
           for(int ixy=0;ixy<nxy;ixy++){
-            q[icent][ibbcz][ihar][isub][ixy].resize(nangle1, std::vector<TH1F*>(nangle2));
-   //         qtmp[icent][ibbcz][ihar][isub][ixy].resize(nangle1, std::vector<TH1F*>(nangle2));
-            qRec[icent][ibbcz][ihar][isub][ixy].resize(nangle1, std::vector<TH1F*>(nangle2));
+            q[icent][ibbcz][ihar][isub][ixy]=NULL;
+            qRec[icent][ibbcz][ihar][isub][ixy]=NULL;
           }
           for(int iord=0;iord<nord;iord++){
-            sinflt[icent][ibbcz][ihar][isub][iord].resize(nangle1, std::vector<TH1F*>(nangle2));
-            cosflt[icent][ibbcz][ihar][isub][iord].resize(nangle1, std::vector<TH1F*>(nangle2));
-   //         sinflttmp[icent][ibbcz][ihar][isub][iord].resize(nangle1, std::vector<TH1F*>(nangle2));
-   //         cosflttmp[icent][ibbcz][ihar][isub][iord].resize(nangle1, std::vector<TH1F*>(nangle2));
+            sinflt[icent][ibbcz][ihar][isub][iord]=NULL;
+            cosflt[icent][ibbcz][ihar][isub][iord]=NULL;
           }
         }
       }
     }
   }
     
-for(int iangle1=0;iangle1<nangle1;iangle1++){
-for(int iangle2=0;iangle2<nangle2;iangle2++){
   for(int icent=0;icent<ncent;icent++){
       for(int ihar=0;ihar<nhar;ihar++){
         /*
-          EPRCNTBBCS[iangle1][iangle2][icent][ihar]=NULL;
-          EPRCNTFVTX1S[iangle1][iangle2][icent][ihar]=NULL;
+          EPRCNTBBCS[icent][ihar]=NULL;
+          EPRCNTFVTX1S[icent][ihar]=NULL;
           EPRCNTFVTX1S[icent][ihar]=NULL;
           EPRCNTFVTX2S[icent][ihar]=NULL;
           EPRCNTFVTX1LS[icent][ihar]=NULL;
@@ -70,81 +64,89 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
           EPRBBCSFVTX1S[icent][ihar]=NULL;
           EPRBBCSFVTX2S[icent][ihar]=NULL;
           */
-          EPRBBCSFVTX1S[iangle1][iangle2][icent][ihar]=NULL;
-          EPRBBCSFVTX1LS[iangle1][iangle2][icent][ihar]=NULL;
-          EPRBBCSFVTX2LS[iangle1][iangle2][icent][ihar]=NULL;
-          EPRBBCSFVTX3LS[iangle1][iangle2][icent][ihar]=NULL;
-          EPRBBCSFVTX4LS[iangle1][iangle2][icent][ihar]=NULL;
-          EPRBBCSFVTX1p2p3LS[iangle1][iangle2][icent][ihar]=NULL;
-          EPRBBCSFVTXtrkS[iangle1][iangle2][icent][ihar]=NULL;
+          EPRBBCSFVTX1S[icent][ihar]=NULL;
+          EPRBBCSFVTX1LS[icent][ihar]=NULL;
+          EPRBBCSFVTX2LS[icent][ihar]=NULL;
+          EPRBBCSFVTX3LS[icent][ihar]=NULL;
+          EPRBBCSFVTX4LS[icent][ihar]=NULL;
+          EPRBBCSFVTX1p2p3LS[icent][ihar]=NULL;
+          EPRBBCSFVTX1p2p4LS[icent][ihar]=NULL;
+          EPRFVTX1NFVTX1S[icent][ihar]=NULL;
+          EPRBBCSFVTXtrkS[icent][ihar]=NULL;
           /*
-          EPRCNTFVTX1trkS[iangle1][iangle2][icent][ihar]=NULL;
-          EPRCNTFVTX2trkS[iangle1][iangle2][icent][ihar]=NULL;
+          EPRCNTFVTX1trkS[icent][ihar]=NULL;
+          EPRCNTFVTX2trkS[icent][ihar]=NULL;
 
-          EPRCNTcBBCSc[iangle1][iangle2][icent][ihar]=NULL;
-          EPRCNTcFVTX1S[iangle1][iangle2][icent][ihar]=NULL;
-          EPRBBCScFVTX1S[iangle1][iangle2][icent][ihar]=NULL;
+          EPRCNTcBBCSc[icent][ihar]=NULL;
+          EPRCNTcFVTX1S[icent][ihar]=NULL;
+          EPRBBCScFVTX1S[icent][ihar]=NULL;
 
-          EPRBBCSFVTX1trkS[iangle1][iangle2][icent][ihar]=NULL;
-          EPRBBCSFVTX2trkS[iangle1][iangle2][icent][ihar]=NULL;
-          EPRCNTcBBCSc[iangle1][iangle2][icent][ihar]=NULL;
-          EPRCNTcFVTX1Sc[iangle1][iangle2][icent][ihar]=NULL;
-          EPRBBCScFVTX1Sc[iangle1][iangle2][icent][ihar]=NULL;
+          EPRBBCSFVTX1trkS[icent][ihar]=NULL;
+          EPRBBCSFVTX2trkS[icent][ihar]=NULL;
+          EPRCNTcBBCSc[icent][ihar]=NULL;
+          EPRCNTcFVTX1Sc[icent][ihar]=NULL;
+          EPRBBCScFVTX1Sc[icent][ihar]=NULL;
           */
           
         for(int iphi=0;iphi<nphi;iphi++){
           /*
-          vobsBBCS[iangle1][iangle2][icent][ihar][iphi]=NULL;
+          vobsBBCS[icent][ihar][iphi]=NULL;
           vobsFVTX1S[icent][ihar][iphi]=NULL;
           vobsFVTX2S[icent][ihar][iphi]=NULL;
           */
           /*
-          vobsBBCSsq[iangle1][iangle2][icent][ihar][iphi]=NULL;
+          vobsBBCSsq[icent][ihar][iphi]=NULL;
           vobsFVTX1Ssq[icent][ihar][iphi]=NULL;
           vobsFVTX2Ssq[icent][ihar][iphi]=NULL;
           */
-          vobsFVTX1LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX2LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX3LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX4LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsBBCS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTXtrkS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX1S[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vFVTX1LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vFVTX2LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vFVTX3LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vFVTX4LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vBBCS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vFVTXtrkS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vFVTX1S[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vnFVTX1LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vnFVTX2LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vnFVTX3LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vnFVTX4LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vnFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vnBBCS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vnFVTXtrkS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vnFVTX1S[iangle1][iangle2][icent][ihar][iphi]=NULL;
+          vobsFVTX1LS[icent][ihar][iphi]=NULL;
+          vobsFVTX2LS[icent][ihar][iphi]=NULL;
+          vobsFVTX3LS[icent][ihar][iphi]=NULL;
+          vobsFVTX4LS[icent][ihar][iphi]=NULL;
+          vobsFVTX1p2p3LS[icent][ihar][iphi]=NULL;
+          vobsFVTX1p2p4LS[icent][ihar][iphi]=NULL;
+          vobsBBCS[icent][ihar][iphi]=NULL;
+          vobsFVTXtrkS[icent][ihar][iphi]=NULL;
+          vobsFVTX1N[icent][ihar][iphi]=NULL;
+          vobsFVTX1S[icent][ihar][iphi]=NULL;
+
+          vFVTX1LS[icent][ihar][iphi]=NULL;
+          vFVTX2LS[icent][ihar][iphi]=NULL;
+          vFVTX3LS[icent][ihar][iphi]=NULL;
+          vFVTX4LS[icent][ihar][iphi]=NULL;
+          vFVTX1p2p3LS[icent][ihar][iphi]=NULL;
+          vFVTX1p2p4LS[icent][ihar][iphi]=NULL;
+          vBBCS[icent][ihar][iphi]=NULL;
+          vFVTXtrkS[icent][ihar][iphi]=NULL;
+          vFVTX1N[icent][ihar][iphi]=NULL;
+          vFVTX1S[icent][ihar][iphi]=NULL;
+
+          vnFVTX1LS[icent][ihar][iphi]=NULL;
+          vnFVTX2LS[icent][ihar][iphi]=NULL;
+          vnFVTX3LS[icent][ihar][iphi]=NULL;
+          vnFVTX4LS[icent][ihar][iphi]=NULL;
+          vnFVTX1p2p3LS[icent][ihar][iphi]=NULL;
+          vnFVTX1p2p4LS[icent][ihar][iphi]=NULL;
+          vnBBCS[icent][ihar][iphi]=NULL;
+          vnFVTXtrkS[icent][ihar][iphi]=NULL;
+          vnFVTX1N[icent][ihar][iphi]=NULL;
+          vnFVTX1S[icent][ihar][iphi]=NULL;
           /*
-          vobsFVTX2S[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX2Ssq[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobscBBCSc[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobscBBCScsq[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobscFVTX1Sc[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobscFVTX1Scsq[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX1trkS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX2trkS[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX1trkSsq[iangle1][iangle2][icent][ihar][iphi]=NULL;
-          vobsFVTX2trkSsq[iangle1][iangle2][icent][ihar][iphi]=NULL;
+          vobsFVTX2S[icent][ihar][iphi]=NULL;
+          vobsFVTX2Ssq[icent][ihar][iphi]=NULL;
+          vobscBBCSc[icent][ihar][iphi]=NULL;
+          vobscBBCScsq[icent][ihar][iphi]=NULL;
+          vobscFVTX1Sc[icent][ihar][iphi]=NULL;
+          vobscFVTX1Scsq[icent][ihar][iphi]=NULL;
+          vobsFVTX1trkS[icent][ihar][iphi]=NULL;
+          vobsFVTX2trkS[icent][ihar][iphi]=NULL;
+          vobsFVTX1trkSsq[icent][ihar][iphi]=NULL;
+          vobsFVTX2trkSsq[icent][ihar][iphi]=NULL;
           */
         }
         }
   }
 
-}
-}
 
 for(int istation=0;istation<4;istation++){
     hfvtx[istation]=NULL;
@@ -181,40 +183,29 @@ int EPAnaRun16alltree::Init()
   float pi = acos(-1.0);
   d_outfile = new TFile(OutputFileName.c_str(),"recreate");
 
-for(int iangle1=0;iangle1<nangle1;iangle1++){
-for(int iangle2=0;iangle2<nangle2;iangle2++){
-  
   for(int icent=0;icent<ncent;icent++){
     for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
       for(int ihar=0;ihar<nhar;ihar++){
         for(int isub=0;isub<nsub;isub++){
-            sprintf(name,"psi_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub);
-            psi[icent][ibbcz][ihar][isub][iangle1][iangle2]=new TH1F(name,name,100,-pi,pi);
-       //     sprintf(name,"psitmp_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub);
-       //     psitmp[icent][ibbcz][ihar][isub][iangle1][iangle2]=new TH1F(name,name,100,-pi,pi);
-            sprintf(name,"psiFla_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub);
-            psiFla[icent][ibbcz][ihar][isub][iangle1][iangle2]=new TH1F(name,name,100,-pi,pi);
-            sprintf(name,"phiweight_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub);
-            phiweight[icent][ibbcz][ihar][isub][iangle1][iangle2]=new TH1F(name,name,50,-pi,pi);
-            sprintf(name,"phiweightbbc_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub);
-            phiweightbbc[icent][ibbcz][ihar][isub][iangle1][iangle2]=new TProfile(name,name,200,0,200,0,100);
+            sprintf(name,"psi_%d_%d_%d_%d",icent,ibbcz,ihar,isub);
+            psi[icent][ibbcz][ihar][isub]=new TH1F(name,name,100,-pi,pi);
+            sprintf(name,"psiFla_%d_%d_%d_%d",icent,ibbcz,ihar,isub);
+            psiFla[icent][ibbcz][ihar][isub]=new TH1F(name,name,100,-pi,pi);
+            sprintf(name,"phiweight_%d_%d_%d_%d",icent,ibbcz,ihar,isub);
+            phiweight[icent][ibbcz][ihar][isub]=new TH1F(name,name,50,-pi,pi);
+            sprintf(name,"phiweightbbc_%d_%d_%d_%d",icent,ibbcz,ihar,isub);
+            phiweightbbc[icent][ibbcz][ihar][isub]=new TProfile(name,name,200,0,200,0,100);
           for(int ixy=0;ixy<nxy;ixy++){
-            sprintf(name,"q_%d_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub,ixy);
-            q[icent][ibbcz][ihar][isub][ixy][iangle1][iangle2]=new TH1F(name,name,820,-4.1,4.1);
-       //     sprintf(name,"qtmp_%d_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub,ixy);
-       //     qtmp[icent][ibbcz][ihar][isub][ixy][iangle1][iangle2]=new TH1F(name,name,820,-4.1,4.1);
-            sprintf(name,"qRec_%d_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub,ixy);
-            qRec[icent][ibbcz][ihar][isub][ixy][iangle1][iangle2]=new TH1F(name,name,820,-4.1,4.1);
+            sprintf(name,"q_%d_%d_%d_%d_%d",icent,ibbcz,ihar,isub,ixy);
+            q[icent][ibbcz][ihar][isub][ixy]=new TH1F(name,name,820,-4.1,4.1);
+            sprintf(name,"qRec_%d_%d_%d_%d_%d",icent,ibbcz,ihar,isub,ixy);
+            qRec[icent][ibbcz][ihar][isub][ixy]=new TH1F(name,name,820,-4.1,4.1);
           }   
           for(int iord=0;iord<nord;iord++){
-            sprintf(name,"fltsin_%d_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub,iord);
-            sinflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]=new TH1F(name,name,220,-1.1,1.1);
-            sprintf(name,"fltcos_%d_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub,iord);
-            cosflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]=new TH1F(name,name,220,-1.1,1.1);
-         //   sprintf(name,"fltsintmp_%d_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub,iord);
-         //   sinflttmp[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]=new TH1F(name,name,220,-1.1,1.1);
-         //   sprintf(name,"fltcostmp_%d_%d_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ibbcz,ihar,isub,iord);
-         //   cosflttmp[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]=new TH1F(name,name,220,-1.1,1.1);
+            sprintf(name,"fltsin_%d_%d_%d_%d_%d",icent,ibbcz,ihar,isub,iord);
+            sinflt[icent][ibbcz][ihar][isub][iord]=new TH1F(name,name,220,-1.1,1.1);
+            sprintf(name,"fltcos_%d_%d_%d_%d_%d",icent,ibbcz,ihar,isub,iord);
+            cosflt[icent][ibbcz][ihar][isub][iord]=new TH1F(name,name,220,-1.1,1.1);
             }
       }
     }
@@ -224,12 +215,12 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
   for(int icent=0;icent<ncent;icent++){
       for(int ihar=0;ihar<nhar;ihar++){
           /*
-        sprintf(name,"EPRCNTBBCS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRCNTBBCS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX1S_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRCNTFVTX1S[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX1S_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTX1S[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRCNTBBCS_%d_%d",icent,ihar);
+        EPRCNTBBCS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRCNTFVTX1S_%d_%d",icent,ihar);
+        EPRCNTFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX1S_%d_%d",icent,ihar);
+        EPRBBCSFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
         sprintf(name,"EPRCNTFVTX1S_%d_%d",icent,ihar);
         EPRCNTFVTX2S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
         sprintf(name,"EPRCNTFVTX1LS_%d_%d",icent,ihar);
@@ -245,48 +236,52 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
         sprintf(name,"EPRBBCSFVTX2S_%d_%d",icent,ihar);
         EPRBBCSFVTX2S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
         */
-        sprintf(name,"EPRBBCSFVTX1S_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTX1S[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX1LS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTX1LS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX2LS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTX2LS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX3LS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTX3LS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX4LS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTX4LS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX1p2p3LS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTX1p2p3LS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTXtrkS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTXtrkS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX1S_%d_%d",icent,ihar);
+        EPRBBCSFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRFVTX1NFVTX1S_%d_%d",icent,ihar);
+        EPRFVTX1NFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX1LS_%d_%d",icent,ihar);
+        EPRBBCSFVTX1LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX2LS_%d_%d",icent,ihar);
+        EPRBBCSFVTX2LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX3LS_%d_%d",icent,ihar);
+        EPRBBCSFVTX3LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX4LS_%d_%d",icent,ihar);
+        EPRBBCSFVTX4LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX1p2p3LS_%d_%d",icent,ihar);
+        EPRBBCSFVTX1p2p3LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX1p2p4LS_%d_%d",icent,ihar);
+        EPRBBCSFVTX1p2p4LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTXtrkS_%d_%d",icent,ihar);
+        EPRBBCSFVTXtrkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
         /*
-        sprintf(name,"EPRCNTcBBCSc_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRCNTcBBCSc[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCScFVTX1S_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCScFVTX1S[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTcFVTX1S_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRCNTcFVTX1S[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRCNTcBBCSc_%d_%d",icent,ihar);
+        EPRCNTcBBCSc[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCScFVTX1S_%d_%d",icent,ihar);
+        EPRBBCScFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRCNTcFVTX1S_%d_%d",icent,ihar);
+        EPRCNTcFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
 
-        sprintf(name,"EPRCNTFVTX1trkS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRCNTFVTX1trkS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX2trkS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRCNTFVTX2trkS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRCNTFVTX1trkS_%d_%d",icent,ihar);
+        EPRCNTFVTX1trkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRCNTFVTX2trkS_%d_%d",icent,ihar);
+        EPRCNTFVTX2trkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
 
-        sprintf(name,"EPRBBCSFVTX1trkS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTX1trkS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX2trkS_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCSFVTX2trkS[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTcBBCSc_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRCNTcBBCSc[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCScFVTX1Sc_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRBBCScFVTX1Sc[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTcFVTX1Sc_%d_%d_%d_%d",iangle1,iangle2,icent,ihar);
-        EPRCNTcFVTX1Sc[iangle1][iangle2][icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX1trkS_%d_%d",icent,ihar);
+        EPRBBCSFVTX1trkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCSFVTX2trkS_%d_%d",icent,ihar);
+        EPRBBCSFVTX2trkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRCNTcBBCSc_%d_%d",icent,ihar);
+        EPRCNTcBBCSc[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRBBCScFVTX1Sc_%d_%d",icent,ihar);
+        EPRBBCScFVTX1Sc[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
+        sprintf(name,"EPRCNTcFVTX1Sc_%d_%d",icent,ihar);
+        EPRCNTcFVTX1Sc[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
         */
         for(int iphi=0;iphi<nphi;iphi++){
         /*
-        sprintf(name,"vobsBBCS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsBBCS[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobsBBCS_%d_%d_%d",icent,ihar,iphi);
+        vobsBBCS[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
         sprintf(name,"vobsFVTX1S_%d_%d_%d",icent,ihar,iphi);
         vobsFVTX1S[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
         sprintf(name,"vobsFVTX2S_%d_%d_%d",icent,ihar,iphi);
@@ -294,91 +289,101 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
         */
 
         /*
-        sprintf(name,"vobsBBCSsq_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsBBCSsq[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobsBBCSsq_%d_%d_%d",icent,ihar,iphi);
+        vobsBBCSsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
         sprintf(name,"vobsFVTX1Ssq_%d_%d_%d",icent,ihar,iphi);
         vobsFVTX1Ssq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
         sprintf(name,"vobsFVTX2Ssq_%d_%d_%d",icent,ihar,iphi);
         vobsFVTX2Ssq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
         */
-        sprintf(name,"vobsFVTX1LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX1LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
-        sprintf(name,"vobsFVTX2LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX2LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
-        sprintf(name,"vobsFVTX3LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX3LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
-        sprintf(name,"vobsFVTX4LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX4LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
-        sprintf(name,"vobsFVTX1p2p3LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
-        sprintf(name,"vobsFVTX1S_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX1S[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
-        sprintf(name,"vobsBBCS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsBBCS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
-        sprintf(name,"vobsFVTXtrkS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTXtrkS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX1LS_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX1LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX2LS_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX2LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX3LS_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX3LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX4LS_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX4LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX1p2p3LS_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX1p2p3LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX1p2p4LS_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX1p2p4LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX1S_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX1S[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX1N_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX1N[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsBBCS_%d_%d_%d",icent,ihar,iphi);
+        vobsBBCS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTXtrkS_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTXtrkS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
 
-        sprintf(name,"vFVTX1LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vFVTX1LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
-        sprintf(name,"vFVTX2LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vFVTX2LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
-        sprintf(name,"vFVTX3LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vFVTX3LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
-        sprintf(name,"vFVTX4LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vFVTX4LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
-        sprintf(name,"vFVTX1p2p3LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
-        sprintf(name,"vFVTX1S_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vFVTX1S[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
-        sprintf(name,"vBBCS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vBBCS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
-        sprintf(name,"vFVTXtrkS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vFVTXtrkS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX1LS_%d_%d_%d",icent,ihar,iphi);
+        vFVTX1LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX2LS_%d_%d_%d",icent,ihar,iphi);
+        vFVTX2LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX3LS_%d_%d_%d",icent,ihar,iphi);
+        vFVTX3LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX4LS_%d_%d_%d",icent,ihar,iphi);
+        vFVTX4LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX1p2p3LS_%d_%d_%d",icent,ihar,iphi);
+        vFVTX1p2p3LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX1p2p4LS_%d_%d_%d",icent,ihar,iphi);
+        vFVTX1p2p4LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX1N_%d_%d_%d",icent,ihar,iphi);
+        vFVTX1N[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX1S_%d_%d_%d",icent,ihar,iphi);
+        vFVTX1S[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vBBCS_%d_%d_%d",icent,ihar,iphi);
+        vBBCS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTXtrkS_%d_%d_%d",icent,ihar,iphi);
+        vFVTXtrkS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
 
-        sprintf(name,"vnFVTX1LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vnFVTX1LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
-        sprintf(name,"vnFVTX2LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vnFVTX2LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
-        sprintf(name,"vnFVTX3LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vnFVTX3LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
-        sprintf(name,"vnFVTX4LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vnFVTX4LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
-        sprintf(name,"vnFVTX1p2p3LS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vnFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
-        sprintf(name,"vnFVTX1S_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vnFVTX1S[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
-        sprintf(name,"vnBBCS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vnBBCS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
-        sprintf(name,"vnFVTXtrkS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vnFVTXtrkS[iangle1][iangle2][icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX1LS_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX1LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX2LS_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX2LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX3LS_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX3LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX4LS_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX4LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX1p2p3LS_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX1p2p3LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX1p2p4LS_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX1p2p4LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX1N_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX1N[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX1S_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX1S[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnBBCS_%d_%d_%d",icent,ihar,iphi);
+        vnBBCS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTXtrkS_%d_%d_%d",icent,ihar,iphi);
+        vnFVTXtrkS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
         /*
-        sprintf(name,"vobsFVTX2S_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX2S[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX2Ssq_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX2Ssq[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobscBBCSc_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobscBBCSc[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobscBBCScsq_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobscBBCScsq[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobscFVTX1Sc_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobscFVTX1Sc[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobscFVTX1Scsq_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobscFVTX1Scsq[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX1trkS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX1trkS[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX1trkSsq_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX1trkSsq[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX2trkS_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX2trkS[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX2trkSsq_%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,iphi);
-        vobsFVTX2trkSsq[iangle1][iangle2][icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobsFVTX2S_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX2S[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobsFVTX2Ssq_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX2Ssq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobscBBCSc_%d_%d_%d",icent,ihar,iphi);
+        vobscBBCSc[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobscBBCScsq_%d_%d_%d",icent,ihar,iphi);
+        vobscBBCScsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobscFVTX1Sc_%d_%d_%d",icent,ihar,iphi);
+        vobscFVTX1Sc[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobscFVTX1Scsq_%d_%d_%d",icent,ihar,iphi);
+        vobscFVTX1Scsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobsFVTX1trkS_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX1trkS[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobsFVTX1trkSsq_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX1trkSsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobsFVTX2trkS_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX2trkS[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
+        sprintf(name,"vobsFVTX2trkSsq_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX2trkSsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
         */
         }
   }
   }
 
-}
-}
 for(int istation=0;istation<4;istation++){
     sprintf(name,"hfvtx_%d",istation);
     hfvtx[istation] = new TH2F(name,name,200,-20,20,200,-20,20);
@@ -587,27 +592,23 @@ int EPAnaRun16alltree::process_event()
 
   jevent++;
 
- float Qx[nangle1][nangle2][nsub][nhar];
- float Qy[nangle1][nangle2][nsub][nhar];
- float Qw[nangle1][nangle2][nsub][nhar];
- float RPPhi[nangle1][nangle2][nsub][nhar];
- bool GoodPsi[nangle1][nangle2][nsub][nhar];
+ float Qx[nsub][nhar];
+ float Qy[nsub][nhar];
+ float Qw[nsub][nhar];
+ float RPPhi[nsub][nhar];
+ bool GoodPsi[nsub][nhar];
 
  int iharE=0;
  if(nhar == 1 || nhar == 2) iharE=1;
 
-
-for(int iangle1=0;iangle1<nangle1;iangle1++){
-for(int iangle2=0;iangle2<nangle2;iangle2++){
-
  for(int ihar=0;ihar<nhar;ihar++){
 
     for(int isub=0;isub<nsub;isub++){
-      Qx[iangle1][iangle2][isub][ihar] = 0;
-      Qy[iangle1][iangle2][isub][ihar] = 0;
-      Qw[iangle1][iangle2][isub][ihar] = 0;
-      RPPhi[iangle1][iangle2][isub][ihar] = -9999;
-      GoodPsi[iangle1][iangle2][isub][ihar] = false;
+      Qx[isub][ihar] = 0;
+      Qy[isub][ihar] = 0;
+      Qw[isub][ihar] = 0;
+      RPPhi[isub][ihar] = -9999;
+      GoodPsi[isub][ihar] = false;
     }
 
   int n = ihar+1.0+iharE;
@@ -634,9 +635,9 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
 
      bool dcacut = fabs(DCA_x)<2.0 && fabs(DCA_y)<2.0; //fabs(sigma_dcax)<2.0 && fabs(sigma_dcay)<2.0;
       if(fvtx_phi<10 && fvtx_phi > -10 && fabs(fvtx_eta)<3.5 && dcacut && nhits>=3){
-            Qx[iangle1][iangle2][7][ihar] += weight * cos(n*fvtx_phi);
-            Qy[iangle1][iangle2][7][ihar] += weight * sin(n*fvtx_phi);
-            Qw[iangle1][iangle2][7][ihar] += weight;
+            Qx[9][ihar] += weight * cos(n*fvtx_phi);
+            Qy[9][ihar] += weight * sin(n*fvtx_phi);
+            Qw[9][ihar] += weight;
         }
 }
 
@@ -651,52 +652,69 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
     fvtx_z = fvtx_z-vtx_z;
     fvtx_x = fvtx_z*sin(-beam_angle) + fvtx_x*cos(-beam_angle);
     double weight = 1.0;
-    int iarm = 0;
-    if(fvtx_z>0) iarm = 1; 
-    if(iarm == 1) continue;
+//    int iarm = 0;
+//    if(fvtx_z>0) iarm = 1; 
     float fvtx_r = sqrt(pow(fvtx_x,2.0)+pow(fvtx_y,2.0));
     if ( RunNumber >= 456652 && RunNumber <= 458167 && fvtx_r < 5.2 ) continue; //radius cut
     if( (fabs(fvtx_x)>999) ||(fabs(fvtx_y)>999) || (fabs(fvtx_z)>999)) continue;
-    float fvtx_the = atan2(fvtx_r,fvtx_z);
+//    float fvtx_the = atan2(fvtx_r,fvtx_z);
     float fvtx_phi = atan2(fvtx_y,fvtx_x);
-    float fvtx_eta = -log(tan(0.5*fvtx_the));
+//    float fvtx_eta = -log(tan(0.5*fvtx_the));
     if(calFlag == 0){
-        phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->Fill(fvtx_phi);
-        phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->Fill(fvtx_phi);
+        phiweight[icent][ibbcz][ihar][istation]->Fill(fvtx_phi);
+      //  phiweight[icent][ibbcz][ihar][5]->Fill(fvtx_phi);
     }
     else{
-    if(iangle1==0 && iangle2==0){
-    if(fabs(fvtx_eta)>1.0 && fabs(fvtx_eta)<3.0){
-        int ibin = phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->FindBin(fvtx_phi);
-        float binc = phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->GetBinContent(ibin);
+    //if(!(fabs(fvtx_eta)>1.0 && fabs(fvtx_eta)<3.0)) continue;
+        int ibin = phiweight[icent][ibbcz][ihar][istation]->FindBin(fvtx_phi);
+        float binc = phiweight[icent][ibbcz][ihar][istation]->GetBinContent(ibin);
         if(binc!=0){
         if(ibin > 0 && ibin<=50)
-         weight = phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->Integral()/phiweight[icent][ibbcz][ihar][istation][iangle1][iangle2]->GetNbinsX()/binc;
+         weight = phiweight[icent][ibbcz][ihar][istation]->Integral()/phiweight[icent][ibbcz][ihar][istation]->GetNbinsX()/binc;
         //if(fabs(weight-1.)>0.2) weight = 0.;
         else weight = 0.;
         }
-        else weight = 0.;
-      Qx[iangle1][iangle2][istation][ihar] += weight * cos(n*fvtx_phi);
-      Qy[iangle1][iangle2][istation][ihar] += weight * sin(n*fvtx_phi);
-      Qw[iangle1][iangle2][istation][ihar] += weight;
+        //else weight = 0.;
+      Qx[istation][ihar] += weight * cos(n*fvtx_phi);
+      Qy[istation][ihar] += weight * sin(n*fvtx_phi);
+      Qw[istation][ihar] += weight;
 
-        ibin = phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->FindBin(fvtx_phi);
-        binc = phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->GetBinContent(ibin);
+      /*
+        ibin = phiweight[icent][ibbcz][ihar][5]->FindBin(fvtx_phi);
+        binc = phiweight[icent][ibbcz][ihar][5]->GetBinContent(ibin);
         if(binc!=0){
         if(ibin > 0 && ibin<=50)
-        weight = phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->Integral()/phiweight[icent][ibbcz][ihar][5][iangle1][iangle2]->GetNbinsX()/binc;
+        weight = phiweight[icent][ibbcz][ihar][5]->Integral()/phiweight[icent][ibbcz][ihar][5]->GetNbinsX()/binc;
       //if(fabs(weight-1.)>0.2) weight = 0.;
         else weight = 0.;
         }
     else weight = 0.;
-      Qx[iangle1][iangle2][5][ihar] += weight * cos(n*fvtx_phi);
-      Qy[iangle1][iangle2][5][ihar] += weight * sin(n*fvtx_phi);
-      Qw[iangle1][iangle2][5][ihar] += weight;
-      }
+    */
+    if(istation == 0 || istation == 1 || istation == 2){
+     Qx[6][ihar] += weight * cos(n*fvtx_phi);
+     Qy[6][ihar] += weight * sin(n*fvtx_phi);
+     Qw[6][ihar] += weight;
     }
+    if(istation == 0 || istation == 1 || istation == 3){
+     Qx[7][ihar] += weight * cos(n*fvtx_phi);
+     Qy[7][ihar] += weight * sin(n*fvtx_phi);
+     Qw[7][ihar] += weight;
     }
+    if(istation < 4){
+      Qx[5][ihar] += weight * cos(n*fvtx_phi);
+      Qy[5][ihar] += weight * sin(n*fvtx_phi);
+      Qw[5][ihar] += weight;
+    }
+    if(istation >= 4){
+      Qx[8][ihar] += weight * cos(n*fvtx_phi);
+      Qy[8][ihar] += weight * sin(n*fvtx_phi);
+      Qw[8][ihar] += weight;
+    }
+
+    }//calflag > 0 
     }//fvtx cluster loop
 
+/*
 // Tracks 
     for(int itrk=0; itrk< d_ntrk; itrk++){
       float mom    = d_mom[itrk];
@@ -715,13 +733,11 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
       weight = pt;
       if(pt<0.0 || pt>2.0) weight = 0.0;
 
-    if(iangle1==0 && iangle2==0) {
-        Qx[iangle1][iangle2][6][ihar] += weight * cos(n*phi);
-        Qy[iangle1][iangle2][6][ihar] += weight * sin(n*phi);
-        Qw[iangle1][iangle2][6][ihar] += weight;
-    }
+        Qx[6][ihar] += weight * cos(n*phi);
+        Qy[6][ihar] += weight * sin(n*phi);
+        Qw[6][ihar] += weight;
     }//track loop
-
+*/
 
   // beam beam counter (bbc) r.p. // -----------------------------------
     int ibbc = 0;
@@ -751,23 +767,21 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
       float phi=atan2(bbcy,bbcx);
       float weight = charge;
       if(calFlag == 0){
-          phiweightbbc[icent][ibbcz][ihar][4][iangle1][iangle2]->Fill(ipmt,charge);
+          phiweightbbc[icent][ibbcz][ihar][4]->Fill(ipmt,charge);
       }
       else{
-           //        phiweight[icent][ibbcz][ihar][4][iangle1][iangle2] = GetPPbbcpmt(ibbcz);
-           //        if(phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->GetBinContent(phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->FindBin(phi))!=0)
-           //        weight = charge * phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->Integral()/phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->GetNbinsX()/phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->GetBinContent(phiweight[icent][ibbcz][ihar][4][iangle1][iangle2]->FindBin(phi));
+           //        phiweight[icent][ibbcz][ihar][4] = GetPPbbcpmt(ibbcz);
+           //        if(phiweight[icent][ibbcz][ihar][4]->GetBinContent(phiweight[icent][ibbcz][ihar][4]->FindBin(phi))!=0)
+           //        weight = charge * phiweight[icent][ibbcz][ihar][4]->Integral()/phiweight[icent][ibbcz][ihar][4]->GetNbinsX()/phiweight[icent][ibbcz][ihar][4]->GetBinContent(phiweight[icent][ibbcz][ihar][4]->FindBin(phi));
           //        else weight = charge * 1.;
-        int ibin = phiweightbbc[icent][ibbcz][ihar][4][iangle1][iangle2]->FindBin(ipmt);
-        float binc = phiweightbbc[icent][ibbcz][ihar][4][iangle1][iangle2]->GetBinContent(ibin);
-        if(ibin!=0)
+        int ibin = phiweightbbc[icent][ibbcz][ihar][4]->FindBin(ipmt);
+        float binc = phiweightbbc[icent][ibbcz][ihar][4]->GetBinContent(ibin);
+        if(binc!=0)
         weight = charge * PPbbcpmtweight[ibbcz][ipmt]/binc;
-        else weight = 0;
-    if(iangle1==0 && iangle2==0) {
-      Qx[iangle1][iangle2][4][ihar] += weight * cos(n*phi);
-      Qy[iangle1][iangle2][4][ihar] += weight * sin(n*phi);
-      Qw[iangle1][iangle2][4][ihar] += weight;
-    }
+      //  else weight = 0;
+      Qx[4][ihar] += weight * cos(n*phi);
+      Qy[4][ihar] += weight * sin(n*phi);
+      Qw[4][ihar] += weight;
     }
     }
     }//bbc loop
@@ -778,29 +792,26 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
 if(calFlag>0){
     for(int isub=0;isub<nsub;isub++){
 
-    //if(!(isub==2 || isub == 3) && !(iangle1==0 && iangle2==0) ) continue;
-    if(!(iangle1==0 && iangle2==0) ) continue;
-    //if(!(isub==4)) continue;
-        if(Qw[iangle1][iangle2][isub][ihar]>0){
-          float qx = Qx[iangle1][iangle2][isub][ihar]/Qw[iangle1][iangle2][isub][ihar];
-          float qy = Qy[iangle1][iangle2][isub][ihar]/Qw[iangle1][iangle2][isub][ihar];
+        if(Qw[isub][ihar]>0){
+          float qx = Qx[isub][ihar]/Qw[isub][ihar];
+          float qy = Qy[isub][ihar]/Qw[isub][ihar];
           if(calFlag==1){
-            q[icent][ibbcz][ihar][isub][0][iangle1][iangle2]->Fill(qx);
-            q[icent][ibbcz][ihar][isub][1][iangle1][iangle2]->Fill(qy);
+            q[icent][ibbcz][ihar][isub][0]->Fill(qx);
+            q[icent][ibbcz][ihar][isub][1]->Fill(qy);
           }
           else{
-            qx=(qx-meanx[icent][ibbcz][ihar][isub][iangle1][iangle2])/rmsx[icent][ibbcz][ihar][isub][iangle1][iangle2];
-            qy=(qy-meany[icent][ibbcz][ihar][isub][iangle1][iangle2])/rmsy[icent][ibbcz][ihar][isub][iangle1][iangle2];
+            qx=(qx-meanx[icent][ibbcz][ihar][isub])/rmsx[icent][ibbcz][ihar][isub];
+            qy=(qy-meany[icent][ibbcz][ihar][isub])/rmsy[icent][ibbcz][ihar][isub];
             float Psi = atan2(qy,qx)/n;
             if(calFlag==2){
-              qRec[icent][ibbcz][ihar][isub][0][iangle1][iangle2]->Fill(qx);
-              qRec[icent][ibbcz][ihar][isub][1][iangle1][iangle2]->Fill(qy);
-              psi[icent][ibbcz][ihar][isub][iangle1][iangle2]->Fill(Psi*n);  //make sure the Psi angle range (0,2*pi)
+              qRec[icent][ibbcz][ihar][isub][0]->Fill(qx);
+              qRec[icent][ibbcz][ihar][isub][1]->Fill(qy);
+              psi[icent][ibbcz][ihar][isub]->Fill(Psi*n);  //make sure the Psi angle range (0,2*pi)
               for (int iord=0; iord<nord; iord++) {
                 float cosPsi=cos((iord+1.0)*n*Psi);
                 float sinPsi=sin((iord+1.0)*n*Psi);
-                sinflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->Fill(sinPsi);
-                cosflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->Fill(cosPsi);
+                sinflt[icent][ibbcz][ihar][isub][iord]->Fill(sinPsi);
+                cosflt[icent][ibbcz][ihar][isub][iord]->Fill(cosPsi);
               }
             }
             else{
@@ -809,42 +820,41 @@ if(calFlag>0){
                 float cosPsi=cos((iord+1.0)*n*Psi);
                 float sinPsi=sin((iord+1.0)*n*Psi);
                 //dPsi+=(fltcos[icent][ibbcz][ihar][isub][iord]*sinPsi-fltsin[icent][ibbcz][ihar][isub][iord]*cosPsi)*2.0/(iord+1)/n;
-                dPsi+=(cosfltarr[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]*sinPsi-sinfltarr[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]*cosPsi)*2.0/(iord+1)/n;
+                dPsi+=(cosfltarr[icent][ibbcz][ihar][isub][iord]*sinPsi-sinfltarr[icent][ibbcz][ihar][isub][iord]*cosPsi)*2.0/(iord+1)/n;
               }
             Psi+=dPsi;
             Psi=atan2(sin(n*Psi),cos(n*Psi))/n;
-            RPPhi[iangle1][iangle2][isub][ihar] = Psi;
-            GoodPsi[iangle1][iangle2][isub][ihar] = (fabs(Psi)<4);
-            psiFla[icent][ibbcz][ihar][isub][iangle1][iangle2]->Fill(Psi*n);  //make sure the Psi angle range (0,2*pi)
+            RPPhi[isub][ihar] = Psi;
+            GoodPsi[isub][ihar] = (fabs(Psi)<4);
+            psiFla[icent][ibbcz][ihar][isub]->Fill(Psi*n);  //make sure the Psi angle range (0,2*pi)
             }
           }
         }
     }
     
     if(calFlag==3){
-        if(iangle1 == 0 && iangle2 == 0 ){
         /*
-        if(GoodPsi[iangle1][iangle2][1][ihar] && GoodPsi[iangle1][iangle2][5][ihar])
-          EPRCNTBBCS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][1][ihar]-RPPhi[iangle1][iangle2][5][ihar])));
-        if(GoodPsi[iangle1][iangle2][5][ihar] && GoodPsi[iangle1][iangle2][2][ihar])
-          EPRCNTFVTX1S[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][5][ihar]-RPPhi[iangle1][iangle2][2][ihar])));
-        if(GoodPsi[iangle1][iangle2][1][ihar] && GoodPsi[iangle1][iangle2][2][ihar])
-          EPRBBCSFVTX1S[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][1][ihar]-RPPhi[iangle1][iangle2][2][ihar])));
-        if(GoodPsi[iangle1][iangle2][2][ihar] && GoodPsi[iangle1][iangle2][5][ihar])
-          EPRCNTFVTX1trkS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][2][ihar]-RPPhi[iangle1][iangle2][5][ihar])));
-        if(GoodPsi[iangle1][iangle2][3][ihar] && GoodPsi[iangle1][iangle2][5][ihar])
-          EPRCNTFVTX2trkS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][3][ihar]-RPPhi[iangle1][iangle2][5][ihar])));
-        if(GoodPsi[iangle1][iangle2][1][ihar] && GoodPsi[iangle1][iangle2][2][ihar])
-          EPRBBCSFVTX1trkS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][1][ihar]-RPPhi[iangle1][iangle2][2][ihar])));
-        if(GoodPsi[iangle1][iangle2][1][ihar] && GoodPsi[iangle1][iangle2][3][ihar])
-          EPRBBCSFVTX2trkS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][1][ihar]-RPPhi[iangle1][iangle2][3][ihar])));
+        if(GoodPsi[1][ihar] && GoodPsi[5][ihar])
+          EPRCNTBBCS[icent][ihar]->Fill(cos(n*(RPPhi[1][ihar]-RPPhi[5][ihar])));
+        if(GoodPsi[5][ihar] && GoodPsi[2][ihar])
+          EPRCNTFVTX1S[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[2][ihar])));
+        if(GoodPsi[1][ihar] && GoodPsi[2][ihar])
+          EPRBBCSFVTX1S[icent][ihar]->Fill(cos(n*(RPPhi[1][ihar]-RPPhi[2][ihar])));
+        if(GoodPsi[2][ihar] && GoodPsi[5][ihar])
+          EPRCNTFVTX1trkS[icent][ihar]->Fill(cos(n*(RPPhi[2][ihar]-RPPhi[5][ihar])));
+        if(GoodPsi[3][ihar] && GoodPsi[5][ihar])
+          EPRCNTFVTX2trkS[icent][ihar]->Fill(cos(n*(RPPhi[3][ihar]-RPPhi[5][ihar])));
+        if(GoodPsi[1][ihar] && GoodPsi[2][ihar])
+          EPRBBCSFVTX1trkS[icent][ihar]->Fill(cos(n*(RPPhi[1][ihar]-RPPhi[2][ihar])));
+        if(GoodPsi[1][ihar] && GoodPsi[3][ihar])
+          EPRBBCSFVTX2trkS[icent][ihar]->Fill(cos(n*(RPPhi[1][ihar]-RPPhi[3][ihar])));
 
-        if(GoodPsi[iangle1][iangle2][0][ihar] && GoodPsi[iangle1][iangle2][4][ihar])
-          EPRCNTcBBCSc[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][0][ihar]-RPPhi[iangle1][iangle2][4][ihar])));
-        if(GoodPsi[iangle1][iangle2][4][ihar] && GoodPsi[iangle1][iangle2][3][ihar])
-          EPRCNTcFVTX1Sc[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][4][ihar]-RPPhi[iangle1][iangle2][3][ihar])));
-        if(GoodPsi[iangle1][iangle2][0][ihar] && GoodPsi[iangle1][iangle2][3][ihar])
-          EPRBBCScFVTX1Sc[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][0][ihar]-RPPhi[iangle1][iangle2][3][ihar])));
+        if(GoodPsi[0][ihar] && GoodPsi[4][ihar])
+          EPRCNTcBBCSc[icent][ihar]->Fill(cos(n*(RPPhi[0][ihar]-RPPhi[4][ihar])));
+        if(GoodPsi[4][ihar] && GoodPsi[3][ihar])
+          EPRCNTcFVTX1Sc[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[3][ihar])));
+        if(GoodPsi[0][ihar] && GoodPsi[3][ihar])
+          EPRBBCScFVTX1Sc[icent][ihar]->Fill(cos(n*(RPPhi[0][ihar]-RPPhi[3][ihar])));
 
         if(GoodPsi[2][ihar] && GoodPsi[5][ihar])
             EPRCNTBBCS[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[2][ihar])));//cnt-bbcs
@@ -857,21 +867,24 @@ if(calFlag>0){
         if(GoodPsi[2][ihar] && GoodPsi[7][ihar])
             EPRBBCSFVTX2S[icent][ihar]->Fill(cos(n*(RPPhi[2][ihar]-RPPhi[7][ihar])));//bbcs-fvtx2s
         */
-        if(GoodPsi[iangle1][iangle2][4][ihar] && GoodPsi[iangle1][iangle2][0][ihar])
-            EPRBBCSFVTX1LS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][4][ihar]-RPPhi[iangle1][iangle2][0][ihar])));//bbcs-fvtx1ls
-        if(GoodPsi[iangle1][iangle2][4][ihar] && GoodPsi[iangle1][iangle2][1][ihar])
-            EPRBBCSFVTX2LS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][4][ihar]-RPPhi[iangle1][iangle2][1][ihar])));//bbcs-fvtx2ls
-        if(GoodPsi[iangle1][iangle2][4][ihar] && GoodPsi[iangle1][iangle2][2][ihar])
-            EPRBBCSFVTX3LS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][4][ihar]-RPPhi[iangle1][iangle2][2][ihar])));//bbcs-fvtx1ls
-        if(GoodPsi[iangle1][iangle2][4][ihar] && GoodPsi[iangle1][iangle2][3][ihar])
-            EPRBBCSFVTX4LS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][4][ihar]-RPPhi[iangle1][iangle2][3][ihar])));//bbcs-fvtx1ls
-        if(GoodPsi[iangle1][iangle2][4][ihar] && GoodPsi[iangle1][iangle2][5][ihar])
-            EPRBBCSFVTX1S[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][4][ihar]-RPPhi[iangle1][iangle2][5][ihar])));//bbcs-fvtx1ls
-        if(GoodPsi[iangle1][iangle2][4][ihar] && GoodPsi[iangle1][iangle2][6][ihar])
-            EPRBBCSFVTX1p2p3LS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][4][ihar]-RPPhi[iangle1][iangle2][6][ihar])));//bbcs-fvtx1ls
-        if(GoodPsi[iangle1][iangle2][4][ihar] && GoodPsi[iangle1][iangle2][7][ihar])
-            EPRBBCSFVTXtrkS[iangle1][iangle2][icent][ihar]->Fill(cos(n*(RPPhi[iangle1][iangle2][4][ihar]-RPPhi[iangle1][iangle2][7][ihar])));//bbcs-fvtx1ls
-    }
+        if(GoodPsi[4][ihar] && GoodPsi[0][ihar])
+            EPRBBCSFVTX1LS[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[0][ihar])));//bbcs-fvtx1ls
+        if(GoodPsi[4][ihar] && GoodPsi[1][ihar])
+            EPRBBCSFVTX2LS[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[1][ihar])));//bbcs-fvtx2ls
+        if(GoodPsi[4][ihar] && GoodPsi[2][ihar])
+            EPRBBCSFVTX3LS[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[2][ihar])));//bbcs-fvtx1ls
+        if(GoodPsi[4][ihar] && GoodPsi[3][ihar])
+            EPRBBCSFVTX4LS[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[3][ihar])));//bbcs-fvtx1ls
+        if(GoodPsi[4][ihar] && GoodPsi[5][ihar])
+            EPRBBCSFVTX1S[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[5][ihar])));//bbcs-fvtx1ls
+        if(GoodPsi[4][ihar] && GoodPsi[6][ihar])
+            EPRBBCSFVTX1p2p3LS[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[6][ihar])));//bbcs-fvtx1ls
+        if(GoodPsi[4][ihar] && GoodPsi[7][ihar])
+            EPRBBCSFVTX1p2p4LS[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[7][ihar])));//bbcs-fvtx1ls
+        if(GoodPsi[5][ihar] && GoodPsi[8][ihar])
+            EPRFVTX1NFVTX1S[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[8][ihar])));//bbcs-fvtx1ls
+        if(GoodPsi[4][ihar] && GoodPsi[9][ihar])
+            EPRBBCSFVTXtrkS[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[9][ihar])));//bbcs-fvtx1ls
         /*
         if(GoodPsi[5][ihar] && GoodPsi[8][ihar])
             EPRCNTFVTX1LS[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[8][ihar])));//cnt-fvtx1ls
@@ -906,64 +919,74 @@ if(calFlag>0){
       if(fabs(sdphi)<2.0 && fabs(sdz)<2.0){
           if(dcarm==0) iphi = 0;
           else iphi = 1;
-        if(iangle1 == 0 && iangle2 == 0 ){
-        if(GoodPsi[iangle1][iangle2][4][ihar]){
-          vobsBBCS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][4][ihar])));
-          float dphi = phi-RPPhi[iangle1][iangle2][4][ihar];
-          vBBCS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
-          vnBBCS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        if(GoodPsi[4][ihar]){
+          vobsBBCS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[4][ihar])));
+          float dphi = phi-RPPhi[4][ihar];
+          vBBCS[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnBBCS[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
         }
-        if(GoodPsi[iangle1][iangle2][0][ihar]){
-          vobsFVTX1LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][0][ihar])));
-          float dphi = phi-RPPhi[iangle1][iangle2][0][ihar];
-          vFVTX1LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
-          vnFVTX1LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        if(GoodPsi[0][ihar]){
+          vobsFVTX1LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[0][ihar])));
+          float dphi = phi-RPPhi[0][ihar];
+          vFVTX1LS[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX1LS[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
         }
-        if(GoodPsi[iangle1][iangle2][1][ihar]){
-          vobsFVTX2LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][1][ihar])));
-          float dphi = phi-RPPhi[iangle1][iangle2][1][ihar];
-          vFVTX2LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
-          vnFVTX2LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        if(GoodPsi[1][ihar]){
+          vobsFVTX2LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[1][ihar])));
+          float dphi = phi-RPPhi[1][ihar];
+          vFVTX2LS[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX2LS[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
         }
-        if(GoodPsi[iangle1][iangle2][2][ihar]){
-          vobsFVTX3LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][2][ihar])));
-          float dphi = phi-RPPhi[iangle1][iangle2][2][ihar];
-          vFVTX3LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
-          vnFVTX3LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
-        }
-        if(GoodPsi[iangle1][iangle2][3][ihar]){
-          vobsFVTX4LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][3][ihar])));
-          float dphi = phi-RPPhi[iangle1][iangle2][3][ihar];
-          vFVTX4LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
-          vnFVTX4LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
-        }
-        if(GoodPsi[iangle1][iangle2][5][ihar]){
-          vobsFVTX1S[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][5][ihar])));
-          float dphi = phi-RPPhi[iangle1][iangle2][5][ihar];
-          vFVTX1S[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
-          vnFVTX1S[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
-        }
-        if(GoodPsi[iangle1][iangle2][6][ihar]){
-          vobsFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][6][ihar])));
-          float dphi = phi-RPPhi[iangle1][iangle2][6][ihar];
-          vFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
-          vnFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
-        }
-        if(GoodPsi[iangle1][iangle2][7][ihar]){
-          vobsFVTXtrkS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][7][ihar])));
-          float dphi = phi-RPPhi[iangle1][iangle2][7][ihar];
-          vFVTXtrkS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
-          vnFVTXtrkS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
-        }
-        }
-        /*
-        if(GoodPsi[iangle1][iangle2][2][ihar]){
-          vobsFVTX1trkS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][2][ihar])));
-          vobsFVTX1trkSsq[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][2][ihar]))*cos(n*(phi-RPPhi[iangle1][iangle2][2][ihar])));
+        if(GoodPsi[2][ihar]){
+          vobsFVTX3LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[2][ihar])));
+          float dphi = phi-RPPhi[2][ihar];
+          vFVTX3LS[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX3LS[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
         }
         if(GoodPsi[3][ihar]){
-          vobsFVTX2trkS[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][3][ihar])));
-          vobsFVTX2trkSsq[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][3][ihar]))*cos(n*(phi-RPPhi[iangle1][iangle2][3][ihar])));
+          vobsFVTX4LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[3][ihar])));
+          float dphi = phi-RPPhi[3][ihar];
+          vFVTX4LS[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX4LS[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        }
+        if(GoodPsi[5][ihar]){
+          vobsFVTX1S[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[5][ihar])));
+          float dphi = phi-RPPhi[5][ihar];
+          vFVTX1S[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX1S[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        }
+        if(GoodPsi[6][ihar]){
+          vobsFVTX1p2p3LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[6][ihar])));
+          float dphi = phi-RPPhi[6][ihar];
+          vFVTX1p2p3LS[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX1p2p3LS[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        }
+        if(GoodPsi[7][ihar]){
+          vobsFVTX1p2p4LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[7][ihar])));
+          float dphi = phi-RPPhi[7][ihar];
+          vFVTX1p2p4LS[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX1p2p4LS[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        }
+        if(GoodPsi[8][ihar]){
+          vobsFVTX1N[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[8][ihar])));
+          float dphi = phi-RPPhi[8][ihar];
+          vFVTX1N[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX1N[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        }
+        if(GoodPsi[9][ihar]){
+          vobsFVTXtrkS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[9][ihar])));
+          float dphi = phi-RPPhi[9][ihar];
+          vFVTXtrkS[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTXtrkS[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        }
+        /*
+        if(GoodPsi[2][ihar]){
+          vobsFVTX1trkS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[2][ihar])));
+          vobsFVTX1trkSsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[2][ihar]))*cos(n*(phi-RPPhi[2][ihar])));
+        }
+        if(GoodPsi[3][ihar]){
+          vobsFVTX2trkS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[3][ihar])));
+          vobsFVTX2trkSsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[3][ihar]))*cos(n*(phi-RPPhi[3][ihar])));
         }
         */
 /*
@@ -972,13 +995,13 @@ if(calFlag>0){
           TLorentzVector particle_vec = RotateAndBoost(angleblue,angleyellow,px,py,pz,mass);
           float pt = TMath::Sqrt(particle_vec.Py()*particle_vec.Py()+particle_vec.Px()*particle_vec.Px());                   
           float phi = TMath::ATan2(particle_vec.Py(),particle_vec.Px());
-        if(GoodPsi[iangle1][iangle2][0][ihar]){
-          vobscBBCSc[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][0][ihar])));
-          vobscBBCScsq[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][0][ihar]))*cos(n*(phi-RPPhi[iangle1][iangle2][0][ihar])));
+        if(GoodPsi[0][ihar]){
+          vobscBBCSc[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[0][ihar])));
+          vobscBBCScsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[0][ihar]))*cos(n*(phi-RPPhi[0][ihar])));
         }
-        if(GoodPsi[iangle1][iangle2][3][ihar]){
-          vobscFVTX1Sc[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][3][ihar])));
-          vobscFVTX1Scsq[iangle1][iangle2][icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[iangle1][iangle2][3][ihar]))*cos(n*(phi-RPPhi[iangle1][iangle2][3][ihar])));
+        if(GoodPsi[3][ihar]){
+          vobscFVTX1Sc[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[3][ihar])));
+          vobscFVTX1Scsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[3][ihar]))*cos(n*(phi-RPPhi[3][ihar])));
         }
         */
         /*
@@ -1013,45 +1036,6 @@ if(calFlag>0){
     } //calFlag > 0
  }//ihar
 
-    //individual calibration
-    /*
-//if(!seqcal)
-  if( isLast==-1){
-  for(int icent=0;icent<ncent;icent++){
-    for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
-      for(int ihar=0;ihar<nhar;ihar++){
-        for(int isub=0;isub<nsub;isub++){
-        if(calFlag == 1){
-          for(int ixy=0;ixy<nxy;ixy++){
-            q[iangle1][iangle2][icent][ibbcz][ihar][isub][ixy]->Add(qtmp[iangle1][iangle2][icent][ibbcz][ihar][isub][ixy]);
-            qtmp[iangle1][iangle2][icent][ibbcz][ihar][isub][ixy]=q[iangle1][iangle2][icent][ibbcz][ihar][isub][ixy];
-            q[iangle1][iangle2][icent][ibbcz][ihar][isub][ixy]->Reset();
-          }
-        }
-        if(calFlag==2){
-            psi[iangle1][iangle2][icent][ibbcz][ihar][isub]->Add(psitmp[iangle1][iangle2][icent][ibbcz][ihar][isub]);
-            psitmp[iangle1][iangle2][icent][ibbcz][ihar][isub]=psi[iangle1][iangle2][icent][ibbcz][ihar][isub];
-            psi[iangle1][iangle2][icent][ibbcz][ihar][isub]->Reset();
-          for(int iord=0;iord<nord;iord++){
-            sinflt[iangle1][iangle2][icent][ibbcz][ihar][isub][iord]->Add(sinflttmp[iangle1][iangle2][icent][ibbcz][ihar][isub][iord]);
-            sinflttmp[iangle1][iangle2][icent][ibbcz][ihar][isub][iord]=sinflt[iangle1][iangle2][icent][ibbcz][ihar][isub][iord];
-            sinflt[iangle1][iangle2][icent][ibbcz][ihar][isub][iord]->Reset();
-            cosflt[iangle1][iangle2][icent][ibbcz][ihar][isub][iord]->Add(cosflttmp[iangle1][iangle2][icent][ibbcz][ihar][isub][iord]);
-            cosflttmp[iangle1][iangle2][icent][ibbcz][ihar][isub][iord]=cosflt[iangle1][iangle2][icent][ibbcz][ihar][isub][iord];
-            cosflt[iangle1][iangle2][icent][ibbcz][ihar][isub][iord]->Reset();
-          }
-        }
-        }
-      }
-    }
-  }
-
-}
-*/
-
-} //iangle2 loop
-} //iangle1 loop
-
 } //event loop
 
   return 0;
@@ -1067,22 +1051,20 @@ int EPAnaRun16alltree::End()
  if(calFlag == 3){
   if(d_outfile && d_outfile->IsOpen()) {
     d_outfile->cd();
-for(int iangle1=0;iangle1<nangle1;iangle1++){
-for(int iangle2=0;iangle2<nangle2;iangle2++){
     /*
     for(int icent=0;icent<ncent;icent++){
     for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
       for(int ihar=0;ihar<nhar;ihar++){
         for(int isub=0;isub<nsub;isub++){
-        psi[icent][ibbcz][ihar][isub][iangle1][iangle2]->Write();
-        psiFla[icent][ibbcz][ihar][isub][iangle1][iangle2]->Write();
+        psi[icent][ibbcz][ihar][isub]->Write();
+        psiFla[icent][ibbcz][ihar][isub]->Write();
           for(int ixy=0;ixy<nxy;ixy++){
-            q[icent][ibbcz][ihar][isub][ixy][iangle1][iangle2]->Write();
-            qRec[icent][ibbcz][ihar][isub][ixy][iangle1][iangle2]->Write();
+            q[icent][ibbcz][ihar][isub][ixy]->Write();
+            qRec[icent][ibbcz][ihar][isub][ixy]->Write();
           }
           for(int iord=0;iord<nord;iord++){
-            sinflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->Write();
-            cosflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->Write();
+            sinflt[icent][ibbcz][ihar][isub][iord]->Write();
+            cosflt[icent][ibbcz][ihar][isub][iord]->Write();
           }
         }
       }
@@ -1094,17 +1076,14 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
     for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
       for(int ihar=0;ihar<nhar;ihar++){
         for(int isub=0;isub<nsub;isub++){
-   // if(!(isub==2 || isub == 3) && !(iangle1==0 && iangle2==0) ) continue;
-    if(!(iangle1==0 && iangle2==0) ) continue;
-   // if(!(isub==4)) continue;
           for(int ixy=0;ixy<nxy;ixy++){
-            q[icent][ibbcz][ihar][isub][ixy][iangle1][iangle2]->Write();
-            qRec[icent][ibbcz][ihar][isub][ixy][iangle1][iangle2]->Write();
+            q[icent][ibbcz][ihar][isub][ixy]->Write();
+            qRec[icent][ibbcz][ihar][isub][ixy]->Write();
             }
-        psi[icent][ibbcz][ihar][isub][iangle1][iangle2]->Write();
-        psiFla[icent][ibbcz][ihar][isub][iangle1][iangle2]->Write();
-        phiweight[icent][ibbcz][ihar][isub][iangle1][iangle2]->Write();
-        phiweightbbc[icent][ibbcz][ihar][isub][iangle1][iangle2]->Write();
+        psi[icent][ibbcz][ihar][isub]->Write();
+        psiFla[icent][ibbcz][ihar][isub]->Write();
+        phiweight[icent][ibbcz][ihar][isub]->Write();
+        phiweightbbc[icent][ibbcz][ihar][isub]->Write();
 
         }
       }
@@ -1113,88 +1092,92 @@ for(int iangle2=0;iangle2<nangle2;iangle2++){
 
   for(int icent=0;icent<ncent;icent++){
       for(int ihar=0;ihar<nhar;ihar++){
-        if(iangle1 == 0 && iangle2 == 0 ){
           /*
           EPRCNTBBCS[icent][ihar]->Write();
           EPRCNTFVTX1S[icent][ihar]->Write();
           EPRCNTFVTX2S[icent][ihar]->Write();
           EPRBBCSFVTX2S[icent][ihar]->Write();
           */
-          EPRBBCSFVTX1S[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCSFVTX1LS[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCSFVTX2LS[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCSFVTX3LS[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCSFVTX4LS[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCSFVTX1p2p3LS[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCSFVTXtrkS[iangle1][iangle2][icent][ihar]->Write();
+          EPRBBCSFVTX1S[icent][ihar]->Write();
+          EPRFVTX1NFVTX1S[icent][ihar]->Write();
+          EPRBBCSFVTX1LS[icent][ihar]->Write();
+          EPRBBCSFVTX2LS[icent][ihar]->Write();
+          EPRBBCSFVTX3LS[icent][ihar]->Write();
+          EPRBBCSFVTX4LS[icent][ihar]->Write();
+          EPRBBCSFVTX1p2p3LS[icent][ihar]->Write();
+          EPRBBCSFVTX1p2p4LS[icent][ihar]->Write();
+          EPRBBCSFVTXtrkS[icent][ihar]->Write();
         /*
-          EPRCNTBBCS[iangle1][iangle2][icent][ihar]->Write();
-          EPRCNTFVTX1S[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCSFVTX1S[iangle1][iangle2][icent][ihar]->Write();
-          EPRCNTFVTX1trkS[iangle1][iangle2][icent][ihar]->Write();
-          EPRCNTFVTX2trkS[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCSFVTX1trkS[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCSFVTX2trkS[iangle1][iangle2][icent][ihar]->Write();
+          EPRCNTBBCS[icent][ihar]->Write();
+          EPRCNTFVTX1S[icent][ihar]->Write();
+          EPRBBCSFVTX1S[icent][ihar]->Write();
+          EPRCNTFVTX1trkS[icent][ihar]->Write();
+          EPRCNTFVTX2trkS[icent][ihar]->Write();
+          EPRBBCSFVTX1trkS[icent][ihar]->Write();
+          EPRBBCSFVTX2trkS[icent][ihar]->Write();
 
-          EPRCNTcBBCSc[iangle1][iangle2][icent][ihar]->Write();
-          EPRCNTcFVTX1Sc[iangle1][iangle2][icent][ihar]->Write();
-          EPRBBCScFVTX1Sc[iangle1][iangle2][icent][ihar]->Write();
+          EPRCNTcBBCSc[icent][ihar]->Write();
+          EPRCNTcFVTX1Sc[icent][ihar]->Write();
+          EPRBBCScFVTX1Sc[icent][ihar]->Write();
           */
         for(int iphi=0;iphi<nphi;iphi++){
           /*
-          vobsFVTX2S[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX2Ssq[iangle1][iangle2][icent][ihar][iphi]->Write();
+          vobsFVTX2S[icent][ihar][iphi]->Write();
+          vobsFVTX2Ssq[icent][ihar][iphi]->Write();
           */
-          vobsFVTX1LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX2LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX3LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX4LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX1S[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsBBCS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTXtrkS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vFVTX1LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vFVTX2LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vFVTX3LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vFVTX4LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vFVTX1S[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vBBCS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vFVTXtrkS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vnFVTX1LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vnFVTX2LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vnFVTX3LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vnFVTX4LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vnFVTX1S[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vnFVTX1p2p3LS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vnBBCS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vnFVTXtrkS[iangle1][iangle2][icent][ihar][iphi]->Write();
+          vobsFVTX1LS[icent][ihar][iphi]->Write();
+          vobsFVTX2LS[icent][ihar][iphi]->Write();
+          vobsFVTX3LS[icent][ihar][iphi]->Write();
+          vobsFVTX4LS[icent][ihar][iphi]->Write();
+          vobsFVTX1S[icent][ihar][iphi]->Write();
+          vobsFVTX1N[icent][ihar][iphi]->Write();
+          vobsFVTX1p2p3LS[icent][ihar][iphi]->Write();
+          vobsFVTX1p2p4LS[icent][ihar][iphi]->Write();
+          vobsBBCS[icent][ihar][iphi]->Write();
+          vobsFVTXtrkS[icent][ihar][iphi]->Write();
+
+          vFVTX1LS[icent][ihar][iphi]->Write();
+          vFVTX2LS[icent][ihar][iphi]->Write();
+          vFVTX3LS[icent][ihar][iphi]->Write();
+          vFVTX4LS[icent][ihar][iphi]->Write();
+          vFVTX1S[icent][ihar][iphi]->Write();
+          vFVTX1N[icent][ihar][iphi]->Write();
+          vFVTX1p2p3LS[icent][ihar][iphi]->Write();
+          vFVTX1p2p4LS[icent][ihar][iphi]->Write();
+          vBBCS[icent][ihar][iphi]->Write();
+          vFVTXtrkS[icent][ihar][iphi]->Write();
+
+          vnFVTX1LS[icent][ihar][iphi]->Write();
+          vnFVTX2LS[icent][ihar][iphi]->Write();
+          vnFVTX3LS[icent][ihar][iphi]->Write();
+          vnFVTX4LS[icent][ihar][iphi]->Write();
+          vnFVTX1N[icent][ihar][iphi]->Write();
+          vnFVTX1S[icent][ihar][iphi]->Write();
+          vnFVTX1p2p3LS[icent][ihar][iphi]->Write();
+          vnFVTX1p2p4LS[icent][ihar][iphi]->Write();
+          vnBBCS[icent][ihar][iphi]->Write();
+          vnFVTXtrkS[icent][ihar][iphi]->Write();
          /* 
-          vobscBBCSc[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobscBBCScsq[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobscFVTX1Sc[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobscFVTX1Scsq[iangle1][iangle2][icent][ihar][iphi]->Write();
+          vobscBBCSc[icent][ihar][iphi]->Write();
+          vobscBBCScsq[icent][ihar][iphi]->Write();
+          vobscFVTX1Sc[icent][ihar][iphi]->Write();
+          vobscFVTX1Scsq[icent][ihar][iphi]->Write();
           */
-        //if(iangle1 == 0 && iangle2 == 0 ){
          /*
-          vobsBBCS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsBBCSsq[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX1S[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX1Ssq[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX1trkS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX1trkSsq[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX2trkS[iangle1][iangle2][icent][ihar][iphi]->Write();
-          vobsFVTX2trkSsq[iangle1][iangle2][icent][ihar][iphi]->Write();
-        }
+          vobsBBCS[icent][ihar][iphi]->Write();
+          vobsBBCSsq[icent][ihar][iphi]->Write();
+          vobsFVTX1S[icent][ihar][iphi]->Write();
+          vobsFVTX1Ssq[icent][ihar][iphi]->Write();
+          vobsFVTX1trkS[icent][ihar][iphi]->Write();
+          vobsFVTX1trkSsq[icent][ihar][iphi]->Write();
+          vobsFVTX2trkS[icent][ihar][iphi]->Write();
+          vobsFVTX2trkSsq[icent][ihar][iphi]->Write();
           */
           
           }
         }
         }
-        }
 
-  }
-  }
 /*
 for(int istation=0;istation<4;istation++){
     hfvtx[istation]->Write();
@@ -1222,39 +1205,31 @@ int EPAnaRun16alltree::SetcalFlag(int _flag){
 }
 
 void EPAnaRun16alltree::Getrec(){
-for(int iangle1=0;iangle1<nangle1;iangle1++){
-for(int iangle2=0;iangle2<nangle2;iangle2++){
     for(int icent=0;icent<ncent;icent++){
     for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
       for(int ihar=0;ihar<nhar;ihar++){
         for(int isub=0;isub<nsub;isub++){
-    meanx[icent][ibbcz][ihar][isub][iangle1][iangle2] = q[icent][ibbcz][ihar][isub][0][iangle1][iangle2]->GetMean();
-    rmsx[icent][ibbcz][ihar][isub][iangle1][iangle2] = q[icent][ibbcz][ihar][isub][0][iangle1][iangle2]->GetRMS();
-    meany[icent][ibbcz][ihar][isub][iangle1][iangle2] = q[icent][ibbcz][ihar][isub][1][iangle1][iangle2]->GetMean();
-    rmsy[icent][ibbcz][ihar][isub][iangle1][iangle2] = q[icent][ibbcz][ihar][isub][1][iangle1][iangle2]->GetRMS();
+    meanx[icent][ibbcz][ihar][isub] = q[icent][ibbcz][ihar][isub][0]->GetMean();
+    rmsx[icent][ibbcz][ihar][isub] = q[icent][ibbcz][ihar][isub][0]->GetRMS();
+    meany[icent][ibbcz][ihar][isub] = q[icent][ibbcz][ihar][isub][1]->GetMean();
+    rmsy[icent][ibbcz][ihar][isub] = q[icent][ibbcz][ihar][isub][1]->GetRMS();
                 }
         }
         }
     }
-    }
-}
 }
 
 void EPAnaRun16alltree::Getflt(){
-for(int iangle1=0;iangle1<nangle1;iangle1++){
-for(int iangle2=0;iangle2<nangle2;iangle2++){
     for(int icent=0;icent<ncent;icent++){
     for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
       for(int ihar=0;ihar<nhar;ihar++){
         for(int isub=0;isub<nsub;isub++){
             for(int iord=0; iord<nord; iord++) {
-                cosfltarr[icent][ibbcz][ihar][isub][iord][iangle1][iangle2] = cosflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->GetMean();
-                sinfltarr[icent][ibbcz][ihar][isub][iord][iangle1][iangle2] = sinflt[icent][ibbcz][ihar][isub][iord][iangle1][iangle2]->GetMean();
+                cosfltarr[icent][ibbcz][ihar][isub][iord] = cosflt[icent][ibbcz][ihar][isub][iord]->GetMean();
+                sinfltarr[icent][ibbcz][ihar][isub][iord] = sinflt[icent][ibbcz][ihar][isub][iord]->GetMean();
         }
       }
     }
     }
     }
-}
-}
 }

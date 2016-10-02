@@ -102,107 +102,116 @@ class EPAnaRun16alltree
   std::vector<std::list<std::string> > filelist;
   //std::vector<std::string> fnames;
 
-  std::vector<std::vector<TH1F*> > sinflt[ncent][nbbcz][nhar][nsub][nord];
-  std::vector<std::vector<TH1F*> > cosflt[ncent][nbbcz][nhar][nsub][nord];
+  TH1F* sinflt[ncent][nbbcz][nhar][nsub][nord];
+  TH1F* cosflt[ncent][nbbcz][nhar][nsub][nord];
   
 //  std::vector<std::vector<TH1F*> > sinflttmp[ncent][nbbcz][nhar][nsub][nord];
 //  std::vector<std::vector<TH1F*> > cosflttmp[ncent][nbbcz][nhar][nsub][nord];
 
-  std::vector<std::vector<TH1F*> > q[ncent][nbbcz][nhar][nsub][nxy];
+  TH1F* q[ncent][nbbcz][nhar][nsub][nxy];
 //  std::vector<std::vector<TH1F*> > qtmp[ncent][nbbcz][nhar][nsub][nxy];  //invidual calibration
-  std::vector<std::vector<TH1F*> > qRec[ncent][nbbcz][nhar][nsub][nxy];
-  std::vector<std::vector<TH1F*> > psi[ncent][nbbcz][nhar][nsub];
+  TH1F* qRec[ncent][nbbcz][nhar][nsub][nxy];
+  TH1F* psi[ncent][nbbcz][nhar][nsub];
 //  std::vector<std::vector<TH1F*> > psitmp[ncent][nbbcz][nhar][nsub];
-  std::vector<std::vector<TH1F*> > psiFla[ncent][nbbcz][nhar][nsub];
+  TH1F* psiFla[ncent][nbbcz][nhar][nsub];
 
-   std::vector<std::vector<TH1F*> > phiweight[ncent][nbbcz][nhar][nsub];
-   std::vector<std::vector<TProfile*> > phiweightbbc[ncent][nbbcz][nhar][nsub];
+   TH1F* phiweight[ncent][nbbcz][nhar][nsub];
+   TProfile* phiweightbbc[ncent][nbbcz][nhar][nsub];
 
-  float meanx[ncent][nbbcz][nhar][nsub][nangle1][nangle2];
-  float meany[ncent][nbbcz][nhar][nsub][nangle1][nangle2];
-  float rmsx[ncent][nbbcz][nhar][nsub][nangle1][nangle2];
-  float rmsy[ncent][nbbcz][nhar][nsub][nangle1][nangle2];
+  float meanx[ncent][nbbcz][nhar][nsub];
+  float meany[ncent][nbbcz][nhar][nsub];
+  float rmsx[ncent][nbbcz][nhar][nsub];
+  float rmsy[ncent][nbbcz][nhar][nsub];
 
-  float cosfltarr[ncent][nbbcz][nhar][nsub][nord][nangle1][nangle2];
-  float sinfltarr[ncent][nbbcz][nhar][nsub][nord][nangle1][nangle2];
+  float cosfltarr[ncent][nbbcz][nhar][nsub][nord];
+  float sinfltarr[ncent][nbbcz][nhar][nsub][nord];
 
   /*
-  TH1F* EPRCNTBBCS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTFVTX1S[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCSFVTX1S[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTFVTX1S[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTFVTX2S[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTFVTX1LS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTFVTX2LS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTFVTX3LS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTFVTX4LS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCSFVTX2S[nangle1][nangle2][ncent][nhar];
+  TH1F* EPRCNTBBCS[ncent][nhar];
+  TH1F* EPRCNTFVTX1S[ncent][nhar];
+  TH1F* EPRBBCSFVTX1S[ncent][nhar];
+  TH1F* EPRCNTFVTX1S[ncent][nhar];
+  TH1F* EPRCNTFVTX2S[ncent][nhar];
+  TH1F* EPRCNTFVTX1LS[ncent][nhar];
+  TH1F* EPRCNTFVTX2LS[ncent][nhar];
+  TH1F* EPRCNTFVTX3LS[ncent][nhar];
+  TH1F* EPRCNTFVTX4LS[ncent][nhar];
+  TH1F* EPRBBCSFVTX2S[ncent][nhar];
   */
-  TH1F* EPRBBCSFVTX1S[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCSFVTX1LS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCSFVTX2LS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCSFVTX3LS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCSFVTX4LS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCSFVTX1p2p3LS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCSFVTXtrkS[nangle1][nangle2][ncent][nhar];
+  TH1F* EPRFVTX1NFVTX1S[ncent][nhar];
+  TH1F* EPRBBCSFVTX1S[ncent][nhar];
+  TH1F* EPRBBCSFVTX1LS[ncent][nhar];
+  TH1F* EPRBBCSFVTX2LS[ncent][nhar];
+  TH1F* EPRBBCSFVTX3LS[ncent][nhar];
+  TH1F* EPRBBCSFVTX4LS[ncent][nhar];
+  TH1F* EPRBBCSFVTX1p2p3LS[ncent][nhar];
+  TH1F* EPRBBCSFVTX1p2p4LS[ncent][nhar];
+  TH1F* EPRBBCSFVTXtrkS[ncent][nhar];
   /*
-  TH1F* EPRCNTFVTX1trkS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTFVTX2trkS[nangle1][nangle2][ncent][nhar];
+  TH1F* EPRCNTFVTX1trkS[ncent][nhar];
+  TH1F* EPRCNTFVTX2trkS[ncent][nhar];
 
-  TH1F* EPRCNTcBBCSc[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTcFVTX1S[nangle1][nangle2][ncent][nhar];
+  TH1F* EPRCNTcBBCSc[ncent][nhar];
+  TH1F* EPRCNTcFVTX1S[ncent][nhar];
 
-  TH1F* EPRBBCSFVTX1trkS[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCSFVTX2trkS[nangle1][nangle2][ncent][nhar];
+  TH1F* EPRBBCSFVTX1trkS[ncent][nhar];
+  TH1F* EPRBBCSFVTX2trkS[ncent][nhar];
           
-  TH1F* EPRBBCScFVTX1S[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTcBBCSc[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRCNTcFVTX1Sc[nangle1][nangle2][ncent][nhar];
-  TH1F* EPRBBCScFVTX1Sc[nangle1][nangle2][ncent][nhar];
+  TH1F* EPRBBCScFVTX1S[ncent][nhar];
+  TH1F* EPRCNTcBBCSc[ncent][nhar];
+  TH1F* EPRCNTcFVTX1Sc[ncent][nhar];
+  TH1F* EPRBBCScFVTX1Sc[ncent][nhar];
   */
 /*
-  TH2F* vobsFVTX2S[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX2Ssq[nangle1][nangle2][ncent][nhar][nphi];
+  TH2F* vobsFVTX2S[ncent][nhar][nphi];
+  TH2F* vobsFVTX2Ssq[ncent][nhar][nphi];
  */ 
 
-  TH2F* vobsBBCS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX1S[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX1LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX2LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX3LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX4LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX1p2p3LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTXtrkS[nangle1][nangle2][ncent][nhar][nphi];
+  TH2F* vobsBBCS[ncent][nhar][nphi];
+  TH2F* vobsFVTX1N[ncent][nhar][nphi];
+  TH2F* vobsFVTX1S[ncent][nhar][nphi];
+  TH2F* vobsFVTX1LS[ncent][nhar][nphi];
+  TH2F* vobsFVTX2LS[ncent][nhar][nphi];
+  TH2F* vobsFVTX3LS[ncent][nhar][nphi];
+  TH2F* vobsFVTX4LS[ncent][nhar][nphi];
+  TH2F* vobsFVTX1p2p3LS[ncent][nhar][nphi];
+  TH2F* vobsFVTX1p2p4LS[ncent][nhar][nphi];
+  TH2F* vobsFVTXtrkS[ncent][nhar][nphi];
   
-  TH2F* vBBCS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vFVTX1S[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vFVTX1LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vFVTX2LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vFVTX3LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vFVTX4LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vFVTX1p2p3LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vFVTXtrkS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vnBBCS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vnFVTX1S[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vnFVTX1LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vnFVTX2LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vnFVTX3LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vnFVTX4LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vnFVTX1p2p3LS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vnFVTXtrkS[nangle1][nangle2][ncent][nhar][nphi];
+  TH2F* vBBCS[ncent][nhar][nphi];
+  TH2F* vFVTX1N[ncent][nhar][nphi];
+  TH2F* vFVTX1S[ncent][nhar][nphi];
+  TH2F* vFVTX1LS[ncent][nhar][nphi];
+  TH2F* vFVTX2LS[ncent][nhar][nphi];
+  TH2F* vFVTX3LS[ncent][nhar][nphi];
+  TH2F* vFVTX4LS[ncent][nhar][nphi];
+  TH2F* vFVTX1p2p3LS[ncent][nhar][nphi];
+  TH2F* vFVTX1p2p4LS[ncent][nhar][nphi];
+  TH2F* vFVTXtrkS[ncent][nhar][nphi];
+
+  TH2F* vnBBCS[ncent][nhar][nphi];
+  TH2F* vnFVTX1N[ncent][nhar][nphi];
+  TH2F* vnFVTX1S[ncent][nhar][nphi];
+  TH2F* vnFVTX1LS[ncent][nhar][nphi];
+  TH2F* vnFVTX2LS[ncent][nhar][nphi];
+  TH2F* vnFVTX3LS[ncent][nhar][nphi];
+  TH2F* vnFVTX4LS[ncent][nhar][nphi];
+  TH2F* vnFVTX1p2p3LS[ncent][nhar][nphi];
+  TH2F* vnFVTX1p2p4LS[ncent][nhar][nphi];
+  TH2F* vnFVTXtrkS[ncent][nhar][nphi];
  /* 
-  TH2F* vobsBBCS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsBBCSsq[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX1S[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX1Ssq[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobscBBCSc[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobscBBCScsq[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobscFVTX1Sc[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobscFVTX1Scsq[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX1trkS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX1trkSsq[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX2trkS[nangle1][nangle2][ncent][nhar][nphi];
-  TH2F* vobsFVTX2trkSsq[nangle1][nangle2][ncent][nhar][nphi];
+  TH2F* vobsBBCS[ncent][nhar][nphi];
+  TH2F* vobsBBCSsq[ncent][nhar][nphi];
+  TH2F* vobsFVTX1S[ncent][nhar][nphi];
+  TH2F* vobsFVTX1Ssq[ncent][nhar][nphi];
+  TH2F* vobscBBCSc[ncent][nhar][nphi];
+  TH2F* vobscBBCScsq[ncent][nhar][nphi];
+  TH2F* vobscFVTX1Sc[ncent][nhar][nphi];
+  TH2F* vobscFVTX1Scsq[ncent][nhar][nphi];
+  TH2F* vobsFVTX1trkS[ncent][nhar][nphi];
+  TH2F* vobsFVTX1trkSsq[ncent][nhar][nphi];
+  TH2F* vobsFVTX2trkS[ncent][nhar][nphi];
+  TH2F* vobsFVTX2trkSsq[ncent][nhar][nphi];
   */
   TH2F* hfvtx[4];
   TH2F* hbbc;

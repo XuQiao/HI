@@ -27,7 +27,7 @@ TString choosesub(int isub){
 void plotvn(){
     gStyle->SetOptStat(kFALSE);
     int icent = 0;
-    int n = 3;
+    int n = 2;
     int color[6] = {1,2,4,7,8,5};
     int style[12] = {20,21,24,25,26,27,28,30,31,32,33,34};
     TGraphErrors *gr[nsub][3][2];
@@ -223,7 +223,7 @@ grr->Draw("Psame");
 c4->Print(Form("v%dEWFVTX.png",n));
 
 TCanvas *c5 = new TCanvas("c5","c5",800,450);
-isub=4;
+isub=3;
 iCNTEP = 0;
 c5->Divide(2);
 c5->cd(1);
@@ -266,7 +266,7 @@ grr->Draw("Psame");
 TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[isub][2][iCNTEP],gr[isub][0][iCNTEP]);
 //SetStyle(*grr,1.2,color[2+3*iCNTEP],style[isub]);
 grr->Draw("Psame");
-c5->Print(Form("v%dEWBBC.png",n));
+c5->Print(Form("v%dEWFVTX4L.png",n));
 
 TCanvas *c6 = new TCanvas("c6","c6",800,450);
 iCNTEP = 0;
@@ -306,10 +306,8 @@ leg->AddEntry(gr[3][0][iCNTEP],Form("FVTX 4LS"),"P");
 leg->Draw("same");
 
 c6->cd(2);
-if(n==3){
 h->SetMinimum(0);
 h->SetMaximum(2);
-}
 SetTitle(h,"","p_{T}","v_{2} ratio over bbc");
 h->DrawCopy();
 TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[0][0][iCNTEP],gr[4][0][iCNTEP]);

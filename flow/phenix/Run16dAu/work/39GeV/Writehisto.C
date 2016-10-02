@@ -11,16 +11,21 @@ void Writehisto(){
         corrs>>index>>run;
         }
 
-        //EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i),Form("/scratch/xuq7/phenix/Run16dAu/39GeV/EPAnaFull%s_%d.root",trigtype.Data(),i));
-        EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("output/EPAnaFull%s_%d.root",trigtype.Data(),i));
+        //EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("testEPAnaFull.root"));
+        EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("/store/user/qixu/flow/Run16dAu/39GeV/EPAnaFull%s_%d.root",trigtype.Data(),i));
         pl->Init();
         pl->Inittree();
         pl->SetcalFlag(0);
         pl->process_event();
+        
         pl->SetcalFlag(1);
         pl->process_event();
+        pl->Getrec();
+        
         pl->SetcalFlag(2);
         pl->process_event();
+        pl->Getflt();
+
         pl->SetcalFlag(3);
         pl->process_event();
         pl->End();

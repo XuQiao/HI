@@ -6,10 +6,10 @@ int get_fvtx_layer(float z)
   if ( z < -30 && z > -35 ) return 2;
   if ( z < -35 )            return 3;
   // --- north side
-  if ( z > 18 && z < 24 ) return 0;
-  if ( z > 24 && z < 30 ) return 1;
-  if ( z > 30 && z < 35 ) return 2;
-  if ( z > 35 )           return 3;
+  if ( z > 18 && z < 24 ) return 4;
+  if ( z > 24 && z < 30 ) return 5;
+  if ( z > 30 && z < 35 ) return 6;
+  if ( z > 35 )           return 7;
   // --- invalid numbers...
   cout<<"get_fvtx_layer::invalid z =  "<<z<<endl;
   return -1;
