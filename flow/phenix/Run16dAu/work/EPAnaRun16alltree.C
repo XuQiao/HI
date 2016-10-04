@@ -657,15 +657,15 @@ int EPAnaRun16alltree::process_event()
     float fvtx_r = sqrt(pow(fvtx_x,2.0)+pow(fvtx_y,2.0));
     if ( RunNumber >= 456652 && RunNumber <= 458167 && fvtx_r < 5.2 ) continue; //radius cut
     if( (fabs(fvtx_x)>999) ||(fabs(fvtx_y)>999) || (fabs(fvtx_z)>999)) continue;
-//    float fvtx_the = atan2(fvtx_r,fvtx_z);
+    float fvtx_the = atan2(fvtx_r,fvtx_z);
     float fvtx_phi = atan2(fvtx_y,fvtx_x);
-//    float fvtx_eta = -log(tan(0.5*fvtx_the));
+    float fvtx_eta = -log(tan(0.5*fvtx_the));
+    if(!(fabs(fvtx_eta)<3.5)) continue;
     if(calFlag == 0){
         phiweight[icent][ibbcz][ihar][istation]->Fill(fvtx_phi);
       //  phiweight[icent][ibbcz][ihar][5]->Fill(fvtx_phi);
     }
     else{
-    //if(!(fabs(fvtx_eta)>1.0 && fabs(fvtx_eta)<3.0)) continue;
         int ibin = phiweight[icent][ibbcz][ihar][istation]->FindBin(fvtx_phi);
         float binc = phiweight[icent][ibbcz][ihar][istation]->GetBinContent(ibin);
         if(binc!=0){
@@ -675,10 +675,11 @@ int EPAnaRun16alltree::process_event()
         else weight = 0.;
         }
         //else weight = 0.;
+    if(istation < 4){
       Qx[istation][ihar] += weight * cos(n*fvtx_phi);
       Qy[istation][ihar] += weight * sin(n*fvtx_phi);
       Qw[istation][ihar] += weight;
-
+    }
       /*
         ibin = phiweight[icent][ibbcz][ihar][5]->FindBin(fvtx_phi);
         binc = phiweight[icent][ibbcz][ihar][5]->GetBinContent(ibin);

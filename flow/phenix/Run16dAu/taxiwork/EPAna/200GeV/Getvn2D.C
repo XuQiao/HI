@@ -36,6 +36,10 @@ TString choosesub(int isub){
         else if(isub==6)
          str = "FVTX1p2p3LS";
         else if(isub==7)
+         str = "FVTX1p2p4LS";
+        else if(isub==8)
+         str = "FVTX1N";
+        else if(isub==9)
          str = "FVTXtrkS";
         else
          str = "ABORT";
@@ -44,7 +48,7 @@ TString choosesub(int isub){
 
 TString choosesub1(int isub){
     TString str;
-    if(choosesub(isub).Contains("BBC")) //BBC
+    if(choosesub(isub).Contains("BBC") || choosesub(isub).Contains("N")) //BBC or FVTX1N
         str = "FVTX1S";
     else if(choosesub(isub).Contains("FVTX"))
         str = "BBCS";
@@ -102,13 +106,13 @@ void Getvn2D(int icent, int ihar, bool usingCNTEP=0){
          if(iphi<nphi){
         for(int irun=0;irun<nrun;irun++){
          //std::cout<<"cent = "<<icent<<"; n = "<<n<<" ;isub = "<<str<<" ;run = "<<irun<<" "<<phistr<<std::endl;
-         fin = TFile::Open(Form("/home/xuq7/HI/flow/phenix/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
+         fin = TFile::Open(Form("/store/user/qixu/flow/Run16dAu/200GeV/%s",GetRun(irun).Data()));
          if(!(GoodRunFit[icent][ihar][isub][irun]>0.2 && GoodRunFit[icent][ihar][isub][irun]<3.0)){
          std::cout<<"cent = "<<icent<<"; n = "<<n<<" ;isub = "<<str<<" ;run = "<<GetRun(irun)<<" is bad run!"<<std::endl;
          fin->Close();
         continue;
          }
-         TH2F* hvobstemp = (TH2F*)fin->Get(Form("vobs%s_0_0_%d_%d_%d",str.Data(),icent,ihar,iphi));
+         TH2F* hvobstemp = (TH2F*)fin->Get(Form("vobs%s_%d_%d_%d",str.Data(),icent,ihar,iphi));
          //TH2F* hvobssqtemp = (TH2F*)fin->Get(Form("vobs%ssq_%d_%d_%d",str.Data(),icent,ihar,iphi));
          hvobs->Add(hvobstemp);
          //hvobssq->Add(hvobssqtemp);
@@ -164,10 +168,10 @@ void FillGoodRun(){
             if(str=="ABORT") continue;
             for(int irun=0;irun<nrun;irun++){
         //std::cout<<icent<<" "<<ihar<<" "<<isub<<" "<<irun<<std::endl;
-         fin = TFile::Open(Form("/home/xuq7/HI/flow/phenix/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
+         fin = TFile::Open(Form("/store/user/qixu/flow/Run16dAu/200GeV/%s",GetRun(irun).Data()));
         TH1F* hpsi = new TH1F("psi","psi",100,-pi,pi);
         for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
-          TH1F* hpsitemp = (TH1F*)fin->Get(Form("psiFla_0_0_%d_%d_%d_%d",icent,ibbcz,ihar,isub));
+          TH1F* hpsitemp = (TH1F*)fin->Get(Form("psiFla_%d_%d_%d_%d",icent,ibbcz,ihar,isub));
           hpsi->Add(hpsitemp);
         }
         TF1 *fun = new TF1("fun","pol0",-pi,pi);
@@ -215,7 +219,7 @@ float GetReso(int icent, int ihar, int isub, bool usingCNTEP){
         std::cout<<"Calculating Resolution..."<<std::endl;
         for(int irun=0;irun<nrun;irun++){
          //std::cout<<"cent = "<<icent<<"; n = "<<n<<" ;run = "<<irun<<" of total "<<nrun<<" runs"<<std::endl;
-         fin = TFile::Open(Form("/home/xuq7/HI/flow/phenix/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
+         fin = TFile::Open(Form("/store/user/qixu/flow/Run16dAu/200GeV/%s",GetRun(irun).Data()));
          if(!(GoodRunFit[icent][ihar][isub][irun]>0.2 && GoodRunFit[icent][ihar][isub][irun]<3.0)){
          std::cout<<"cent = "<<icent<<"; n = "<<n<<" ;isub = "<<str1<<" ;run = "<<GetRun(irun)<<" is bad run!"<<std::endl;
          fin->Close();
@@ -224,24 +228,24 @@ float GetReso(int icent, int ihar, int isub, bool usingCNTEP){
          if(usingCNTEP){
             if(isub>=9 && isub<12) //do not store CNT-FVTX1-4LS correlation histograms, only use NOCNTEP
                 return 0.2;
-         hEPR1temp = (TH1F*)fin->Get(Form("EPR%s%s_0_0_%d_%d","CNT",str1.Data(),icent,ihar));
-         hEPR2temp = (TH1F*)fin->Get(Form("EPR%s%s_0_0_%d_%d","CNT",str2.Data(),icent,ihar));
+         hEPR1temp = (TH1F*)fin->Get(Form("EPR%s%s_%d_%d","CNT",str1.Data(),icent,ihar));
+         hEPR2temp = (TH1F*)fin->Get(Form("EPR%s%s_%d_%d","CNT",str2.Data(),icent,ihar));
          }
          else{
             hEPR1temp = new TH1F(Form("hEPRtemp1_%d_%d_%d",icent,ihar,isub),Form("hEPRtemp1_%d_%d_%d",icent,ihar,isub),220,-1.1,1.1);
             hEPR2temp = new TH1F(Form("hEPRtemp2_%d_%d_%d",icent,ihar,isub),Form("hEPRtemp2_%d_%d_%d",icent,ihar,isub),220,-1.1,1.1);
              for(int iphi=0;iphi<nphi;iphi++){
-         TH2F* hvobstemp1 = (TH2F*)fin->Get(Form("vobs%s_0_0_%d_%d_%d",str1.Data(),icent,ihar,iphi));
-         TH2F* hvobstemp2 = (TH2F*)fin->Get(Form("vobs%s_0_0_%d_%d_%d",str2.Data(),icent,ihar,iphi));
+         TH2F* hvobstemp1 = (TH2F*)fin->Get(Form("vobs%s_%d_%d_%d",str1.Data(),icent,ihar,iphi));
+         TH2F* hvobstemp2 = (TH2F*)fin->Get(Form("vobs%s_%d_%d_%d",str2.Data(),icent,ihar,iphi));
          TH1D* hEPR1temptemp = hvobstemp1->ProjectionY(Form("hEPR1%s%s_%d_%d","CNT",str1.Data(),icent,ihar),hvobstemp1->GetXaxis()->FindBin(0.2+1e-4),hvobstemp1->GetXaxis()->FindBin(5.0-1e-4));
          TH1D* hEPR2temptemp = hvobstemp2->ProjectionY(Form("hEPR2%s%s_%d_%d","CNT",str1.Data(),icent,ihar),hvobstemp1->GetXaxis()->FindBin(0.2+1e-4),hvobstemp1->GetXaxis()->FindBin(5.0-1e-4));
             hEPR1temp->Add(hEPR1temptemp);
             hEPR2temp->Add(hEPR2temptemp);
             }
          }
-         TH1F* hEPR3temp = (TH1F*)fin->Get(Form("EPR%s%s_0_0_%d_%d",str1.Data(),str2.Data(),icent,ihar));
+         TH1F* hEPR3temp = (TH1F*)fin->Get(Form("EPR%s%s_%d_%d",str1.Data(),str2.Data(),icent,ihar));
          if(!hEPR3temp)
-         hEPR3temp = (TH1F*)fin->Get(Form("EPR%s%s_0_0_%d_%d",str2.Data(),str1.Data(),icent,ihar));
+         hEPR3temp = (TH1F*)fin->Get(Form("EPR%s%s_%d_%d",str2.Data(),str1.Data(),icent,ihar));
 
          hEPR1->Add(hEPR1temp);
          hEPR2->Add(hEPR2temp);

@@ -18,6 +18,10 @@ TString choosesub(int isub){
         else if(isub==6)
          str = "FVTX1p2p3LS";
         else if(isub==7)
+         str = "FVTX1p2p4LS";
+        else if(isub==8)
+         str = "FVTX1N";
+        else if(isub==9)
          str = "FVTXtrkS";
         else
          str = "ABORT";
@@ -88,10 +92,10 @@ SetStyle(*grr,1.2,color[idire+3*iCNTEP],style[ilay+8]);
 grr->Draw("Psame");
 }
 */
-TCanvas *c2 = new TCanvas("c2","c2",450,450);
+TCanvas *c2 = new TCanvas("c2","c2",800,450);
 iCNTEP = 0;
 idire = 0;
-//c2->Divide(2);
+c2->Divide(2);
 c2->cd(1);
 if(n==1){
 h->SetMinimum(-0.05);
@@ -118,19 +122,28 @@ leg->SetBorderSize(0);
 leg->SetTextSize(0.04);
 SetStyle(*gr[4][idire][iCNTEP], 1.2, 2,style[2]);
 SetStyle(*gr[5][idire][iCNTEP], 1.2, 1,style[3]);
-SetStyle(*gr[7][idire][iCNTEP], 1.2, 4,style[6]);
+SetStyle(*gr[6][idire][iCNTEP], 1.2, 4,style[6]);
+SetStyle(*gr[7][idire][iCNTEP], 1.2, 7,style[4]);
+SetStyle(*gr[8][idire][iCNTEP], 1.2, 1,style[5]);
+SetStyle(*gr[9][idire][iCNTEP], 1.2, 4,style[7]);
 if(n==2)
 grold_fvtx1s->Draw("Psame");
 gr[4][idire][iCNTEP]->Draw("Psame");
 gr[5][idire][iCNTEP]->Draw("Psame");
+gr[6][idire][iCNTEP]->Draw("Psame");
 gr[7][idire][iCNTEP]->Draw("Psame");
+gr[8][idire][iCNTEP]->Draw("Psame");
+gr[9][idire][iCNTEP]->Draw("Psame");
 if(n==2)
 leg->AddEntry(grold_fvtx1s,"Run8 200GeV 0-5\%");
 leg->AddEntry(gr[4][idire][iCNTEP],Form("Run16 200GeV BBCs"),"P");
-leg->AddEntry(gr[5][idire][iCNTEP],Form("Run16 200GeV FVTXs cluster -3.0<#eta<-1.0"),"P");
-leg->AddEntry(gr[7][idire][iCNTEP],Form("Run16 200GeV FVTXs track -3.0<#eta<-1.0"),"P");
+leg->AddEntry(gr[5][idire][iCNTEP],Form("Run16 200GeV FVTXs cluster "),"P");
+leg->AddEntry(gr[6][idire][iCNTEP],Form("Run16 200GeV FVTXs cluster 1+2+3L"),"P");
+leg->AddEntry(gr[7][idire][iCNTEP],Form("Run16 200GeV FVTXs cluster 1+2+4L"),"P");
+leg->AddEntry(gr[8][idire][iCNTEP],Form("Run16 200GeV FVTXs cluster North"),"P");
+leg->AddEntry(gr[9][idire][iCNTEP],Form("Run16 200GeV FVTXs track #eta>-3.5"),"P");
 leg->Draw("Psame");
-/*
+
 c2->cd(2);
 if(n==2){
 h->SetMinimum(0.8);
@@ -142,10 +155,16 @@ h->SetMaximum(2);
 }
 SetTitle(h,"","p_{T}","v_{2} ratio BBCs/FVTXs");
 h->DrawCopy();
-TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[4][idire][iCNTEP],gr[6][idire][iCNTEP]);
-//SetStyle(*grr,1.2,color[idire+3*iCNTEP],style[2]);
+TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[4][idire][iCNTEP],gr[5][idire][iCNTEP]);
 grr->Draw("Psame");
-*/
+TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[6][idire][iCNTEP],gr[5][idire][iCNTEP]);
+grr->Draw("Psame");
+TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[7][idire][iCNTEP],gr[5][idire][iCNTEP]);
+grr->Draw("Psame");
+TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[8][idire][iCNTEP],gr[5][idire][iCNTEP]);
+grr->Draw("Psame");
+TGraphErrors *grr = (TGraphErrors*)DivideTwoGraphs(gr[9][idire][iCNTEP],gr[5][idire][iCNTEP]);
+grr->Draw("Psame");
 c2->Print(Form("v%dBBCSFVTX.png",n));
 /*
 TCanvas *c3 = new TCanvas("c3","c3",800,450);
@@ -223,7 +242,7 @@ grr->Draw("Psame");
 c4->Print(Form("v%dEWFVTX.png",n));
 
 TCanvas *c5 = new TCanvas("c5","c5",800,450);
-isub=3;
+isub=4;
 iCNTEP = 0;
 c5->Divide(2);
 c5->cd(1);
@@ -291,14 +310,16 @@ TLegend *leg = new TLegend(0.5,0.75,0.8,0.85);
 leg->SetFillColor(0);
 leg->SetBorderSize(0);
 leg->SetTextSize(0.04);
+grold_fvtx1s->Draw("Psame");
 gr[0][0][iCNTEP]->Draw("Psame");
 gr[1][0][iCNTEP]->Draw("Psame");
 gr[2][0][iCNTEP]->Draw("Psame");
 gr[3][0][iCNTEP]->Draw("Psame");
-SetStyle(*gr[0][0][iCNTEP],1.2,color[0],style[0]);
+SetStyle(*gr[0][0][iCNTEP],1.2,color[4],style[4]);
 SetStyle(*gr[1][0][iCNTEP],1.2,color[1],style[1]);
 SetStyle(*gr[2][0][iCNTEP],1.2,color[2],style[2]);
 SetStyle(*gr[3][0][iCNTEP],1.2,color[3],style[3]);
+leg->AddEntry(grold_fvtx1s,"Run8 200GeV 0-5\%");
 leg->AddEntry(gr[0][0][iCNTEP],Form("FVTX 1LS"),"P");
 leg->AddEntry(gr[1][0][iCNTEP],Form("FVTX 2LS"),"P");
 leg->AddEntry(gr[2][0][iCNTEP],Form("FVTX 3LS"),"P");

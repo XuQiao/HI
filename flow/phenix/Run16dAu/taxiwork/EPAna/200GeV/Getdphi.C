@@ -38,6 +38,10 @@ TString choosesub(int isub){
         else if(isub==6)
          str = "FVTX1p2p3LS";
         else if(isub==7)
+         str = "FVTX1p2p4LS";
+        else if(isub==8)
+         str = "FVTX1N";
+        else if(isub==9)
          str = "FVTXtrkS";
         else
          str = "ABORT";
@@ -56,7 +60,7 @@ TString choosesub1(int isub){
 }
 
 
-void Getdphi(int icent=0, int ihar=2, int iangle1=0, int iangle2=0, bool usingCNTEP=0){
+void Getdphi(int icent=0, int ihar=1, bool usingCNTEP=0){
     TString str;
     int nrun = GetTotalRun();
     std::cout<<"Totally we have "<<nrun<<" runs/segments!"<<std::endl;
@@ -70,7 +74,6 @@ void Getdphi(int icent=0, int ihar=2, int iangle1=0, int iangle2=0, bool usingCN
      TFile *fin;
 
     int n = ihar+1.0+iharE;
-    cout<<"iangle1 = "<<iangle1<<" iangle2 = "<<iangle2<<endl;
     TFile *fout = new TFile(Form("dphiv%d.root",n),"recreate");
 
        for(int isub=0;isub<nsub;isub++){
@@ -83,19 +86,17 @@ void Getdphi(int icent=0, int ihar=2, int iangle1=0, int iangle2=0, bool usingCN
          UseCNTEP = "NoUseCNTEP";
         std::cout<<UseCNTEP<<std::endl;
         std::cout<<"starting doing "<<str<<" v"<<n<<" analysis!"<<std::endl;
-//         float reso = GetReso(iangle1, iangle2, icent,ihar,isub,usingCNTEP);
-//         if(reso<=0) {std::cout<<"resolution is wrong!"<<std::endl; reso = 1.0;}
-         TH2F* hvall = new TH2F(Form("hdphiall_%d%d_%d_%d_%d",iangle1,iangle2,icent,ihar,isub),Form("hdphiall_%d%d_%d_%d_%d",iangle1,iangle2,icent,ihar,isub),60,0,6,200,-4,4);
-         TH2F* hvnall = new TH2F(Form("hdphinall_%d%d_%d_%d_%d",iangle1,iangle2,icent,ihar,isub),Form("hdphinall_%d%d_%d_%d_%d",iangle1,iangle2,icent,ihar,isub),60,0,6,100,-2,2);
+         TH2F* hvall = new TH2F(Form("hdphiall_%d_%d_%d",icent,ihar,isub),Form("hdphiall_%d_%d_%d",icent,ihar,isub),60,0,6,200,-4,4);
+         TH2F* hvnall = new TH2F(Form("hdphinall_%d_%d_%d",icent,ihar,isub),Form("hdphinall_%d_%d_%d",icent,ihar,isub),60,0,6,100,-2,2);
 
         for(int iphi=0;iphi<nphi+1;iphi++){
-         TH2F* hv = new TH2F(Form("hdphi_%d%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,isub,iphi),Form("hdphi_%d%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,isub,iphi),60,0,6,200,-4,4);
-         TH2F* hvn = new TH2F(Form("hdphin_%d%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,isub,iphi),Form("hdphin_%d%d_%d_%d_%d_%d",iangle1,iangle2,icent,ihar,isub,iphi),60,0,6,100,-2,2);
+         TH2F* hv = new TH2F(Form("hdphi_%d_%d_%d_%d",icent,ihar,isub,iphi),Form("hdphi_%d_%d_%d_%d",icent,ihar,isub,iphi),60,0,6,200,-4,4);
+         TH2F* hvn = new TH2F(Form("hdphin_%d_%d_%d_%d",icent,ihar,isub,iphi),Form("hdphin_%d_%d_%d_%d",icent,ihar,isub,iphi),60,0,6,100,-2,2);
          string phistr = (iphi==0)?"_east":"_west";
          if(iphi==nphi) phistr = "";
          if(iphi<nphi){
         for(int irun=0;irun<nrun;irun++){
-         fin = TFile::Open(Form("/home/xuq7/HI/flow/phenix/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
+         fin = TFile::Open(Form("/store/user/qixu/flow/Run16dAu/200GeV/%s",GetRun(irun).Data()));
          if(!(GoodRunFit[icent][ihar][isub][irun]>0.2 && GoodRunFit[icent][ihar][isub][irun]<3.0)){
          std::cout<<"cent = "<<icent<<"; n = "<<n<<" ;isub = "<<str<<" ;run = "<<GetRun(irun)<<" is bad run!"<<std::endl;
          fin->Close();
@@ -103,8 +104,8 @@ void Getdphi(int icent=0, int ihar=2, int iangle1=0, int iangle2=0, bool usingCN
          }
          TH2F *hvtemp;
          TH2F *hvntemp;
-         hvtemp = (TH2F*)fin->Get(Form("v%s_%d_%d_%d_%d_%d",str.Data(),iangle1,iangle2,icent,ihar,iphi));
-         hvntemp = (TH2F*)fin->Get(Form("vn%s_%d_%d_%d_%d_%d",str.Data(),iangle1,iangle2,icent,ihar,iphi));
+         hvtemp = (TH2F*)fin->Get(Form("v%s_%d_%d_%d",str.Data(),icent,ihar,iphi));
+         hvntemp = (TH2F*)fin->Get(Form("vn%s_%d_%d_%d",str.Data(),icent,ihar,iphi));
          hv->Add(hvtemp);
          hvn->Add(hvntemp);
          fin->Close();
@@ -146,11 +147,11 @@ void FillGoodRun(int icent,int ihar){
             str = choosesub(isub);
             if(str=="ABORT") continue;
             for(int irun=0;irun<nrun;irun++){
-      //std::cout<<icent<<" "<<ihar<<" "<<isub<<" "<<irun<<std::endl;
-         fin = TFile::Open(Form("/home/xuq7/HI/flow/phenix/Run16dAu/work/200GeV/output/%s",GetRun(irun).Data()));
+      std::cout<<icent<<" "<<ihar<<" "<<isub<<" "<<irun<<std::endl;
+         fin = TFile::Open(Form("/store/user/qixu/flow/Run16dAu/200GeV/%s",GetRun(irun).Data()));
         TH1F* hpsi = new TH1F("psi","psi",100,-pi,pi);
         for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
-          TH1F* hpsitemp = (TH1F*)fin->Get(Form("psiFla_0_0_%d_%d_%d_%d",icent,ibbcz,ihar,isub));
+          TH1F* hpsitemp = (TH1F*)fin->Get(Form("psiFla_%d_%d_%d_%d",icent,ibbcz,ihar,isub));
           hpsi->Add(hpsitemp);
         }
         TF1 *fun = new TF1("fun","pol0",-pi,pi);

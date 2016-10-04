@@ -1,7 +1,7 @@
 #include "RpPar.h"
 void plotdphi(){
     gStyle->SetOptStat(kFALSE);
-    int ihar = 2;
+    int ihar = 1;
     int icent = 0;
     int isub = 7;
     int iharE = 0;
@@ -31,7 +31,7 @@ void plotdphi(){
     xbin[np+2] = 4./n;
     TFile *fin = TFile::Open(Form("dphiv%d.root",n));
   //  for(int isub=0;isub<nsub;isub++){
-        TH2F* hpt = (TH2F*)fin->Get(Form("hdphinall_00_%d_%d_%d",icent,ihar,isub));
+        TH2F* hpt = (TH2F*)fin->Get(Form("hdphinall_%d_%d_%d",icent,ihar,isub));
         int xbinmin = hpt->GetXaxis()->FindBin(ptmin);
         int xbinmax = hpt->GetXaxis()->FindBin(ptmax);
         TH1F* h1 = (TH1F*)hpt->ProjectionY("h1",xbinmin,xbinmax);
