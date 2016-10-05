@@ -31,7 +31,7 @@ TString choosesub(int isub){
 void plotvn(){
     gStyle->SetOptStat(kFALSE);
     int icent = 0;
-    int n = 2;
+    int n = 3;
     int color[6] = {1,2,4,7,8,5};
     int style[12] = {20,21,24,25,26,27,28,30,31,32,33,34};
     TGraphErrors *gr[nsub][3][2];
