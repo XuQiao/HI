@@ -57,20 +57,20 @@ float MPPbbc[ncent] = {3.8,3.8,3.8,3.8,3.8,3.8};
 float MPPfvtx[ncent] = {0.69,0.69,0.69,0.69,0.69,0.69};
     }
     else{
-float MPPbbc[ncent] = {2.38,2.38,2.39,2.38,2.38,2.38};
-float MPPfvtx[ncent] = {1.27,1.27,1.27,1.27,1.27,1.27};
+float MPPbbc[ncent] = {7.39,7.39,7.39,7.39,7.39,7.39};
+float MPPfvtx[ncent] = {3.27,3.27,3.27,3.27,3.27,3.27};
     }
-float Mbbc[ncent] = {31.01,24.94,15.83,9.84,5.36,2.38};
-float Mfvtx[ncent]  = {4.75,3.62,2.93,2.25,1.67,1.27};
+float Mbbc[ncent] = {83.86,60.54,48.24,30.16,16.66,7.39};
+float Mfvtx[ncent]  = {15.50,12.73,11.12,8.47,5.69,3.27};
 //MPPNpart[0] = 2;
 //MNpart[0] = 11;
     if(pporper ==0 ){
 float MPPNpart[ncent] = {3.8,3.8,3.8,3.8,3.8,3.8};
-float MNpart[ncent] = {31.01,24.94,15.83,9.84,5.36,2.38};
+float MNpart[ncent] = {83.86,60.54,48.24,30.16,16.66,7.39};
     }
     else{
-float MPPNpart[ncent] = {2.38,2.38,2.39,2.38,2.38,2.38};
-float MNpart[ncent] = {31.01,24.94,15.83,9.84,5.36,2.38};
+float MPPNpart[ncent] = {7.39,7.39,7.39,7.39,7.39,7.39};
+float MNpart[ncent] = {83.86,60.54,48.24,30.16,16.66,7.39};
     }
 
 //--------------read in parameters--------------------------------------------

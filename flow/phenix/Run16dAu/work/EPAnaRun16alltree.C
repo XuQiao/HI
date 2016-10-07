@@ -655,7 +655,8 @@ int EPAnaRun16alltree::process_event()
 //    int iarm = 0;
 //    if(fvtx_z>0) iarm = 1; 
     float fvtx_r = sqrt(pow(fvtx_x,2.0)+pow(fvtx_y,2.0));
-    if ( RunNumber >= 456652 && RunNumber <= 458167 && fvtx_r < 5.2 ) continue; //radius cut
+ //   if ( RunNumber >= 456652 && RunNumber <= 458167 && fvtx_r < 5.2 ) continue; //radius cut
+    if ( RunNumber >= 455792 && RunNumber <= 458167 && fvtx_r < 5.2 ) continue; //radius cut, also for 62GeV
     if( (fabs(fvtx_x)>999) ||(fabs(fvtx_y)>999) || (fabs(fvtx_z)>999)) continue;
     float fvtx_the = atan2(fvtx_r,fvtx_z);
     float fvtx_phi = atan2(fvtx_y,fvtx_x);

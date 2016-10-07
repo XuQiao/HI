@@ -80,7 +80,7 @@ kbackbbcw2[icent][ipt] = (TH1F*)f->Get(Form("kback%sbbcw2_%d_%d",dire.Data(),ice
 }
 int ncent_a = sizeof(selcentbin)/sizeof(double)-1;
 int npt_a = sizeof(selptbin)/sizeof(double)-1;
-for(int icent_a=0;icent_a<ncent+1;icent_a++){
+for(int icent_a=0;icent_a<ncent_a;icent_a++){
 for(int icent_b=0; icent_b<ncent+1; icent_b++)
 if(selcentbin[icent_a] == centbin[icent_b]) break;
 int xcentmin = icent_b;

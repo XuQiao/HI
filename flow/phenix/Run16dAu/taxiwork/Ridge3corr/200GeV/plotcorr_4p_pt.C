@@ -6,12 +6,13 @@ void plotcorr_4p_pt(){
   gStyle->SetErrorX(0);
 c1 = new TCanvas("c1"," ",1200,340);
 makeMultiPanelCanvas(c1,4,1,0,0,0.25,0.2,0.03);
-TString dire = "north";
-//TString dire = "south";
+//TString dire = "north";
+TString dire = "south";
   float const PI = acos(-1.0);
 const int ncent = 6;
 const int npt = 25;
-TFile *f=TFile::Open("/gpfs/mnt/gpfs02/phenix/plhf/plhf1/xuq/taxi/Run15pAl200MBPro104/9780/merged.root");
+//TFile *f=TFile::Open("../../../work/200GeV/output_Ridge.root");
+TFile *f=TFile::Open("/store/user/qixu/flow/Run16dAu/200GeV/RidgedAu200all_1.root");
 TH1F* kforebbcw[npt][ncent];
 TH1F* hforebbcw[npt][ncent];
 TH1F* kbackbbcw2[npt][ncent];

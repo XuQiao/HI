@@ -12,7 +12,7 @@ void Writehisto(){
         }
 
         //RidgedAuRun16 *pl = new RidgedAuRun16(readline(Form("%s",name.Data()),i),Form("/scratch/xuq7/phenix/Run16dAu/39GeV/EPAnaFull%s_%d.root",trigtype.Data(),i));
-        RidgedAuRun16 *pl = new RidgedAuRun16(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("output/Ridge%s_%d.root",trigtype.Data(),i));
+        RidgedAuRun16 *pl = new RidgedAuRun16(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("/store/user/qixu/flow/Run16dAu/39GeV/Ridge%s_%d.root",trigtype.Data(),i));
         pl->Init();
         pl->Inittree();
         pl->process_event();

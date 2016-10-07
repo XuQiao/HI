@@ -188,6 +188,8 @@ int RidgedAuRun16::Init()
   cout << " RidgedAuRun16::Init " << endl;
   char name[80];
   pi=acos(-1.0);
+  
+  initialize_pmt_position();
 
   d_outfile = new TFile(OutputFileName.c_str(),"recreate");
 

@@ -27,17 +27,17 @@ TGraphErrors *grPsub[ncent];
 //-----------plotting results-----------------------------------------------------
 
    // if(icent==0 || icent==1){
-   grP[icent] = new TGraphErrors(Form("v2_pAu_0_5_asys.dat"),"%lg %lg %lg");
-   grPsub[icent] = new TGraphErrors(Form("v2_pAu_0_5_nonf.dat"),"%lg %lg %lg");
+   grP[icent] = new TGraphErrors(Form("../../EPAna/200GeV/Result/NoUseCNTEP/v2_0_FVTX1S.dat"),"%lg %lg %lg");
+  // grPsub[icent] = new TGraphErrors(Form("v2_pAu_0_5_nonf.dat"),"%lg %lg %lg");
     grP[icent]->SetName(Form("grP_%d",icent));
     grP[icent]->SetMarkerSize(1.2);
     grP[icent]->SetMarkerStyle(20);
     grP[icent]->SetMarkerColor(1);
     grP[icent]->SetLineColor(1);
-    grPsub[icent]->SetMarkerSize(0);
-    grPsub[icent]->SetMarkerColor(1);
-    grPsub[icent]->SetLineColor(2);
-    grPsub[icent]->SetLineStyle(2);
+  //  grPsub[icent]->SetMarkerSize(0);
+  //  grPsub[icent]->SetMarkerColor(1);
+  //  grPsub[icent]->SetLineColor(2);
+  //  grPsub[icent]->SetLineStyle(2);
  //}
     TH1D* h = new TH1D(Form("h_%d",icent),"",100,0,5);
     h->GetXaxis()->SetTitle("p_{T} (GeV/c)");
@@ -217,8 +217,8 @@ TGraphErrors *grPsub[ncent];
     leg->AddEntry(gr[icent],"use 3-sub cnt-fvtxs-bbcs","P");
     leg->AddEntry(grsub[icent],"pp minbias subtracted","P");
     //leg->AddEntry(grsub[icent],"peripheral subtracted","P");
-    leg->AddEntry(grP[icent],"PPG191 p+Au 0-5\%","P");
-    leg->AddEntry(grPsub[icent],"p+Au nonflow subtracted","L");
+    leg->AddEntry(grP[icent],"Run 16 d+Au event plane 0-5\%","P");
+ //   leg->AddEntry(grPsub[icent],"p+Au nonflow subtracted","L");
 //    leg->AddEntry(grF[icent],"use 3-sub cnt-fvtxs-fvtxn","P");
     /*
     if(icent==0 || icent==1)
@@ -230,10 +230,10 @@ TGraphErrors *grPsub[ncent];
     gr[icent]->SetMarkerStyle(21);
     gr[icent]->SetMarkerColor(4);
     gr[icent]->SetLineColor(4);
-    grsub[icent]->SetMarkerSize(1.2);
-    grsub[icent]->SetMarkerStyle(21);
-    grsub[icent]->SetMarkerColor(3);
-    grsub[icent]->SetLineColor(3);
+  //  grsub[icent]->SetMarkerSize(1.2);
+  //  grsub[icent]->SetMarkerStyle(21);
+  //  grsub[icent]->SetMarkerColor(3);
+  //  grsub[icent]->SetLineColor(3);
    // grF[icent]->SetMarkerSize(1.2);
    // grF[icent]->SetMarkerStyle(21);
    // grF[icent]->SetMarkerColor(2);
@@ -241,7 +241,7 @@ TGraphErrors *grPsub[ncent];
     gr[icent]->Draw("Psame");
     grP[icent]->Draw("Psame");
     grsub[icent]->Draw("Psame");
-    grPsub[icent]->Draw("Csame");
+   // grPsub[icent]->Draw("Csame");
    // grF[icent]->Draw("Psame");
    /*
     if(icent==0 || icent==1){
