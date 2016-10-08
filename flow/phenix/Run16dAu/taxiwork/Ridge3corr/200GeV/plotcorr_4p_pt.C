@@ -11,8 +11,7 @@ TString dire = "south";
   float const PI = acos(-1.0);
 const int ncent = 6;
 const int npt = 25;
-//TFile *f=TFile::Open("../../../work/200GeV/output_Ridge.root");
-TFile *f=TFile::Open("/store/user/qixu/flow/Run16dAu/200GeV/RidgedAu200all_1.root");
+TFile *f=TFile::Open("../../../work/200GeV/output_Ridge.root");
 TH1F* kforebbcw[npt][ncent];
 TH1F* hforebbcw[npt][ncent];
 TH1F* kbackbbcw2[npt][ncent];
@@ -134,8 +133,8 @@ ptbin[ipt+1] = 4.0 ;
 
 //  float ymax = 1.032;//hpp[ipt]->GetMaximum()*1.1;
 //  float ymin = 0.968;//hpp[ipt]->GetMinimum()*0.9;
-  float ymax = 1.08;//hpp[ipt]->GetMaximum()*1.1;
-  float ymin = 0.92;//hpp[ipt]->GetMinimum()*0.9;
+  float ymax = 1.02;//hpp[ipt]->GetMaximum()*1.1;
+  float ymin = 0.98;//hpp[ipt]->GetMinimum()*0.9;
 
   hpp[ipt]->SetMinimum(ymin);
   hpp[ipt]->SetMaximum(ymax);
