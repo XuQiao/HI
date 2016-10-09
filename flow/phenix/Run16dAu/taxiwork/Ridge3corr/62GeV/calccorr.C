@@ -16,7 +16,7 @@ const int npt = 1;
 TString dire="sn";
 }
 
-TFile *f=TFile::Open("../../../work/62GeV/output_3corr.root");
+TFile *f=TFile::Open("../../../work/62GeV/output_Ridge.root");
 TH1F* kforebbcw[ncent][npt];
 TH1F* hforebbcw[ncent][npt];
 TH1F* kbackbbcw2[ncent][npt];
@@ -27,9 +27,18 @@ double ptbin[26] = {0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.2,2.4,2.6,2.8,3.
 double centbin[7] = {0,0.05,0.1,0.2,0.4,0.6,1.0};
 //double centbin[ncent+1] = {0,1,2};
 TString type = t.c_str();
-if(type=="ptIn25_4"){
-double selptbin[] = {2.5,4.0};
-double selcentbin[ncent+1] = {0,0.01,0.05,0.1,0.2,0.3,0.4,0.6,1.0};
+if(type=="per"){
+double selptbin[] = {0.0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.2,2.4,2.6,2.8,3.0,3.2,3.4,3.6,3.8,4.0,4.2,4.4,4.6,4.8,5.0};
+double selcentbin[] = {0.6,1.0};
+}
+else if(type=="per_ptIn"){
+    if(i==2){
+double selptbin[] = {0.0,0.2};
+    }
+    else{
+double selptbin[] = {0.4,3.0};
+    }
+double selcentbin[] = {0.6,1.0};
 }
 else if(type=="ptIn"){
     if(i==2){
@@ -45,7 +54,7 @@ double selptbin[] = {0.2,1.0,2.0,3.0,5.0};
 double selcentbin[] = {0,0.01,0.05,0.1,0.2,0.3,0.4,0.6,1.0};
 }
 else if(type=="ptfiner"){
-double selptbin[] = {0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.2,2.4,2.6,2.8,3.0,3.2,3.4,3.6,3.8,4.0,4.2,4.4,4.6,4.8,5.0};
+double selptbin[] = {0.0,0.2,0.4,0.8,1.2,1.4,1.6,1.8,2.0,2.4,2.8,3.2,4.0,5.0};
 double selcentbin[] = {0,0.05,0.1,0.2,0.4,0.6,1.0};
 //double selcentbin[ncent+1] = {0,1,2};
 }
@@ -54,7 +63,7 @@ double selptbin[] = {0.2,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0};
 double selcentbin[] = {0,1.0};
 }
 else if(type=="ptccentc"){
-double selptbin[] = {0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.2,2.4,2.6,2.8,3.0,3.2,3.4,3.6,3.8,4.0,4.2,4.4,4.6,4.8,5.0};
+double selptbin[] = {0.0,0.2,0.4,0.8,1.2,1.4,1.6,1.8,2.0,2.4,2.8,3.2,4.0,5.0};
 double selcentbin[] = {0,0.05};
 }
 else{exit(0);};
@@ -80,7 +89,7 @@ kbackbbcw2[icent][ipt] = (TH1F*)f->Get(Form("kback%sbbcw2_%d_%d",dire.Data(),ice
 }
 int ncent_a = sizeof(selcentbin)/sizeof(double)-1;
 int npt_a = sizeof(selptbin)/sizeof(double)-1;
-for(int icent_a=0;icent_a<ncent+1;icent_a++){
+for(int icent_a=0;icent_a<ncent_a;icent_a++){
 for(int icent_b=0; icent_b<ncent+1; icent_b++)
 if(selcentbin[icent_a] == centbin[icent_b]) break;
 int xcentmin = icent_b;
@@ -140,6 +149,7 @@ TH1F* hbackpp;
   TF1 *fun0 = new TF1("fun0","[0]*(1+2*[1]*cos(x)+2*[2]*cos(2*x)+2*[3]*cos(3*x)+2*[4]*cos(4*x))", -0.5*PI, 1.5*PI);
 
   fun0->SetLineColor(1);
+  if(nforepp!=0) 
   hpp->Fit("fun0","NORQ");
 
   TF1 *fun1 = new TF1("fun1","[0]*(1+2*[1]*cos(x))",   -0.5*PI, 1.5*PI);

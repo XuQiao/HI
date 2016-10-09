@@ -6,12 +6,12 @@ void plotcorr_1p(){
   gStyle->SetErrorX(0);
 c1 = new TCanvas("c1"," ",500,500);
 //makeMultiPanelCanvas(c1,4,1,0,0,0.25,0.2,0.03);
-//TString dire = "north";
-TString dire = "south";
+TString dire = "north";
+//TString dire = "south";
   float const PI = acos(-1.0);
 const int ncent = 6;
 const int npt = 10;
-  TFile *f=TFile::Open("../../../work/62GeV/output_3corr.root");
+  TFile *f=TFile::Open("../../../work/62GeV/output_Ridge.root");
 TH1F* kforebbcw[npt][ncent];
 TH1F* hforebbcw[npt][ncent];
 TH1F* kbackbbcw2[npt][ncent];
@@ -28,9 +28,9 @@ for(int icent=0; icent<ncent; icent++){
 if(centmin >= centbin[icent] && centmin < centbin[icent+1]){int xcentmin = icent; continue;}
 if(centmax >= centbin[icent] && centmax < centbin[icent+1]){int xcentmax = icent; continue;}
 }*/
-for(int icent_a=0;icent_a<1;icent_a++){
+for(int icent_a=0;icent_a<ncent;icent_a++){
 int xcentmin = icent_a*1;
-int xcentmax = (icent_a+1)*1+1;
+int xcentmax = (icent_a+1)*1;
 double centmin = centbin[xcentmin];
 double centmax = centbin[xcentmax];
 

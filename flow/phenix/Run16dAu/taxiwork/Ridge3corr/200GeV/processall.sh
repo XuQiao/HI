@@ -1,8 +1,8 @@
-#/bin/bash
+#!/bin/bash
 #i=1
 #j=1
-typearr=(ptIn ptfiner centIn per per_ptIn)
-for i in {0..4};do
+typearr=(ptIn ptfiner centIn per per_ptIn ptccentc)
+for i in {0..5};do
   #j=1
   type=${typearr[$i]}
   for j in {0..2};do

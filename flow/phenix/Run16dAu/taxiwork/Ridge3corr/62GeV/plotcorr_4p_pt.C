@@ -11,7 +11,7 @@ TString dire = "south";
   float const PI = acos(-1.0);
 const int ncent = 6;
 const int npt = 25;
-  TFile *f=TFile::Open("../../../work/62GeV/output_3corr.root");
+  TFile *f=TFile::Open("../../../work/62GeV/output_Ridge.root");
 TH1F* kforebbcw[npt][ncent];
 TH1F* hforebbcw[npt][ncent];
 TH1F* kbackbbcw2[npt][ncent];
@@ -64,7 +64,7 @@ TH1F* hbackpp[npt];
 for(int ipt=0; ipt<4; ipt++){
   int ipt_add;
 	if(ipt==0){
-for(int ipt_add=1;ipt_add<5;ipt_add++){
+for(int ipt_add=3;ipt_add<4;ipt_add++){
 kforebbcw_centIn[ipt]->Add(kforebbcw_centIn[ipt_add]);
 hforebbcw_centIn[ipt]->Add(hforebbcw_centIn[ipt_add]);
 kbackbbcw2_centIn[ipt]->Add(kbackbbcw2_centIn[ipt_add]);

@@ -6,8 +6,8 @@ void plotcorr_4p_pt(){
   gStyle->SetErrorX(0);
 c1 = new TCanvas("c1"," ",1200,340);
 makeMultiPanelCanvas(c1,4,1,0,0,0.25,0.2,0.03);
-//TString dire = "north";
-TString dire = "south";
+TString dire = "north";
+//TString dire = "south";
   float const PI = acos(-1.0);
 const int ncent = 6;
 const int npt = 25;

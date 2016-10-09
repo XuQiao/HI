@@ -29,7 +29,7 @@ for(int icent=0; icent<ncent; icent++){
 if(centmin >= centbin[icent] && centmin < centbin[icent+1]){int xcentmin = icent; continue;}
 if(centmax >= centbin[icent] && centmax < centbin[icent+1]){int xcentmax = icent; continue;}
 }*/
-for(int icent_a=0;icent_a<1;icent_a++){
+for(int icent_a=0;icent_a<ncent;icent_a++){
 int xcentmin = icent_a*1;
 int xcentmax = (icent_a+1)*1;
 double centmin = centbin[xcentmin];

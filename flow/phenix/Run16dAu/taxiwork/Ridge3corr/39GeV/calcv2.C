@@ -1,6 +1,7 @@
 void calcv2(){
     const int ncent = 6;
-    const int npt = 25;
+    const int npt = 8;
+    int pporper = 1; // 0 is pp, 1 is per
     int centbin[ncent+1] = {0,5,10,20,40,60,100};
     gStyle->SetOptFit(kFALSE);
     gStyle->SetOptStat(kFALSE);
@@ -21,13 +22,20 @@ void calcv2(){
     float c1errcntfvtx[ncent][npt], c2errcntfvtx[ncent][npt], c3errcntfvtx[ncent][npt];
     float c1errcntfvtxIn[ncent][npt], c2errcntfvtxIn[ncent][npt], c3errcntfvtxIn[ncent][npt];
     float c1errbbcfvtx[ncent][npt], c2errbbcfvtx[ncent][npt], c3errbbcfvtx[ncent][npt];
-     
+    if(pporper ==0 ){
     ifstream PPfcntbbc("c1_c2_PP_centIn_south.dat");
     ifstream PPfcntbbcIn("c1_c2_PP_ptIn_south.dat");
     ifstream PPfcntfvtx("c1_c2_PP_centIn_north.dat");
     ifstream PPfcntfvtxIn("c1_c2_PP_ptIn_north.dat");
     ifstream PPfbbcfvtx("c1_c2_bbcfvtx_PP_centIn.dat");
-    
+    }
+    else{
+    ifstream PPfcntbbc("c1_c2_central_per_south.dat");
+    ifstream PPfcntbbcIn("c1_c2_central_per_ptIn_south.dat");
+    ifstream PPfcntfvtx("c1_c2_central_per_north.dat");
+    ifstream PPfcntfvtxIn("c1_c2_central_per_ptIn_north.dat");
+    ifstream PPfbbcfvtx("c1_c2_central_per_ptIn_sn.dat");
+    }
     float c1PPcntbbc[ncent][npt], c2PPcntbbc[ncent][npt], c3PPcntbbc[ncent][npt];
     float c1PPcntbbcIn[ncent][npt], c2PPcntbbcIn[ncent][npt], c3PPcntbbcIn[ncent][npt];
     float c1PPcntfvtx[ncent][npt], c2PPcntfvtx[ncent][npt], c3PPcntfvtx[ncent][npt];
@@ -43,14 +51,27 @@ void calcv2(){
     int scale = 1; //0: use c1 as scale factor 1: use multiplicity as scale factor
 
 //--------------Multiplicity-----------------------
-float MPPbbc[ncent] = {3.8,1,1,1,1,1};
-float Mbbc[ncent]= {58.9,1,1,1,1,1};
-float MPPfvtx[ncent] = {0.57,1,1,1,1,1};
-float Mfvtx[ncent]  = {4,1,1,1,1,1};
+//float MPPbbc[ncent] = {7.43,7.43,7.43,7.43,7.43,7.43};
+    if(pporper ==0 ){
+float MPPbbc[ncent] = {3.8,3.8,3.8,3.8,3.8,3.8};
+float MPPfvtx[ncent] = {0.69,0.69,0.69,0.69,0.69,0.69};
+    }
+    else{
+float MPPbbc[ncent] = {4.21,4.21,4.21,4.21,4.21,4.21};
+float MPPfvtx[ncent] = {2.34,2.34,2.34,2.34,2.34,2.34};
+    }
+float Mbbc[ncent] = {63.93,47.41,38.03,25.73,13.63,4.21};
+float Mfvtx[ncent]  = {11.35,9.66,8.52,6.71,4.55,2.34};
 //MPPNpart[0] = 2;
 //MNpart[0] = 11;
-float MPPNpart[ncent] = {3.8,1,1,1,1,1}; //use bbc
-float MNpart[ncent] = {58.9,1,1,1,1,1}; //use bbc
+    if(pporper ==0 ){
+float MPPNpart[ncent] = {3.8,3.8,3.8,3.8,3.8,3.8};
+float MNpart[ncent] = {63.93,47.41,38.03,25.73,13.63,4.21};
+    }
+    else{
+float MPPNpart[ncent] = {4.21,4.21,4.21,4.21,4.21,4.21};
+float MNpart[ncent] = {63.93,47.41,38.03,25.73,13.63,4.21};
+    }
 
 //--------------read in parameters--------------------------------------------
 for(int icent=0;icent<ncent;icent++){
@@ -79,6 +100,29 @@ for(int ipt=0;ipt<npt;ipt++){
         PPfcntbbc>>c1PPcntbbc[icent][ipt]>>c1PPerrcntbbc[icent][ipt]>>c2PPcntbbc[icent][ipt]>>c2PPerrcntbbc[icent][ipt]>>c3PPcntbbc[icent][ipt]>>c3PPerrcntbbc[icent][ipt];
         PPfcntfvtx>>c1PPcntfvtx[icent][ipt]>>c1PPerrcntfvtx[icent][ipt]>>c2PPcntfvtx[icent][ipt]>>c2PPerrcntfvtx[icent][ipt]>>c3PPcntfvtx[icent][ipt]>>c3PPerrcntfvtx[icent][ipt];
     }
+    if(pporper ==0 ){
+//Only PP c2 are fitted!
+    const int nptpp = 10;
+    float ptppmean[nptpp] = {0.25,0.75,1.25,1.75,2.25,2.75,3.25,3.75,4.25,4.75};
+    TGraphErrors *grPPcntbbc = new TGraphErrors(nptpp,ptppmean,c2PPcntbbc[icent],0,c2PPerrcntbbc[icent]);
+    TGraphErrors *grPPcntfvtx = new TGraphErrors(nptpp,ptppmean,c2PPcntfvtx[icent],0,c2PPerrcntfvtx[icent]);
+    TF1 *f1 = new TF1("f1","pol3",0,3.5);
+    TF1 *f2 = new TF1("f2","pol3",0,3.5);
+    TFitResultPtr r1 = grPPcntbbc->Fit("f1", "S");
+    TFitResultPtr r2 = grPPcntfvtx->Fit("f2", "S");
+    double x[npt]={0.3,0.7,1.2,1.6,2.2,2.8,3.5,4.5};
+    double ci1[npt],ci2[npt];
+    double cl = 0.683;  // for 1 sigma error
+    r1->GetConfidenceIntervals(npt,1,1,x,ci1,cl);
+    r2->GetConfidenceIntervals(npt,1,1,x,ci2,cl);
+    for(int ipt=0;ipt<npt;ipt++){
+        c2PPcntbbc[icent][ipt] = f1->Eval(x[ipt]);
+        c2PPerrcntbbc[icent][ipt] = ci1[ipt];
+        c2PPcntfvtx[icent][ipt] = f2->Eval(x[ipt]);
+        c2PPerrcntfvtx[icent][ipt] = ci2[ipt];
+        }
+    }
+
         cout<<"icent: "<<centbin[icent] << "\% to " << centbin[icent+1]<< "\%"<<endl;
         cout<<"cnt - bbc "<<c2cntbbcIn[icent][0]<<" "<<c2errcntbbcIn[icent][0]<<endl;
         cout<<"cnt - fvtx "<<c2cntfvtxIn[icent][0]<<" "<<c2errcntfvtxIn[icent][0]<<endl;
@@ -111,7 +155,7 @@ for(int ipt=0;ipt<npt;ipt++){
         
         float v2cntpt1[ncent][npt], v2errcntpt1[ncent][npt];
         float v2cntpt2[ncent][npt], v2errcntpt2[ncent][npt];
-        float ptmean[npt];
+        float ptmean[npt]={0.3,0.7,1.2,1.6,2.2,2.8,3.5,4.5};
     for(int ipt=0;ipt<npt;ipt++){
         v2cntpt1[icent][ipt] = c2cntbbc[icent][ipt]/v2bbc;
         //v2errcntpt1[icent][ipt] = v2cntpt1[icent][ipt]*sqrt(TMath::Power(c2errcntbbc[icent][ipt]/c2cntbbc[icent][ipt],2)+TMath::Power(v2errbbc/v2bbc,2));
@@ -120,7 +164,6 @@ for(int ipt=0;ipt<npt;ipt++){
         v2cntpt2[icent][ipt] = c2cntfvtx[icent][ipt]/v2fvtx;
         //v2errcntpt2[icent][ipt] = v2cntpt2[icent][ipt]*sqrt(TMath::Power(c2errcntfvtx[icent][ipt]/c2cntfvtx[icent][ipt],2)+TMath::Power(v2errfvtx/v2fvtx,2));
         v2errcntpt2[icent][ipt] = get2derr(c2cntfvtx[icent][ipt],c2errcntfvtx[icent][ipt],v2bbc,v2errbbc);
-        ptmean[ipt] = 0.1+0.2*ipt;
     }
 
 //------------calculating cnt pt dependence v2--------------------method2----------------
@@ -182,7 +225,7 @@ for(int ipt=0;ipt<npt;ipt++){
         
         float v2cntpt1[ncent][npt], v2errcntpt1[ncent][npt];
         float v2cntpt2[ncent][npt], v2errcntpt2[ncent][npt];
-        float ptmean[npt];
+        float ptmean[npt]={0.3,0.7,1.2,1.6,2.2,2.8,3.5,4.5};
     for(int ipt=0;ipt<npt;ipt++){
     if(scale==0){
         c2cntbbc[icent][ipt] = c2cntbbc[icent][ipt] - c2PPcntbbc[icent][ipt]*c1cntbbc[icent][ipt]/c1PPcntbbc[icent][ipt];
@@ -195,10 +238,24 @@ for(int ipt=0;ipt<npt;ipt++){
     else{
         c2cntbbc[icent][ipt] = c2cntbbc[icent][ipt] - c2PPcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent];
         c2cntfvtx[icent][ipt] = c2cntfvtx[icent][ipt] - c2PPcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent];
-        c2bbcfvtx[icent][ipt] = c2bbcfvtx[icent][ipt] - c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]);
+      //  c2bbcfvtx[icent][ipt] = c2bbcfvtx[icent][ipt] - c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]);
+if(icent==0&&ipt>=2 &&ipt<=3){
+        cout<<c2cntbbc[icent][ipt]<<" "<<c2errcntbbc[icent][ipt]<<" "<<c2PPcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent]<<" "<<c2PPerrcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent]<<endl;
+        cout<<c2cntfvtx[icent][ipt]<<" "<<c2errcntfvtx[icent][ipt]<<" "<<c2PPcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent]<<endl;
+        cout<<c2bbcfvtx[icent][0]<<" "<<c2errbbcfvtx[icent][0]<<" "<<c2PPbbcfvtx[icent][0]*MPPfvtx[icent]/Mfvtx[icent]<<endl;
+        cout<<sqrt(c2cntbbc[icent][ipt]*c2cntfvtx[icent][ipt]/c2bbcfvtx[icent][0])<<endl;
+        cout<<get3sqerr(c2cntbbc[icent][ipt],c2errcntbbc[icent][ipt],c2cntfvtx[icent][ipt],c2errcntfvtx[icent][ipt],c2bbcfvtx[icent][0],c2errbbcfvtx[icent][0])<<endl;;
+}
         c2errcntbbc[icent][ipt] = get2mierr(c2cntbbc[icent][ipt],c2errcntbbc[icent][ipt],c2PPcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent],c2PPerrcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent]);
         c2errcntfvtx[icent][ipt] = get2mierr(c2cntfvtx[icent][ipt],c2errcntfvtx[icent][ipt],c2PPcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent],c2PPerrcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent]);
-        c2errbbcfvtx[icent][ipt] = get2mierr(c2bbcfvtx[icent][ipt],c2errbbcfvtx[icent][ipt],c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]),c2PPerrbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]));
+        //c2errbbcfvtx[icent][ipt] = get2mierr(c2bbcfvtx[icent][ipt],c2errbbcfvtx[icent][ipt],c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]),c2PPerrbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]));
+if(icent==0&&ipt>=2&&ipt<=3){
+        cout<<c2cntbbc[icent][ipt]<<" "<<c2errcntbbc[icent][ipt]<<" "<<c2PPcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent]<<" "<<c2PPerrcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent]<<endl;
+        cout<<c2cntfvtx[icent][ipt]<<" "<<c2errcntfvtx[icent][ipt]<<" "<<c2PPcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent]<<endl;
+        cout<<c2bbcfvtx[icent][0]<<" "<<c2errbbcfvtx[icent][0]<<" "<<c2PPbbcfvtx[icent][0]*MPPfvtx[icent]/Mfvtx[icent]<<endl;
+        cout<<sqrt(c2cntbbc[icent][ipt]*c2cntfvtx[icent][ipt]/c2bbcfvtx[icent][0])<<endl;
+        cout<<get3sqerr(c2cntbbc[icent][ipt],c2errcntbbc[icent][ipt],c2cntfvtx[icent][ipt],c2errcntfvtx[icent][ipt],c2bbcfvtx[icent][0],c2errbbcfvtx[icent][0])<<endl;;
+}
     }
     }
     for(int ipt=0;ipt<npt;ipt++){
@@ -209,7 +266,6 @@ for(int ipt=0;ipt<npt;ipt++){
         v2cntpt2[icent][ipt] = c2cntfvtx[icent][ipt]/v2fvtx;
         //v2errcntpt2[icent][ipt] = v2cntpt2[icent][ipt]*sqrt(TMath::Power(c2errcntfvtx[icent][ipt]/c2cntfvtx[icent][ipt],2)+TMath::Power(v2errfvtx/v2fvtx,2));
         v2errcntpt2[icent][ipt] = get2derr(c2cntfvtx[icent][ipt],c2errcntfvtx[icent][ipt],v2fvtx,v2errfvtx);
-        ptmean[ipt] = 0.1+0.2*ipt;
     }
 
 //----subtract--------calculating cnt pt dependence v2--------------------method2----------------
@@ -228,8 +284,21 @@ for(int ipt=0;ipt<npt;ipt++){
     ofsub1.close();
     ofsub2.close();
     ofsub.close();
-
-
+    
+if(pporper == 0 ){
+    ifstream PPfcntbbc("c1_c2_PP_centIn_south.dat");
+    ifstream PPfcntbbcIn("c1_c2_PP_ptIn_south.dat");
+    ifstream PPfcntfvtx("c1_c2_PP_centIn_north.dat");
+    ifstream PPfcntfvtxIn("c1_c2_PP_ptIn_north.dat");
+    ifstream PPfbbcfvtx("c1_c2_bbcfvtx_PP_centIn.dat");
+}
+else{
+    ifstream PPfcntbbc("c1_c2_central_per_south.dat");
+    ifstream PPfcntbbcIn("c1_c2_central_per_ptIn_south.dat");
+    ifstream PPfcntfvtx("c1_c2_central_per_north.dat");
+    ifstream PPfcntfvtxIn("c1_c2_central_per_ptIn_north.dat");
+    ifstream PPfbbcfvtx("c1_c2_central_per_ptIn_sn.dat");
+    }
 }
 }
 

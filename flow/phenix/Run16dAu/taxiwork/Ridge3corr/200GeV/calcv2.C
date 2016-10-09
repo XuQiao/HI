@@ -242,7 +242,7 @@ for(int ipt=0;ipt<npt;ipt++){
     else{
         c2cntbbc[icent][ipt] = c2cntbbc[icent][ipt] - c2PPcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent];
         c2cntfvtx[icent][ipt] = c2cntfvtx[icent][ipt] - c2PPcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent];
-        c2bbcfvtx[icent][ipt] = c2bbcfvtx[icent][ipt] - c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]);
+       // c2bbcfvtx[icent][ipt] = c2bbcfvtx[icent][ipt] - c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]);
         c2errcntbbc[icent][ipt] = get2mierr(c2cntbbc[icent][ipt],c2errcntbbc[icent][ipt],c2PPcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent],c2PPerrcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent]);
         c2errcntfvtx[icent][ipt] = get2mierr(c2cntfvtx[icent][ipt],c2errcntfvtx[icent][ipt],c2PPcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent],c2PPerrcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent]);
         c2errbbcfvtx[icent][ipt] = get2mierr(c2bbcfvtx[icent][ipt],c2errbbcfvtx[icent][ipt],c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]),c2PPerrbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]));

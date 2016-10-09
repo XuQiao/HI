@@ -14,7 +14,7 @@ const int npt = 1;
 //  TFile *f=TFile::Open("../../PP/Ridgecntbbc/merged.root");
  // TFile *f=TFile::Open("merged_AnapAumbcentral.root");
  // TFile *f=TFile::Open("merged_bbcfvtx.root");
-  TFile *f=TFile::Open("../../../work/62GeV/output_3corr.root");
+  TFile *f=TFile::Open("../../../work/62GeV/output_Ridge.root");
  // TFile *f=TFile::Open("merged_123corr_EW.root");
 //  TFile *f=TFile::Open("merged_AnapAumb.root");
 TH1F* kforebbcw[npt][ncent];
@@ -34,7 +34,7 @@ for(int icent=0; icent<ncent; icent++){
 if(centmin >= centbin[icent] && centmin < centbin[icent+1]){int xcentmin = icent; continue;}
 if(centmax >= centbin[icent] && centmax < centbin[icent+1]){int xcentmax = icent; continue;}
 }*/
-for(int icent_a=0;icent_a<1;icent_a++){
+for(int icent_a=0;icent_a<ncent;icent_a++){
 int xcentmin = icent_a*1;
 int xcentmax = (icent_a+1)*1;
 double centmin = centbin[xcentmin];
