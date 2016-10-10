@@ -13,6 +13,8 @@ TGraphErrors* gr[ncent];
 //TGraphErrors* grsub1[ncent];
 //TGraphErrors* grsub2[ncent];
 TGraphErrors* grsub[ncent];
+TGraphErrors* grper[ncent];
+TGraphErrors* grpersub[ncent];
 TGraphErrors* grF[ncent];
     
 TGraphErrors *grP[ncent];
@@ -22,6 +24,8 @@ TGraphErrors *grPsub[ncent];
     
     gr[icent] = new TGraphErrors(Form("v2_cent%d.dat",icent),"%lg %lg %lg");
     grsub[icent] = new TGraphErrors(Form("v2_cent%d_scale%d.dat",icent,scale),"%lg %lg %lg");
+    grper[icent] = new TGraphErrors(Form("v2per_cent%d.dat",icent),"%lg %lg %lg");
+    grpersub[icent] = new TGraphErrors(Form("v2per_cent%d_scale%d.dat",icent,scale),"%lg %lg %lg");
 //    grF[icent] = new TGraphErrors(Form("../../Ridge3corrfvtx/200GeV/v2_cent%d.dat",icent),"%lg %lg %lg");
 
 //-----------plotting results-----------------------------------------------------
@@ -216,7 +220,7 @@ TGraphErrors *grPsub[ncent];
     leg->SetTextSize(0.04);
     leg->AddEntry(gr[icent],"use 3-sub cnt-fvtxs-bbcs","P");
     leg->AddEntry(grsub[icent],"pp minbias subtracted","P");
-    //leg->AddEntry(grsub[icent],"peripheral subtracted","P");
+    leg->AddEntry(grpersub[icent],"peripheral subtracted","P");
     leg->AddEntry(grP[icent],"Run 16 d+Au event plane 0-5\%","P");
  //   leg->AddEntry(grPsub[icent],"p+Au nonflow subtracted","L");
 //    leg->AddEntry(grF[icent],"use 3-sub cnt-fvtxs-fvtxn","P");
@@ -234,12 +238,17 @@ TGraphErrors *grPsub[ncent];
     grsub[icent]->SetMarkerStyle(21);
     grsub[icent]->SetMarkerColor(2);
     grsub[icent]->SetLineColor(2);
+    grpersub[icent]->SetMarkerSize(1.2);
+    grpersub[icent]->SetMarkerStyle(25);
+    grpersub[icent]->SetMarkerColor(1);
+    grpersub[icent]->SetLineColor(1);
    // grF[icent]->SetMarkerSize(1.2);
    // grF[icent]->SetMarkerStyle(21);
    // grF[icent]->SetMarkerColor(2);
    // grF[icent]->SetLineColor(2);
     gr[icent]->Draw("Psame");
     grP[icent]->Draw("Psame");
+    grpersub[icent]->Draw("Psame");
     grsub[icent]->Draw("Psame");
    // grPsub[icent]->Draw("Csame");
    // grF[icent]->Draw("Psame");

@@ -1,7 +1,7 @@
 void calcv2(){
     const int ncent = 6;
-    const int npt = 25;
-    int pporper = 0; // 0 is pp, 1 is per
+    const int npt = 5;
+    int pporper = 1; // 0 is pp, 1 is per
     int centbin[ncent+1] = {0,5,10,20,40,60,100};
     gStyle->SetOptFit(kFALSE);
     gStyle->SetOptStat(kFALSE);
@@ -69,8 +69,8 @@ float MPPNpart[ncent] = {3.8,3.8,3.8,3.8,3.8,3.8};
 float MNpart[ncent] = {83.86,60.54,48.24,30.16,16.66,7.39};
     }
     else{
-float MPPNpart[ncent] = {7.39,7.39,7.39,7.39,7.39,7.39};
-float MNpart[ncent] = {83.86,60.54,48.24,30.16,16.66,7.39};
+float MPPNpart[ncent] = {3.27,3.27,3.27,3.27,3.27,3.27};
+float MNpart[ncent]  = {15.50,12.73,11.12,8.47,5.69,3.27};
     }
 
 //--------------read in parameters--------------------------------------------
@@ -78,10 +78,10 @@ for(int icent=0;icent<ncent;icent++){
     //output txt
     ofstream of1(Form("v2cntbbcs_cent%d.dat",icent));
     ofstream of2(Form("v2cntfvtxs_cent%d.dat",icent));
-    ofstream of(Form("v2_cent%d.dat",icent));
+    ofstream of(Form("v2per_cent%d.dat",icent));
     ofstream ofsub1(Form("v2cntbbcs_cent%d_scale%d.dat",icent,scale));
     ofstream ofsub2(Form("v2cntfvtxs_cent%d_scale%d.dat",icent,scale));
-    ofstream ofsub(Form("v2_cent%d_scale%d.dat",icent,scale));
+    ofstream ofsub(Form("v2per_cent%d_scale%d.dat",icent,scale));
 
       fcntbbcIn>>c1cntbbcIn[icent][0]>>c1errcntbbcIn[icent][0]>>c2cntbbcIn[icent][0]>>c2errcntbbcIn[icent][0]>>c3cntbbcIn[icent][0]>>c3errcntbbcIn[icent][0];
       fcntfvtxIn>>c1cntfvtxIn[icent][0]>>c1errcntfvtxIn[icent][0]>>c2cntfvtxIn[icent][0]>>c2errcntfvtxIn[icent][0]>>c3cntfvtxIn[icent][0]>>c3errcntfvtxIn[icent][0];
@@ -110,10 +110,12 @@ for(int ipt=0;ipt<npt;ipt++){
     TF1 *f2 = new TF1("f2","pol3",0,3.5);
     TFitResultPtr r1 = grPPcntbbc->Fit("f1", "S");
     TFitResultPtr r2 = grPPcntfvtx->Fit("f2", "S");
-    double x[npt];
-    for(int ipt=0;ipt<npt;ipt++){
-        x[ipt] = 0.1+0.2*ipt;
-    }
+        if(pporper == 0){
+        double x[25]={0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9,2.1,2.3,2.5,2.7,2.9,3.1,3.3,3.5,3.7,3.9,4.1,4.3,4.5,4.7,4.9};
+        }
+        else{
+        double x[25]={0.4,0.9,1.5,2.1,2.7};
+        }
     double ci1[npt],ci2[npt];
     double cl = 0.683;  // for 1 sigma error
     r1->GetConfidenceIntervals(npt,1,1,x,ci1,cl);
@@ -158,7 +160,12 @@ for(int ipt=0;ipt<npt;ipt++){
         
         float v2cntpt1[ncent][npt], v2errcntpt1[ncent][npt];
         float v2cntpt2[ncent][npt], v2errcntpt2[ncent][npt];
-        float ptmean[npt];
+        if(pporper == 0){
+        float ptmean[npt]={0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9,2.1,2.3,2.5,2.7,2.9,3.1,3.3,3.5,3.7,3.9,4.1,4.3,4.5,4.7,4.9};
+    }
+        else{
+        float ptmean[npt]={0.4,0.9,1.5,2.1,2.7};
+        }
     for(int ipt=0;ipt<npt;ipt++){
         v2cntpt1[icent][ipt] = c2cntbbc[icent][ipt]/v2bbc;
         //v2errcntpt1[icent][ipt] = v2cntpt1[icent][ipt]*sqrt(TMath::Power(c2errcntbbc[icent][ipt]/c2cntbbc[icent][ipt],2)+TMath::Power(v2errbbc/v2bbc,2));
@@ -167,7 +174,6 @@ for(int ipt=0;ipt<npt;ipt++){
         v2cntpt2[icent][ipt] = c2cntfvtx[icent][ipt]/v2fvtx;
         //v2errcntpt2[icent][ipt] = v2cntpt2[icent][ipt]*sqrt(TMath::Power(c2errcntfvtx[icent][ipt]/c2cntfvtx[icent][ipt],2)+TMath::Power(v2errfvtx/v2fvtx,2));
         v2errcntpt2[icent][ipt] = get2derr(c2cntfvtx[icent][ipt],c2errcntfvtx[icent][ipt],v2bbc,v2errbbc);
-        ptmean[ipt] = 0.1+0.2*ipt;
     }
 
 //------------calculating cnt pt dependence v2--------------------method2----------------
@@ -229,7 +235,12 @@ for(int ipt=0;ipt<npt;ipt++){
         
         float v2cntpt1[ncent][npt], v2errcntpt1[ncent][npt];
         float v2cntpt2[ncent][npt], v2errcntpt2[ncent][npt];
-        float ptmean[npt];
+        if(pporper == 0){
+        float ptmean[npt]={0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9,2.1,2.3,2.5,2.7,2.9,3.1,3.3,3.5,3.7,3.9,4.1,4.3,4.5,4.7,4.9};
+        }
+        else{
+        float ptmean[npt]={0.4,0.9,1.5,2.1,2.7};
+        }
     for(int ipt=0;ipt<npt;ipt++){
     if(scale==0){
         c2cntbbc[icent][ipt] = c2cntbbc[icent][ipt] - c2PPcntbbc[icent][ipt]*c1cntbbc[icent][ipt]/c1PPcntbbc[icent][ipt];
@@ -242,10 +253,10 @@ for(int ipt=0;ipt<npt;ipt++){
     else{
         c2cntbbc[icent][ipt] = c2cntbbc[icent][ipt] - c2PPcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent];
         c2cntfvtx[icent][ipt] = c2cntfvtx[icent][ipt] - c2PPcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent];
-       // c2bbcfvtx[icent][ipt] = c2bbcfvtx[icent][ipt] - c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]);
+        //c2bbcfvtx[icent][ipt] = c2bbcfvtx[icent][ipt] - c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]);
         c2errcntbbc[icent][ipt] = get2mierr(c2cntbbc[icent][ipt],c2errcntbbc[icent][ipt],c2PPcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent],c2PPerrcntbbc[icent][ipt]*MPPbbc[icent]/Mbbc[icent]);
         c2errcntfvtx[icent][ipt] = get2mierr(c2cntfvtx[icent][ipt],c2errcntfvtx[icent][ipt],c2PPcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent],c2PPerrcntfvtx[icent][ipt]*MPPfvtx[icent]/Mfvtx[icent]);
-        c2errbbcfvtx[icent][ipt] = get2mierr(c2bbcfvtx[icent][ipt],c2errbbcfvtx[icent][ipt],c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]),c2PPerrbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]));
+        //c2errbbcfvtx[icent][ipt] = get2mierr(c2bbcfvtx[icent][ipt],c2errbbcfvtx[icent][ipt],c2PPbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]),c2PPerrbbcfvtx[icent][ipt]*(MPPbbc[icent]*MPPfvtx[icent]/MPPNpart[icent])/(Mbbc[icent]*Mfvtx[icent]/MNpart[icent]));
     }
     }
     for(int ipt=0;ipt<npt;ipt++){
@@ -256,7 +267,6 @@ for(int ipt=0;ipt<npt;ipt++){
         v2cntpt2[icent][ipt] = c2cntfvtx[icent][ipt]/v2fvtx;
         //v2errcntpt2[icent][ipt] = v2cntpt2[icent][ipt]*sqrt(TMath::Power(c2errcntfvtx[icent][ipt]/c2cntfvtx[icent][ipt],2)+TMath::Power(v2errfvtx/v2fvtx,2));
         v2errcntpt2[icent][ipt] = get2derr(c2cntfvtx[icent][ipt],c2errcntfvtx[icent][ipt],v2fvtx,v2errfvtx);
-        ptmean[ipt] = 0.1+0.2*ipt;
     }
 
 //----subtract--------calculating cnt pt dependence v2--------------------method2----------------

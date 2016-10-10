@@ -20,14 +20,14 @@ TGraphErrors *grPsub[ncent];
 
     for(int icent=0;icent<ncent;icent++){
     
-    gr[icent] = new TGraphErrors(Form("v2_cent%d.dat",icent),"%lg %lg %lg");
-    grsub[icent] = new TGraphErrors(Form("v2_cent%d_scale%d.dat",icent,scale),"%lg %lg %lg");
+    gr[icent] = new TGraphErrors(Form("v2per_cent%d.dat",icent),"%lg %lg %lg");
+    grsub[icent] = new TGraphErrors(Form("v2per_cent%d_scale%d.dat",icent,scale),"%lg %lg %lg");
 //    grF[icent] = new TGraphErrors(Form("../../Ridge3corrfvtx/200GeV/v2_cent%d.dat",icent),"%lg %lg %lg");
 
 //-----------plotting results-----------------------------------------------------
 
    // if(icent==0 || icent==1){
-   grP[icent] = new TGraphErrors(Form("../../EPAna/200GeV/Result/NoUseCNTEP/v2_0_FVTX1S.dat"),"%lg %lg %lg");
+   grP[icent] = new TGraphErrors(Form("../../EPAna/62GeV/Result/NoUseCNTEP/v2_0_FVTX1S.dat"),"%lg %lg %lg");
   // grPsub[icent] = new TGraphErrors(Form("v2_pAu_0_5_nonf.dat"),"%lg %lg %lg");
     grP[icent]->SetName(Form("grP_%d",icent));
     grP[icent]->SetMarkerSize(1.2);

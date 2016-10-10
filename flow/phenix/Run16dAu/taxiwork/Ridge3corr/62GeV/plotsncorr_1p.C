@@ -11,12 +11,7 @@ TString dire = "sn";
   float const PI = acos(-1.0);
 const int ncent = 6;
 const int npt = 1;
-//  TFile *f=TFile::Open("../../PP/Ridgecntbbc/merged.root");
- // TFile *f=TFile::Open("merged_AnapAumbcentral.root");
- // TFile *f=TFile::Open("merged_bbcfvtx.root");
-  TFile *f=TFile::Open("../../../work/62GeV/output_Ridge.root");
- // TFile *f=TFile::Open("merged_123corr_EW.root");
-//  TFile *f=TFile::Open("merged_AnapAumb.root");
+TFile *f=TFile::Open("../../../work/62GeV/output_Ridge.root");
 TH1F* kforebbcw[npt][ncent];
 TH1F* hforebbcw[npt][ncent];
 TH1F* kbackbbcw2[npt][ncent];
@@ -35,6 +30,7 @@ if(centmin >= centbin[icent] && centmin < centbin[icent+1]){int xcentmin = icent
 if(centmax >= centbin[icent] && centmax < centbin[icent+1]){int xcentmax = icent; continue;}
 }*/
 for(int icent_a=0;icent_a<ncent;icent_a++){
+    if(icent_a>0 && icent_a<ncent-1) continue;
 int xcentmin = icent_a*1;
 int xcentmax = (icent_a+1)*1;
 double centmin = centbin[xcentmin];
@@ -139,9 +135,9 @@ ptbin[ipt+1] = 4.0 ;
 
 //  float ymax = 1.032;//hpp[ipt]->GetMaximum()*1.1;
 //  float ymin = 0.968;//hpp[ipt]->GetMinimum()*0.9;
-  float ymax = 1.1;
+  float ymax = 1.02;
   //float ymax = 1.02;//hpp[ipt]->GetMaximum()*1.1;
-  float ymin = 0.9;
+  float ymin = 0.98;
   //float ymin = 0.98;//hpp[ipt]->GetMinimum()*0.9;
 
   hpp[ipt]->SetMinimum(ymin);
@@ -243,7 +239,7 @@ TLegend *leg1 = new TLegend(0.62,0.40,0.82,0.45);
   TLatex *t=new TLatex(2.4,0.88*(ymax-ymin)+ymin, Form("%.1f < p_{T}^{trig} < %.1f (GeV/c)",ptbin[ipt],ptbin[ipt+1]));
   }
   else
-  TLatex *t=new TLatex(-0.4,0.88*(ymax-ymin)+ymin, Form("p+p %.1f < p_{T}^{trig} < %.1f (GeV/c)",ptbin[ipt],ptbin[ipt+1]));
+  TLatex *t=new TLatex(-0.4,0.88*(ymax-ymin)+ymin, Form("%.1f < p_{T}^{trig} < %.1f (GeV/c)",ptbin[ipt],ptbin[ipt+1]));
  // TLatex *t=new TLatex(-0.1,0.88*(ymax-ymin)+ymin, Form("p+p %.1f < p_{T} < %.1f (GeV/c)",ptbin[ipt],ptbin[ipt+1]));
   t->SetTextSize(0.03);
   t->Draw();
@@ -253,7 +249,10 @@ TLegend *leg1 = new TLegend(0.62,0.40,0.82,0.45);
   //TLatex *t=new TLatex(-1.2,0.78*(ymax-ymin)+ymin, Form("Minimum Bias"));
   t->SetTextSize(0.04);
   if(ipt==0)t->Draw();
-  TLatex *t=new TLatex(2,0.78*(ymax-ymin)+ymin, Form("|#eta_{trig}| < 0.35"));
+   TLatex *t=new TLatex(-1.2,0.68*(ymax-ymin)+ymin, Form("c_{1}=%.5f, c_{2}=%.5f",fun0->GetParameter(1),fun0->GetParameter(2)));
+   t->SetTextSize(0.04);
+   if(ipt==0)t->Draw();
+  TLatex *t=new TLatex(2,0.78*(ymax-ymin)+ymin, Form("-3.0 <#eta_{trig} < -1.0"));
   t->SetTextSize(0.04);
   if(ipt==0)t->Draw();
 

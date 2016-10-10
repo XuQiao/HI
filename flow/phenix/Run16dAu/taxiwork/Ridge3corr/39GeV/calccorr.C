@@ -38,7 +38,7 @@ double selptbin[] = {0.0,0.2};
     else{
 double selptbin[] = {0.4,3.0};
     }
-double selcentbin[] = {0.6,1.0};
+double selcentbin[] = {0.4,1.0};
 }
 else if(type=="ptIn"){
     if(i==2){
@@ -47,11 +47,11 @@ double selptbin[] = {0.0,0.2};
     else{
 double selptbin[] = {0.4,3.0};
     }
-double selcentbin[] = {0,0.05,0.1,0.2,0.4,0.6,1.0};
+double selcentbin[] = {0,0.05,0.1,0.2,0.4,1.0};
 }
 else if(type=="ptcoarser"){
 double selptbin[] = {0.2,1.0,2.0,3.0,5.0};
-double selcentbin[] = {0,0.01,0.05,0.1,0.2,0.3,0.4,0.6,1.0};
+double selcentbin[] = {0,0.01,0.05,0.1,0.2,0.3,0.4,1.0};
 }
 else if(type=="ptfiner"){
 double selptbin[] = {0.2,0.4,1.0,1.4,1.8,2.6,3.0,4.0,5.0};
