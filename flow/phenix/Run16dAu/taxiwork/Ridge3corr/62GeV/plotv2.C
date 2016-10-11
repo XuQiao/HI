@@ -216,7 +216,7 @@ TGraphErrors *grPsub[ncent];
     leg->SetTextSize(0.04);
     leg->AddEntry(gr[icent],"use 3-sub cnt-fvtxs-bbcs","P");
     //leg->AddEntry(grsub[icent],"pp minbias subtracted","P");
-    leg->AddEntry(grsub[icent],"peripheral subtracted","P");
+    //leg->AddEntry(grsub[icent],"peripheral subtracted","P");
     leg->AddEntry(grP[icent],"Run 16 d+Au event plane 0-5\%","P");
  //   leg->AddEntry(grPsub[icent],"p+Au nonflow subtracted","L");
 //    leg->AddEntry(grF[icent],"use 3-sub cnt-fvtxs-fvtxn","P");
@@ -240,7 +240,7 @@ TGraphErrors *grPsub[ncent];
    // grF[icent]->SetLineColor(2);
     gr[icent]->Draw("Psame");
     grP[icent]->Draw("Psame");
-    grsub[icent]->Draw("Psame");
+   // grsub[icent]->Draw("Psame");
    // grPsub[icent]->Draw("Csame");
    // grF[icent]->Draw("Psame");
    /*
