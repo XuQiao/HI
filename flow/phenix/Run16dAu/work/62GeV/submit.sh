@@ -6,6 +6,8 @@ for i in $( seq 0 $njobs );do
         sbatch -o job$i.out -J 62${1}job$i jobsub.slurm
     elif [[ ${1} == "Ridge" ]]; then
         sbatch -o job$i.out -J 62${1}job$i jobsubRidge.slurm
+    elif [[ ${1} == "Perf" ]]; then
+        sbatch -o job$i.out -J 62${1}job$i jobsubPerf.slurm
     else
         echo "Wrong parameter!"
     fi
