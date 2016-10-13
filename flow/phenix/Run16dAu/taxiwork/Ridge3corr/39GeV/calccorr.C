@@ -28,7 +28,8 @@ double centbin[7] = {0,0.05,0.1,0.2,0.4,0.6,1.0};
 //double centbin[ncent+1] = {0,1,2};
 TString type = t.c_str();
 if(type=="per"){
-double selptbin[] = {0.0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.2,2.4,2.6,2.8,3.0,3.2,3.4,3.6,3.8,4.0,4.2,4.4,4.6,4.8,5.0};
+//double selptbin[] = {0.0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.2,2.4,2.6,2.8,3.0,3.2,3.4,3.6,3.8,4.0,4.2,4.4,4.6,4.8,5.0};
+double selptbin[] = {0.2,0.6,1.2,1.8,2.4,3.0};
 double selcentbin[] = {0.4,1.0};
 }
 else if(type=="per_ptIn"){
@@ -54,7 +55,7 @@ double selptbin[] = {0.2,1.0,2.0,3.0,5.0};
 double selcentbin[] = {0,0.01,0.05,0.1,0.2,0.3,0.4,1.0};
 }
 else if(type=="ptfiner"){
-double selptbin[] = {0.2,0.4,1.0,1.4,1.8,2.6,3.0,4.0,5.0};
+double selptbin[] = {0.2,0.6,1.2,1.8,2.4,3.0};
 double selcentbin[] = {0,0.05,0.1,0.2,0.4,0.6,1.0};
 //double selcentbin[ncent+1] = {0,1,2};
 }
@@ -63,7 +64,7 @@ double selptbin[] = {0.2,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0};
 double selcentbin[] = {0,1.0};
 }
 else if(type=="ptccentc"){
-double selptbin[] = {0.2,0.4,1.0,1.4,1.8,2.6,3.0,4.0,5.0};
+double selptbin[] = {0.2,0.6,1.2,1.8,2.4,3.0};
 double selcentbin[] = {0,0.05};
 }
 else{exit(0);};

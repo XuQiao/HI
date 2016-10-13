@@ -60,8 +60,8 @@ float MPPfvtx[ncent] = {0.69,0.69,0.69,0.69,0.69,0.69};
 float MPPbbc[ncent] = {4.21,4.21,4.21,4.21,4.21,4.21};
 float MPPfvtx[ncent] = {2.34,2.34,2.34,2.34,2.34,2.34};
     }
-float Mbbc[ncent] = {63.93,47.41,38.03,25.73,13.63,4.21};
-float Mfvtx[ncent]  = {11.35,9.66,8.52,6.71,4.55,2.34};
+float Mbbc[ncent] = {58.21,44.28,35.55,24.85,8.87,4.16};
+float Mfvtx[ncent] = {8.58,7.51,6.71,5.58,3.52,2.80};
 //MPPNpart[0] = 2;
 //MNpart[0] = 11;
     if(pporper ==0 ){
