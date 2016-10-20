@@ -52,18 +52,6 @@ EPAnaRun16alltree::EPAnaRun16alltree(std::vector<TString> input, std::vector<TSt
     
   for(int icent=0;icent<ncent;icent++){
       for(int ihar=0;ihar<nhar;ihar++){
-        /*
-          EPRCNTBBCS[icent][ihar]=NULL;
-          EPRCNTFVTX1S[icent][ihar]=NULL;
-          EPRCNTFVTX1S[icent][ihar]=NULL;
-          EPRCNTFVTX2S[icent][ihar]=NULL;
-          EPRCNTFVTX1LS[icent][ihar]=NULL;
-          EPRCNTFVTX2LS[icent][ihar]=NULL;
-          EPRCNTFVTX3LS[icent][ihar]=NULL;
-          EPRCNTFVTX4LS[icent][ihar]=NULL;
-          EPRBBCSFVTX1S[icent][ihar]=NULL;
-          EPRBBCSFVTX2S[icent][ihar]=NULL;
-          */
           EPRBBCSFVTX1S[icent][ihar]=NULL;
           EPRBBCSFVTX1LS[icent][ihar]=NULL;
           EPRBBCSFVTX2LS[icent][ihar]=NULL;
@@ -73,32 +61,7 @@ EPAnaRun16alltree::EPAnaRun16alltree(std::vector<TString> input, std::vector<TSt
           EPRBBCSFVTX1p2p4LS[icent][ihar]=NULL;
           EPRFVTX1NFVTX1S[icent][ihar]=NULL;
           EPRBBCSFVTXtrkS[icent][ihar]=NULL;
-          /*
-          EPRCNTFVTX1trkS[icent][ihar]=NULL;
-          EPRCNTFVTX2trkS[icent][ihar]=NULL;
-
-          EPRCNTcBBCSc[icent][ihar]=NULL;
-          EPRCNTcFVTX1S[icent][ihar]=NULL;
-          EPRBBCScFVTX1S[icent][ihar]=NULL;
-
-          EPRBBCSFVTX1trkS[icent][ihar]=NULL;
-          EPRBBCSFVTX2trkS[icent][ihar]=NULL;
-          EPRCNTcBBCSc[icent][ihar]=NULL;
-          EPRCNTcFVTX1Sc[icent][ihar]=NULL;
-          EPRBBCScFVTX1Sc[icent][ihar]=NULL;
-          */
-          
         for(int iphi=0;iphi<nphi;iphi++){
-          /*
-          vobsBBCS[icent][ihar][iphi]=NULL;
-          vobsFVTX1S[icent][ihar][iphi]=NULL;
-          vobsFVTX2S[icent][ihar][iphi]=NULL;
-          */
-          /*
-          vobsBBCSsq[icent][ihar][iphi]=NULL;
-          vobsFVTX1Ssq[icent][ihar][iphi]=NULL;
-          vobsFVTX2Ssq[icent][ihar][iphi]=NULL;
-          */
           vobsFVTX1LS[icent][ihar][iphi]=NULL;
           vobsFVTX2LS[icent][ihar][iphi]=NULL;
           vobsFVTX3LS[icent][ihar][iphi]=NULL;
@@ -109,6 +72,10 @@ EPAnaRun16alltree::EPAnaRun16alltree(std::vector<TString> input, std::vector<TSt
           vobsFVTXtrkS[icent][ihar][iphi]=NULL;
           vobsFVTX1N[icent][ihar][iphi]=NULL;
           vobsFVTX1S[icent][ihar][iphi]=NULL;
+          vobsFVTX1LN[icent][ihar][iphi]=NULL;
+          vobsFVTX2LN[icent][ihar][iphi]=NULL;
+          vobsFVTX3LN[icent][ihar][iphi]=NULL;
+          vobsFVTX4LN[icent][ihar][iphi]=NULL;
 
           vFVTX1LS[icent][ihar][iphi]=NULL;
           vFVTX2LS[icent][ihar][iphi]=NULL;
@@ -120,6 +87,10 @@ EPAnaRun16alltree::EPAnaRun16alltree(std::vector<TString> input, std::vector<TSt
           vFVTXtrkS[icent][ihar][iphi]=NULL;
           vFVTX1N[icent][ihar][iphi]=NULL;
           vFVTX1S[icent][ihar][iphi]=NULL;
+          vFVTX1LN[icent][ihar][iphi]=NULL;
+          vFVTX2LN[icent][ihar][iphi]=NULL;
+          vFVTX3LN[icent][ihar][iphi]=NULL;
+          vFVTX4LN[icent][ihar][iphi]=NULL;
 
           vnFVTX1LS[icent][ihar][iphi]=NULL;
           vnFVTX2LS[icent][ihar][iphi]=NULL;
@@ -131,18 +102,10 @@ EPAnaRun16alltree::EPAnaRun16alltree(std::vector<TString> input, std::vector<TSt
           vnFVTXtrkS[icent][ihar][iphi]=NULL;
           vnFVTX1N[icent][ihar][iphi]=NULL;
           vnFVTX1S[icent][ihar][iphi]=NULL;
-          /*
-          vobsFVTX2S[icent][ihar][iphi]=NULL;
-          vobsFVTX2Ssq[icent][ihar][iphi]=NULL;
-          vobscBBCSc[icent][ihar][iphi]=NULL;
-          vobscBBCScsq[icent][ihar][iphi]=NULL;
-          vobscFVTX1Sc[icent][ihar][iphi]=NULL;
-          vobscFVTX1Scsq[icent][ihar][iphi]=NULL;
-          vobsFVTX1trkS[icent][ihar][iphi]=NULL;
-          vobsFVTX2trkS[icent][ihar][iphi]=NULL;
-          vobsFVTX1trkSsq[icent][ihar][iphi]=NULL;
-          vobsFVTX2trkSsq[icent][ihar][iphi]=NULL;
-          */
+          vnFVTX1LN[icent][ihar][iphi]=NULL;
+          vnFVTX2LN[icent][ihar][iphi]=NULL;
+          vnFVTX3LN[icent][ihar][iphi]=NULL;
+          vnFVTX4LN[icent][ihar][iphi]=NULL;
         }
         }
   }
@@ -160,8 +123,6 @@ for(int istation=0;istation<4;istation++){
 //_____________________________________________________________________________________________________________________________
 EPAnaRun16alltree::~EPAnaRun16alltree()
 {
-//  delete bbccalib;
-//  delete bbcgeo;
   cout << " EPAnaRun16alltree::~EPAnaRun16alltree " << endl;
 }
 
@@ -214,28 +175,6 @@ int EPAnaRun16alltree::Init()
 
   for(int icent=0;icent<ncent;icent++){
       for(int ihar=0;ihar<nhar;ihar++){
-          /*
-        sprintf(name,"EPRCNTBBCS_%d_%d",icent,ihar);
-        EPRCNTBBCS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX1S_%d_%d",icent,ihar);
-        EPRCNTFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX1S_%d_%d",icent,ihar);
-        EPRBBCSFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX1S_%d_%d",icent,ihar);
-        EPRCNTFVTX2S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX1LS_%d_%d",icent,ihar);
-        EPRCNTFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX2S_%d_%d",icent,ihar);
-        EPRCNTFVTX1LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX2LS_%d_%d",icent,ihar);
-        EPRCNTFVTX2LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX3LS_%d_%d",icent,ihar);
-        EPRCNTFVTX3LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX4LS_%d_%d",icent,ihar);
-        EPRCNTFVTX4LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX2S_%d_%d",icent,ihar);
-        EPRBBCSFVTX2S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        */
         sprintf(name,"EPRBBCSFVTX1S_%d_%d",icent,ihar);
         EPRBBCSFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
         sprintf(name,"EPRFVTX1NFVTX1S_%d_%d",icent,ihar);
@@ -254,48 +193,7 @@ int EPAnaRun16alltree::Init()
         EPRBBCSFVTX1p2p4LS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
         sprintf(name,"EPRBBCSFVTXtrkS_%d_%d",icent,ihar);
         EPRBBCSFVTXtrkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        /*
-        sprintf(name,"EPRCNTcBBCSc_%d_%d",icent,ihar);
-        EPRCNTcBBCSc[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCScFVTX1S_%d_%d",icent,ihar);
-        EPRBBCScFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTcFVTX1S_%d_%d",icent,ihar);
-        EPRCNTcFVTX1S[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-
-        sprintf(name,"EPRCNTFVTX1trkS_%d_%d",icent,ihar);
-        EPRCNTFVTX1trkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTFVTX2trkS_%d_%d",icent,ihar);
-        EPRCNTFVTX2trkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-
-        sprintf(name,"EPRBBCSFVTX1trkS_%d_%d",icent,ihar);
-        EPRBBCSFVTX1trkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCSFVTX2trkS_%d_%d",icent,ihar);
-        EPRBBCSFVTX2trkS[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTcBBCSc_%d_%d",icent,ihar);
-        EPRCNTcBBCSc[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRBBCScFVTX1Sc_%d_%d",icent,ihar);
-        EPRBBCScFVTX1Sc[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        sprintf(name,"EPRCNTcFVTX1Sc_%d_%d",icent,ihar);
-        EPRCNTcFVTX1Sc[icent][ihar] = new TH1F(name,name,220,-1.1,1.1);
-        */
         for(int iphi=0;iphi<nphi;iphi++){
-        /*
-        sprintf(name,"vobsBBCS_%d_%d_%d",icent,ihar,iphi);
-        vobsBBCS[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX1S_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX1S[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX2S_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX2S[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        */
-
-        /*
-        sprintf(name,"vobsBBCSsq_%d_%d_%d",icent,ihar,iphi);
-        vobsBBCSsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX1Ssq_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX1Ssq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX2Ssq_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX2Ssq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        */
         sprintf(name,"vobsFVTX1LS_%d_%d_%d",icent,ihar,iphi);
         vobsFVTX1LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
         sprintf(name,"vobsFVTX2LS_%d_%d_%d",icent,ihar,iphi);
@@ -316,6 +214,14 @@ int EPAnaRun16alltree::Init()
         vobsBBCS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
         sprintf(name,"vobsFVTXtrkS_%d_%d_%d",icent,ihar,iphi);
         vobsFVTXtrkS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX1LN_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX1LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX2LN_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX2LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX3LN_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX3LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
+        sprintf(name,"vobsFVTX4LN_%d_%d_%d",icent,ihar,iphi);
+        vobsFVTX4LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,220,-1.1,1.1);
 
         sprintf(name,"vFVTX1LS_%d_%d_%d",icent,ihar,iphi);
         vFVTX1LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
@@ -337,6 +243,14 @@ int EPAnaRun16alltree::Init()
         vBBCS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
         sprintf(name,"vFVTXtrkS_%d_%d_%d",icent,ihar,iphi);
         vFVTXtrkS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX1LN_%d_%d_%d",icent,ihar,iphi);
+        vFVTX1LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX2LN_%d_%d_%d",icent,ihar,iphi);
+        vFVTX2LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX3LN_%d_%d_%d",icent,ihar,iphi);
+        vFVTX3LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
+        sprintf(name,"vFVTX4LN_%d_%d_%d",icent,ihar,iphi);
+        vFVTX4LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,200,-4,4);
 
         sprintf(name,"vnFVTX1LS_%d_%d_%d",icent,ihar,iphi);
         vnFVTX1LS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
@@ -358,28 +272,14 @@ int EPAnaRun16alltree::Init()
         vnBBCS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
         sprintf(name,"vnFVTXtrkS_%d_%d_%d",icent,ihar,iphi);
         vnFVTXtrkS[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
-        /*
-        sprintf(name,"vobsFVTX2S_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX2S[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX2Ssq_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX2Ssq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobscBBCSc_%d_%d_%d",icent,ihar,iphi);
-        vobscBBCSc[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobscBBCScsq_%d_%d_%d",icent,ihar,iphi);
-        vobscBBCScsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobscFVTX1Sc_%d_%d_%d",icent,ihar,iphi);
-        vobscFVTX1Sc[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobscFVTX1Scsq_%d_%d_%d",icent,ihar,iphi);
-        vobscFVTX1Scsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX1trkS_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX1trkS[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX1trkSsq_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX1trkSsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX2trkS_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX2trkS[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        sprintf(name,"vobsFVTX2trkSsq_%d_%d_%d",icent,ihar,iphi);
-        vobsFVTX2trkSsq[icent][ihar][iphi] = new TProfile(name,name,60,0,6,-1.1,1.1);
-        */
+        sprintf(name,"vnFVTX1LN_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX1LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX2LN_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX2LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX3LN_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX3LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
+        sprintf(name,"vnFVTX4LN_%d_%d_%d",icent,ihar,iphi);
+        vnFVTX4LN[icent][ihar][iphi] = new TH2F(name,name,60,0,6,100,-2,2);
         }
   }
   }
@@ -672,14 +572,19 @@ int EPAnaRun16alltree::process_event()
         if(binc!=0){
         if(ibin > 0 && ibin<=50)
          weight = phiweight[icent][ibbcz][ihar][istation]->Integral()/phiweight[icent][ibbcz][ihar][istation]->GetNbinsX()/binc;
-        //if(fabs(weight-1.)>0.2) weight = 0.;
         else weight = 0.;
+        if(fabs(weight-1.)>0.2) weight = 0.;
         }
-        //else weight = 0.;
+        else weight = 0.;
     if(istation < 4){
       Qx[istation][ihar] += weight * cos(n*fvtx_phi);
       Qy[istation][ihar] += weight * sin(n*fvtx_phi);
       Qw[istation][ihar] += weight;
+    }
+    if(istation >= 4){
+      Qx[istation+6][ihar] += weight * cos(n*fvtx_phi);
+      Qy[istation+6][ihar] += weight * sin(n*fvtx_phi);
+      Qw[istation+6][ihar] += weight;
     }
       /*
         ibin = phiweight[icent][ibbcz][ihar][5]->FindBin(fvtx_phi);
@@ -780,7 +685,7 @@ int EPAnaRun16alltree::process_event()
         float binc = phiweightbbc[icent][ibbcz][ihar][4]->GetBinContent(ibin);
         if(binc!=0)
         weight = charge * PPbbcpmtweight[ibbcz][ipmt]/binc;
-      //  else weight = 0;
+        else weight = 0;
       Qx[4][ihar] += weight * cos(n*phi);
       Qy[4][ihar] += weight * sin(n*phi);
       Qw[4][ihar] += weight;
@@ -835,40 +740,6 @@ if(calFlag>0){
     }
     
     if(calFlag==3){
-        /*
-        if(GoodPsi[1][ihar] && GoodPsi[5][ihar])
-          EPRCNTBBCS[icent][ihar]->Fill(cos(n*(RPPhi[1][ihar]-RPPhi[5][ihar])));
-        if(GoodPsi[5][ihar] && GoodPsi[2][ihar])
-          EPRCNTFVTX1S[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[2][ihar])));
-        if(GoodPsi[1][ihar] && GoodPsi[2][ihar])
-          EPRBBCSFVTX1S[icent][ihar]->Fill(cos(n*(RPPhi[1][ihar]-RPPhi[2][ihar])));
-        if(GoodPsi[2][ihar] && GoodPsi[5][ihar])
-          EPRCNTFVTX1trkS[icent][ihar]->Fill(cos(n*(RPPhi[2][ihar]-RPPhi[5][ihar])));
-        if(GoodPsi[3][ihar] && GoodPsi[5][ihar])
-          EPRCNTFVTX2trkS[icent][ihar]->Fill(cos(n*(RPPhi[3][ihar]-RPPhi[5][ihar])));
-        if(GoodPsi[1][ihar] && GoodPsi[2][ihar])
-          EPRBBCSFVTX1trkS[icent][ihar]->Fill(cos(n*(RPPhi[1][ihar]-RPPhi[2][ihar])));
-        if(GoodPsi[1][ihar] && GoodPsi[3][ihar])
-          EPRBBCSFVTX2trkS[icent][ihar]->Fill(cos(n*(RPPhi[1][ihar]-RPPhi[3][ihar])));
-
-        if(GoodPsi[0][ihar] && GoodPsi[4][ihar])
-          EPRCNTcBBCSc[icent][ihar]->Fill(cos(n*(RPPhi[0][ihar]-RPPhi[4][ihar])));
-        if(GoodPsi[4][ihar] && GoodPsi[3][ihar])
-          EPRCNTcFVTX1Sc[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[3][ihar])));
-        if(GoodPsi[0][ihar] && GoodPsi[3][ihar])
-          EPRBBCScFVTX1Sc[icent][ihar]->Fill(cos(n*(RPPhi[0][ihar]-RPPhi[3][ihar])));
-
-        if(GoodPsi[2][ihar] && GoodPsi[5][ihar])
-            EPRCNTBBCS[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[2][ihar])));//cnt-bbcs
-        if(GoodPsi[6][ihar] && GoodPsi[5][ihar])
-            EPRCNTFVTX1S[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[6][ihar])));//cnt-fvtx1s
-        if(GoodPsi[7][ihar] && GoodPsi[5][ihar])
-            EPRCNTFVTX2S[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[7][ihar])));//cnt-fvtx2s
-        if(GoodPsi[2][ihar] && GoodPsi[6][ihar])
-            EPRBBCSFVTX1S[icent][ihar]->Fill(cos(n*(RPPhi[2][ihar]-RPPhi[6][ihar])));//bbcs-fvtx1s
-        if(GoodPsi[2][ihar] && GoodPsi[7][ihar])
-            EPRBBCSFVTX2S[icent][ihar]->Fill(cos(n*(RPPhi[2][ihar]-RPPhi[7][ihar])));//bbcs-fvtx2s
-        */
         if(GoodPsi[4][ihar] && GoodPsi[0][ihar])
             EPRBBCSFVTX1LS[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[0][ihar])));//bbcs-fvtx1ls
         if(GoodPsi[4][ihar] && GoodPsi[1][ihar])
@@ -887,16 +758,6 @@ if(calFlag>0){
             EPRFVTX1NFVTX1S[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[8][ihar])));//bbcs-fvtx1ls
         if(GoodPsi[4][ihar] && GoodPsi[9][ihar])
             EPRBBCSFVTXtrkS[icent][ihar]->Fill(cos(n*(RPPhi[4][ihar]-RPPhi[9][ihar])));//bbcs-fvtx1ls
-        /*
-        if(GoodPsi[5][ihar] && GoodPsi[8][ihar])
-            EPRCNTFVTX1LS[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[8][ihar])));//cnt-fvtx1ls
-        if(GoodPsi[5][ihar] && GoodPsi[9][ihar])
-            EPRCNTFVTX2LS[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[9][ihar])));//cnt-fvtx2ls
-        if(GoodPsi[5][ihar] && GoodPsi[10][ihar])
-            EPRCNTFVTX3LS[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[10][ihar])));//cnt-fvtx3ls
-        if(GoodPsi[5][ihar] && GoodPsi[11][ihar])
-            EPRCNTFVTX4LS[icent][ihar]->Fill(cos(n*(RPPhi[5][ihar]-RPPhi[11][ihar])));//cnt-fvtx4ls
-*/
 // Tracks 
     for(int itrk=0; itrk< d_ntrk; itrk++){
       float mom    = d_mom[itrk];
@@ -981,57 +842,30 @@ if(calFlag>0){
           vFVTXtrkS[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
           vnFVTXtrkS[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
         }
-        /*
-        if(GoodPsi[2][ihar]){
-          vobsFVTX1trkS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[2][ihar])));
-          vobsFVTX1trkSsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[2][ihar]))*cos(n*(phi-RPPhi[2][ihar])));
-        }
-        if(GoodPsi[3][ihar]){
-          vobsFVTX2trkS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[3][ihar])));
-          vobsFVTX2trkSsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[3][ihar]))*cos(n*(phi-RPPhi[3][ihar])));
-        }
-        */
-/*
-          float angleblue = 0.0016+0.0008-iangle1*0.0002;
-          float angleyellow = pi+0.0036+0.0016-iangle2*0.0004;
-          TLorentzVector particle_vec = RotateAndBoost(angleblue,angleyellow,px,py,pz,mass);
-          float pt = TMath::Sqrt(particle_vec.Py()*particle_vec.Py()+particle_vec.Px()*particle_vec.Px());                   
-          float phi = TMath::ATan2(particle_vec.Py(),particle_vec.Px());
-        if(GoodPsi[0][ihar]){
-          vobscBBCSc[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[0][ihar])));
-          vobscBBCScsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[0][ihar]))*cos(n*(phi-RPPhi[0][ihar])));
-        }
-        if(GoodPsi[3][ihar]){
-          vobscFVTX1Sc[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[3][ihar])));
-          vobscFVTX1Scsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[3][ihar]))*cos(n*(phi-RPPhi[3][ihar])));
-        }
-        */
-        /*
-        if(GoodPsi[6][ihar]){
-          vobsFVTX1S[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[6][ihar])));
-          vobsFVTX1Ssq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[6][ihar]))*cos(n*(phi-RPPhi[6][ihar])));
-        }
-        if(GoodPsi[7][ihar]){
-          vobsFVTX2S[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[7][ihar])));
-          vobsFVTX2Ssq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[7][ihar]))*cos(n*(phi-RPPhi[7][ihar])));
-        }
-        
-        if(GoodPsi[8][ihar]){
-          vobsFVTX1LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[8][ihar])));
-          vobsFVTX1LSsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[8][ihar]))*cos(n*(phi-RPPhi[8][ihar])));
-        }
-        if(GoodPsi[9][ihar]){
-          vobsFVTX2LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[9][ihar])));
-          vobsFVTX2LSsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[9][ihar]))*cos(n*(phi-RPPhi[9][ihar])));
-        }
         if(GoodPsi[10][ihar]){
-          vobsFVTX3LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[10][ihar])));
-          vobsFVTX3LSsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[10][ihar]))*cos(n*(phi-RPPhi[10][ihar])));
+          vobsFVTX1LN[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[10][ihar])));
+          float dphi = phi-RPPhi[10][ihar];
+          vFVTX1LN[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX1LN[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
         }
         if(GoodPsi[11][ihar]){
-          vobsFVTX4LS[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[11][ihar])));
-          vobsFVTX4LSsq[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[11][ihar]))*cos(n*(phi-RPPhi[11][ihar])));
-        }*/
+          vobsFVTX2LN[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[11][ihar])));
+          float dphi = phi-RPPhi[11][ihar];
+          vFVTX2LN[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX2LN[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        }
+        if(GoodPsi[12][ihar]){
+          vobsFVTX3LN[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[12][ihar])));
+          float dphi = phi-RPPhi[12][ihar];
+          vFVTX3LN[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX3LN[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        }
+        if(GoodPsi[13][ihar]){
+          vobsFVTX4LN[icent][ihar][iphi]->Fill(pt, cos(n*(phi-RPPhi[13][ihar])));
+          float dphi = phi-RPPhi[13][ihar];
+          vFVTX4LN[icent][ihar][iphi]->Fill(pt, atan2(sin(dphi),cos(dphi)));
+          vnFVTX4LN[icent][ihar][iphi]->Fill(pt, atan2(sin(n*dphi),cos(n*dphi))/n);
+        }
       }
     } //track loop
     } //calFlag == 3
@@ -1053,27 +887,6 @@ int EPAnaRun16alltree::End()
  if(calFlag == 3){
   if(d_outfile && d_outfile->IsOpen()) {
     d_outfile->cd();
-    /*
-    for(int icent=0;icent<ncent;icent++){
-    for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
-      for(int ihar=0;ihar<nhar;ihar++){
-        for(int isub=0;isub<nsub;isub++){
-        psi[icent][ibbcz][ihar][isub]->Write();
-        psiFla[icent][ibbcz][ihar][isub]->Write();
-          for(int ixy=0;ixy<nxy;ixy++){
-            q[icent][ibbcz][ihar][isub][ixy]->Write();
-            qRec[icent][ibbcz][ihar][isub][ixy]->Write();
-          }
-          for(int iord=0;iord<nord;iord++){
-            sinflt[icent][ibbcz][ihar][isub][iord]->Write();
-            cosflt[icent][ibbcz][ihar][isub][iord]->Write();
-          }
-        }
-      }
-    }
-  }
-  */
-  
     for(int icent=0;icent<ncent;icent++){
     for(int ibbcz=0;ibbcz<nbbcz;ibbcz++){
       for(int ihar=0;ihar<nhar;ihar++){
@@ -1086,7 +899,6 @@ int EPAnaRun16alltree::End()
         psiFla[icent][ibbcz][ihar][isub]->Write();
         phiweight[icent][ibbcz][ihar][isub]->Write();
         phiweightbbc[icent][ibbcz][ihar][isub]->Write();
-
         }
       }
     }
@@ -1094,12 +906,6 @@ int EPAnaRun16alltree::End()
 
   for(int icent=0;icent<ncent;icent++){
       for(int ihar=0;ihar<nhar;ihar++){
-          /*
-          EPRCNTBBCS[icent][ihar]->Write();
-          EPRCNTFVTX1S[icent][ihar]->Write();
-          EPRCNTFVTX2S[icent][ihar]->Write();
-          EPRBBCSFVTX2S[icent][ihar]->Write();
-          */
           EPRBBCSFVTX1S[icent][ihar]->Write();
           EPRFVTX1NFVTX1S[icent][ihar]->Write();
           EPRBBCSFVTX1LS[icent][ihar]->Write();
@@ -1109,24 +915,7 @@ int EPAnaRun16alltree::End()
           EPRBBCSFVTX1p2p3LS[icent][ihar]->Write();
           EPRBBCSFVTX1p2p4LS[icent][ihar]->Write();
           EPRBBCSFVTXtrkS[icent][ihar]->Write();
-        /*
-          EPRCNTBBCS[icent][ihar]->Write();
-          EPRCNTFVTX1S[icent][ihar]->Write();
-          EPRBBCSFVTX1S[icent][ihar]->Write();
-          EPRCNTFVTX1trkS[icent][ihar]->Write();
-          EPRCNTFVTX2trkS[icent][ihar]->Write();
-          EPRBBCSFVTX1trkS[icent][ihar]->Write();
-          EPRBBCSFVTX2trkS[icent][ihar]->Write();
-
-          EPRCNTcBBCSc[icent][ihar]->Write();
-          EPRCNTcFVTX1Sc[icent][ihar]->Write();
-          EPRBBCScFVTX1Sc[icent][ihar]->Write();
-          */
         for(int iphi=0;iphi<nphi;iphi++){
-          /*
-          vobsFVTX2S[icent][ihar][iphi]->Write();
-          vobsFVTX2Ssq[icent][ihar][iphi]->Write();
-          */
           vobsFVTX1LS[icent][ihar][iphi]->Write();
           vobsFVTX2LS[icent][ihar][iphi]->Write();
           vobsFVTX3LS[icent][ihar][iphi]->Write();
@@ -1137,6 +926,10 @@ int EPAnaRun16alltree::End()
           vobsFVTX1p2p4LS[icent][ihar][iphi]->Write();
           vobsBBCS[icent][ihar][iphi]->Write();
           vobsFVTXtrkS[icent][ihar][iphi]->Write();
+          vobsFVTX1LN[icent][ihar][iphi]->Write();
+          vobsFVTX2LN[icent][ihar][iphi]->Write();
+          vobsFVTX3LN[icent][ihar][iphi]->Write();
+          vobsFVTX4LN[icent][ihar][iphi]->Write();
 
           vFVTX1LS[icent][ihar][iphi]->Write();
           vFVTX2LS[icent][ihar][iphi]->Write();
@@ -1148,6 +941,10 @@ int EPAnaRun16alltree::End()
           vFVTX1p2p4LS[icent][ihar][iphi]->Write();
           vBBCS[icent][ihar][iphi]->Write();
           vFVTXtrkS[icent][ihar][iphi]->Write();
+          vFVTX1LN[icent][ihar][iphi]->Write();
+          vFVTX2LN[icent][ihar][iphi]->Write();
+          vFVTX3LN[icent][ihar][iphi]->Write();
+          vFVTX4LN[icent][ihar][iphi]->Write();
 
           vnFVTX1LS[icent][ihar][iphi]->Write();
           vnFVTX2LS[icent][ihar][iphi]->Write();
@@ -1159,36 +956,14 @@ int EPAnaRun16alltree::End()
           vnFVTX1p2p4LS[icent][ihar][iphi]->Write();
           vnBBCS[icent][ihar][iphi]->Write();
           vnFVTXtrkS[icent][ihar][iphi]->Write();
-         /* 
-          vobscBBCSc[icent][ihar][iphi]->Write();
-          vobscBBCScsq[icent][ihar][iphi]->Write();
-          vobscFVTX1Sc[icent][ihar][iphi]->Write();
-          vobscFVTX1Scsq[icent][ihar][iphi]->Write();
-          */
-         /*
-          vobsBBCS[icent][ihar][iphi]->Write();
-          vobsBBCSsq[icent][ihar][iphi]->Write();
-          vobsFVTX1S[icent][ihar][iphi]->Write();
-          vobsFVTX1Ssq[icent][ihar][iphi]->Write();
-          vobsFVTX1trkS[icent][ihar][iphi]->Write();
-          vobsFVTX1trkSsq[icent][ihar][iphi]->Write();
-          vobsFVTX2trkS[icent][ihar][iphi]->Write();
-          vobsFVTX2trkSsq[icent][ihar][iphi]->Write();
-          */
-          
+          vnFVTX1LN[icent][ihar][iphi]->Write();
+          vnFVTX2LN[icent][ihar][iphi]->Write();
+          vnFVTX3LN[icent][ihar][iphi]->Write();
+          vnFVTX4LN[icent][ihar][iphi]->Write();
           }
         }
         }
 
-/*
-for(int istation=0;istation<4;istation++){
-    hfvtx[istation]->Write();
-}
-    hbbc->Write();
-    hfvtxtrk->Write();
-    hbbcsnfvtxtrk->Write();
-    */
-//    hnfvtxtrk->Write();
     d_outfile->Close();
   }else{
 

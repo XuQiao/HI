@@ -177,6 +177,10 @@ class EPAnaRun16alltree
   TH2F* vobsFVTX1p2p3LS[ncent][nhar][nphi];
   TH2F* vobsFVTX1p2p4LS[ncent][nhar][nphi];
   TH2F* vobsFVTXtrkS[ncent][nhar][nphi];
+  TH2F* vobsFVTX1LN[ncent][nhar][nphi];
+  TH2F* vobsFVTX2LN[ncent][nhar][nphi];
+  TH2F* vobsFVTX3LN[ncent][nhar][nphi];
+  TH2F* vobsFVTX4LN[ncent][nhar][nphi];
   
   TH2F* vBBCS[ncent][nhar][nphi];
   TH2F* vFVTX1N[ncent][nhar][nphi];
@@ -188,6 +192,10 @@ class EPAnaRun16alltree
   TH2F* vFVTX1p2p3LS[ncent][nhar][nphi];
   TH2F* vFVTX1p2p4LS[ncent][nhar][nphi];
   TH2F* vFVTXtrkS[ncent][nhar][nphi];
+  TH2F* vFVTX1LN[ncent][nhar][nphi];
+  TH2F* vFVTX2LN[ncent][nhar][nphi];
+  TH2F* vFVTX3LN[ncent][nhar][nphi];
+  TH2F* vFVTX4LN[ncent][nhar][nphi];
 
   TH2F* vnBBCS[ncent][nhar][nphi];
   TH2F* vnFVTX1N[ncent][nhar][nphi];
@@ -199,6 +207,10 @@ class EPAnaRun16alltree
   TH2F* vnFVTX1p2p3LS[ncent][nhar][nphi];
   TH2F* vnFVTX1p2p4LS[ncent][nhar][nphi];
   TH2F* vnFVTXtrkS[ncent][nhar][nphi];
+  TH2F* vnFVTX1LN[ncent][nhar][nphi];
+  TH2F* vnFVTX2LN[ncent][nhar][nphi];
+  TH2F* vnFVTX3LN[ncent][nhar][nphi];
+  TH2F* vnFVTX4LN[ncent][nhar][nphi];
  /* 
   TH2F* vobsBBCS[ncent][nhar][nphi];
   TH2F* vobsBBCSsq[ncent][nhar][nphi];

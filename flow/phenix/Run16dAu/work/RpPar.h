@@ -1,7 +1,7 @@
 const int ncent = 1;
 const int nhar = 3;
 const int nbbcz = 10;
-const int nsub = 10;
+const int nsub = 14;
 const int nord = 12;
 const int nxy = 2;
 const int nangle1 = 1;

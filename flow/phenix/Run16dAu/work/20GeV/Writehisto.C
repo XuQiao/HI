@@ -12,7 +12,7 @@ void Writehisto(){
         }
 
         //EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("testEPAnaFull.root"));
-        EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("/store/user/qixu/flow/Run16dAu/20GeV/EPAnaFull%s_%d.root",trigtype.Data(),i));
+        EPAnaRun16alltree *pl = new EPAnaRun16alltree(readline(Form("%s",name.Data()),i), readline(Form("%s",name1.Data()),i), Form("/store/user/qixu/flow/Run16dAu/20GeV/EPAnaFull%s_20percut_%d.root",trigtype.Data(),i));
         pl->Init();
         pl->Inittree();
         pl->SetcalFlag(0);
