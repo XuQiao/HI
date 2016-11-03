@@ -35,7 +35,9 @@ EPAnaRun16alltree::EPAnaRun16alltree(std::vector<TString> input, std::vector<TSt
         for(int isub=0;isub<nsub;isub++){
             psi[icent][ibbcz][ihar][isub]=NULL;
             psiFla[icent][ibbcz][ihar][isub]=NULL;
-            phiweight[icent][ibbcz][ihar][isub]=NULL;
+        for(int ir=0;ir<nr;ir++){
+            phiweight[icent][ibbcz][ir][ihar][isub]=NULL;
+        }
             phiweightbbc[icent][ibbcz][ihar][isub]=NULL;
           for(int ixy=0;ixy<nxy;ixy++){
             q[icent][ibbcz][ihar][isub][ixy]=NULL;
@@ -152,8 +154,10 @@ int EPAnaRun16alltree::Init()
             psi[icent][ibbcz][ihar][isub]=new TH1F(name,name,100,-pi,pi);
             sprintf(name,"psiFla_%d_%d_%d_%d",icent,ibbcz,ihar,isub);
             psiFla[icent][ibbcz][ihar][isub]=new TH1F(name,name,100,-pi,pi);
-            sprintf(name,"phiweight_%d_%d_%d_%d",icent,ibbcz,ihar,isub);
-            phiweight[icent][ibbcz][ihar][isub]=new TH1F(name,name,50,-pi,pi);
+        for(int ir=0;ir<nr;ir++){
+            sprintf(name,"phiweight_%d_%d_%d_%d_%d",icent,ibbcz,ir,ihar,isub);
+            phiweight[icent][ibbcz][ir][ihar][isub]=new TH1F(name,name,50,-pi,pi);
+        }
             sprintf(name,"phiweightbbc_%d_%d_%d_%d",icent,ibbcz,ihar,isub);
             phiweightbbc[icent][ibbcz][ihar][isub]=new TProfile(name,name,200,0,200,0,100);
           for(int ixy=0;ixy<nxy;ixy++){
@@ -555,6 +559,8 @@ int EPAnaRun16alltree::process_event()
 //    int iarm = 0;
 //    if(fvtx_z>0) iarm = 1; 
     float fvtx_r = sqrt(pow(fvtx_x,2.0)+pow(fvtx_y,2.0));
+    int ir = (int)(fvtx_r/2)-2;
+    if(ir < 0 || ir >= nr) continue;
  //   if ( RunNumber >= 456652 && RunNumber <= 458167 && fvtx_r < 5.2 ) continue; //radius cut
     if ( RunNumber >= 455792 && RunNumber <= 458167 && fvtx_r < 5.2 ) continue; //radius cut, also for 62GeV
     if( (fabs(fvtx_x)>999) ||(fabs(fvtx_y)>999) || (fabs(fvtx_z)>999)) continue;
@@ -563,15 +569,15 @@ int EPAnaRun16alltree::process_event()
     float fvtx_eta = -log(tan(0.5*fvtx_the));
     if(!(fabs(fvtx_eta)<3.5)) continue;
     if(calFlag == 0){
-        phiweight[icent][ibbcz][ihar][istation]->Fill(fvtx_phi);
+        phiweight[icent][ibbcz][ir][ihar][istation]->Fill(fvtx_phi);
       //  phiweight[icent][ibbcz][ihar][5]->Fill(fvtx_phi);
     }
     else{
-        int ibin = phiweight[icent][ibbcz][ihar][istation]->FindBin(fvtx_phi);
-        float binc = phiweight[icent][ibbcz][ihar][istation]->GetBinContent(ibin);
+        int ibin = phiweight[icent][ibbcz][ir][ihar][istation]->FindBin(fvtx_phi);
+        float binc = phiweight[icent][ibbcz][ir][ihar][istation]->GetBinContent(ibin);
         if(binc!=0){
         if(ibin > 0 && ibin<=50)
-         weight = phiweight[icent][ibbcz][ihar][istation]->Integral()/phiweight[icent][ibbcz][ihar][istation]->GetNbinsX()/binc;
+         weight = phiweight[icent][ibbcz][ir][ihar][istation]->Integral()/phiweight[icent][ibbcz][ir][ihar][istation]->GetNbinsX()/binc;
         else weight = 0.;
         if(fabs(weight-1.)>0.2) weight = 0.;
         }
@@ -897,7 +903,9 @@ int EPAnaRun16alltree::End()
             }
         psi[icent][ibbcz][ihar][isub]->Write();
         psiFla[icent][ibbcz][ihar][isub]->Write();
-        phiweight[icent][ibbcz][ihar][isub]->Write();
+        for(int ir=0;ir<nr;ir++){
+          phiweight[icent][ibbcz][ir][ihar][isub]->Write();
+        }
         phiweightbbc[icent][ibbcz][ihar][isub]->Write();
         }
       }

@@ -115,7 +115,7 @@ class EPAnaRun16alltree
 //  std::vector<std::vector<TH1F*> > psitmp[ncent][nbbcz][nhar][nsub];
   TH1F* psiFla[ncent][nbbcz][nhar][nsub];
 
-   TH1F* phiweight[ncent][nbbcz][nhar][nsub];
+   TH1F* phiweight[ncent][nbbcz][nr][nhar][nsub];
    TProfile* phiweightbbc[ncent][nbbcz][nhar][nsub];
 
   float meanx[ncent][nbbcz][nhar][nsub];
