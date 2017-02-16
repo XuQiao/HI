@@ -1,7 +1,7 @@
 #!/bin/sh
 
 export I=$1
-sbatch --account=cms_stage2 -o job$I.out -J 200checkjob$I jobsub.slurm
+sbatch -o job$I.out -J 200checkjob$I jobsub.slurm
 
 #root -b << EOF
 #int nhar = 3
